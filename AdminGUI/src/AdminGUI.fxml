@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="300.0" prefWidth="400.0"
+            xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="PersonsController">
+   <SplitPane dividerPositions="0.5" prefHeight="300.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0"
+              AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TilePane alignment="TOP_CENTER" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT"
+                orientation="VERTICAL" prefColumns="1" prefHeight="200.0" prefRows="3" prefWidth="150.0"
+                tileAlignment="TOP_LEFT">
+         <VBox spacing="8.0">
+            <TilePane.margin>
+               <Insets top="8.0"/>
+            </TilePane.margin>
+            <RadioButton mnemonicParsing="false" selected="true" text="Личности"/>
+            <RadioButton mnemonicParsing="false" text="Сайты"/>
+            <RadioButton mnemonicParsing="false" text="Ключевые слова"/>
+         </VBox>
+         <VBox spacing="8.0" TilePane.alignment="CENTER">
+            <Button mnemonicParsing="false" text="Добавить элемент"/>
+            <Button mnemonicParsing="false" text="Редактировать элемент"/>
+            <Button mnemonicParsing="false" text="Удалить элемент"/>
+         </VBox>
+      </TilePane>
+      <TableView fx:id="personsTable" nodeOrientation="LEFT_TO_RIGHT">
+         <columns>
+            <TableColumn fx:id="idColumn" maxWidth="200.0" prefWidth="100.0" text="Параметр"/>
+            <TableColumn fx:id="nameColumn" maxWidth="200.0" prefWidth="100.0" text="Значение"/>
+         </columns>
+      </TableView>
+   </SplitPane>
+</AnchorPane>
