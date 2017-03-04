@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Ежедневная статистика</title>
+
+  <link rel="stylesheet" href="bootstrap-3.3.7/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="bootstrap-3.3.7/dist/css/bootstrap-theme.css">
+</head>
+<body>
+  <div class="container">
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">R%ting</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="#">Общая статистика</a></li>
+            <li class="active"><a href="#">Ежедневная статистика</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <div class="container">
+    <h1>Статистика упоминаний</h1>
+    <br>
+    <form class="form-horizontal">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="site" class="col-sm-2 control-label">Сайт</label>
+          <div class="col-sm-10">
+            <select class="form-control" id="site">
+              <option>lenta.ru</option>
+              <option>gazeta.ru</option>
+              <option>meduza.io</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="person" class="col-sm-2 control-label">Личность</label>
+          <div class="col-sm-10">
+            <select class="form-control" id="person">
+              <option>Путин В. В.</option>
+              <option>Навальный А. А.</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="site" class="col-sm-2 control-label">c: </label>
+          <div class="col-sm-10">
+            <input type="date" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="person" class="col-sm-2 control-label">по: </label>
+          <div class="col-sm-10">
+            <input type="date" class="form-control">
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <br>
+    <table class="table table-striped">
+      <tr>
+        <th>Дата</th>
+        <th>Рейтинг</th>
+      </tr>
+      <tr>
+        <td>01.03.2017</td>
+        <td>453</td>
+      </tr>
+      <tr>
+        <td>02.03.2017</td>
+        <td>534</td>
+      </tr>
+    </table>
+  </div>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="bootstrap-3.3.7/dist/js/bootstrap.js" charset="utf-8"></script>
+</body>
+</html>
