@@ -20,6 +20,7 @@
         <!-- Logging -->
         <logback.version>1.1.7</logback.version>
         <slf4j.version>1.7.21</slf4j.version>
+
         <jackson-json.version>2.8.6</jackson-json.version>
         <spring.version>4.3.4.RELEASE</spring.version>
         <tomcat.version>8.5.5</tomcat.version>
@@ -102,7 +103,7 @@
 
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
+            <artifactId>spring-orm</artifactId>
             <version>${spring.version}</version>
         </dependency>
 
@@ -129,6 +130,18 @@
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
             <version>${jackson-json.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.json</groupId>
+            <artifactId>javax.json-api</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20160810</version>
         </dependency>
 
         <!--Web-->
