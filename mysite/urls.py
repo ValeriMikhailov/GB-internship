@@ -16,6 +16,12 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+from general_stat.views import *
+from daily_stat.views import *
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$', show_general_page),
+    url(r'^common/$', show_general_page),
+    url(r'^everyday/$', show_daily_page)
 ]
