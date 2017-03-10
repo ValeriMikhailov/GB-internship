@@ -7,6 +7,7 @@ import ru.geekbrains.rest.model.Person;
 import ru.geekbrains.rest.model.Site;
 import ru.geekbrains.rest.repository.UserRepository;
 
+import java.time.LocalDate;
 import java.util.Set;
 
 @Service
@@ -16,22 +17,22 @@ public class UserServiceImpl implements UserService {
     private UserRepository repository;
 
     @Override
-    public JSONObject getStats() {
-        return null;
+    public JSONObject getStats(int siteId) {
+       return repository.getStats(siteId);
     }
 
     @Override
-    public JSONObject statsByDate() {
-        return null;
+    public JSONObject statsByDate(int siteId, int personId, LocalDate start, LocalDate end) {
+        return repository.statsByDate(siteId, personId, start, end);
     }
 
     @Override
     public Set<Person> getPersons() {
-        return null;
+        return repository.getPersons();
     }
 
     @Override
     public Set<Site> getSites() {
-        return null;
+        return repository.getSites();
     }
 }
