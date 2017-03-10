@@ -11,6 +11,6 @@
     <!-- serve static resources (*.html, ...) from src/main/webapp/ -->
     <mvc:default-servlet-handler/>
 
-    <context:component-scan base-package="ru.geekbrains.rest"/>
+    <context:component-scan base-package="ru.geekbrains.rest.**.web"/>
 
 </beans>
