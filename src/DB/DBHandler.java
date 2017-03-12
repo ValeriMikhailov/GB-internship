@@ -11,6 +11,8 @@ class DBHandler implements DBConnector{
     static final String USER = "root";
     static final String PASS = "351235";
 
+    public DBHandler() { connect(); }
+
     @Override
     public void connect() {
         try {
