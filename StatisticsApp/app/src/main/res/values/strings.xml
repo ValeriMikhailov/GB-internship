@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">StatisticsApp</string>
+    <string name="app_name">Statistics App</string>
+
+    <string name="button_ok">OK</string>
+    <string name="hint_password">PASSWORD</string>
+    <string name="hint_login">LOGIN</string>
+
+    <string name="tab_title_global">Global</string>
+    <string name="tab_title_daily">Daily</string>
+
+    <string name="choose_site">Choose site</string>
+    <string name="last_update">Last update</string>
+    <string name="choose_person">Choose person</string>
 </resources>
