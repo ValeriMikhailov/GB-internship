@@ -6,11 +6,13 @@
 
     <groupId>ru.geekbrains</groupId>
     <artifactId>GB-internship</artifactId>
-    <version>1.0</version>
+    <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <org.eclipse.jetty.version>9.3.0.M0</org.eclipse.jetty.version>
+        <java.version>1.8</java.version>
+        <org.eclipse.jetty.version>9.2.14.v20151106</org.eclipse.jetty.version>
         <org.apache.logging.log4j.version>2.2</org.apache.logging.log4j.version>
+        <jersey.version>2.25.1</jersey.version>
     </properties>
 
     <build>
@@ -20,8 +22,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.3</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -36,7 +38,7 @@
                     <appendAssemblyId>false</appendAssemblyId>
                     <archive>
                         <manifest>
-                            <mainClass>main.Main</mainClass>
+                            <mainClass>ru.geekbrains.main.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -80,6 +82,24 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>${org.apache.logging.log4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-server</artifactId>
+            <version>${jersey.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-servlet-core</artifactId>
+            <version>${jersey.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-jetty-http</artifactId>
+            <version>${jersey.version}</version>
         </dependency>
 
     </dependencies>
