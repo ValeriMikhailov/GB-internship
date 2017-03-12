@@ -2,3 +2,11 @@
   width: 32px;
   margin-top: -6px;
 }
+
+img.app-store-badge {
+  width: 140px;
+}
+
+img.google-play-badge {
+  width: 160px;
+}
