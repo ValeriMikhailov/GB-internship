@@ -10,7 +10,10 @@ import java.util.Set;
 public interface UserService {
 
     JSONObject getStats(int siteId);
+
     JSONObject statsByDate(int siteId, int personId, LocalDate start, LocalDate end);
+
     Set<Person> getPersons();
+
     Set<Site> getSites();
 }

@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public JSONObject getStats(int siteId) {
-       return repository.getStats(siteId);
+        return repository.getStats(siteId);
     }
 
     @Override
