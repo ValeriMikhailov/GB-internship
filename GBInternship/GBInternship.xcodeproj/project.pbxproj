@@ -16,6 +16,7 @@
 		52A19EBD1E7715D100D984F7 /* GBInternshipTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A19EBC1E7715D100D984F7 /* GBInternshipTests.m */; };
 		52A19EC81E7715D100D984F7 /* GBInternshipUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A19EC71E7715D100D984F7 /* GBInternshipUITests.m */; };
 		52A19EDA1E77195000D984F7 /* GBServerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A19ED91E77195000D984F7 /* GBServerManager.m */; };
+		7FB6AA40162AFBEDF17230E5 /* Pods_GBInternship.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55110263F3E6B74E9D02DAB5 /* Pods_GBInternship.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		41313FBA1C32477CF8682175 /* Pods-GBInternship.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GBInternship.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GBInternship/Pods-GBInternship.debug.xcconfig"; sourceTree = "<group>"; };
 		52A19E9C1E7715D100D984F7 /* GBInternship.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GBInternship.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52A19EA01E7715D100D984F7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		52A19EA21E7715D100D984F7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -53,6 +55,8 @@
 		52A19EC91E7715D100D984F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		52A19ED81E77195000D984F7 /* GBServerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBServerManager.h; sourceTree = "<group>"; };
 		52A19ED91E77195000D984F7 /* GBServerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBServerManager.m; sourceTree = "<group>"; };
+		55110263F3E6B74E9D02DAB5 /* Pods_GBInternship.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GBInternship.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		985FA386EB8A5DD9AF6F06E8 /* Pods-GBInternship.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GBInternship.release.xcconfig"; path = "Pods/Target Support Files/Pods-GBInternship/Pods-GBInternship.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FB6AA40162AFBEDF17230E5 /* Pods_GBInternship.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +85,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E9E0606E4F4F6F71F15C486 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				55110263F3E6B74E9D02DAB5 /* Pods_GBInternship.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4A19C74A6C74BB810590AEB0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				41313FBA1C32477CF8682175 /* Pods-GBInternship.debug.xcconfig */,
+				985FA386EB8A5DD9AF6F06E8 /* Pods-GBInternship.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		52A19E931E7715D100D984F7 = {
 			isa = PBXGroup;
 			children = (
@@ -87,6 +109,8 @@
 				52A19EBB1E7715D100D984F7 /* GBInternshipTests */,
 				52A19EC61E7715D100D984F7 /* GBInternshipUITests */,
 				52A19E9D1E7715D100D984F7 /* Products */,
+				4A19C74A6C74BB810590AEB0 /* Pods */,
+				1E9E0606E4F4F6F71F15C486 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -174,9 +198,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 52A19ECC1E7715D100D984F7 /* Build configuration list for PBXNativeTarget "GBInternship" */;
 			buildPhases = (
+				6EFFB5221B9031AE1B92F656 /* [CP] Check Pods Manifest.lock */,
 				52A19E981E7715D100D984F7 /* Sources */,
 				52A19E991E7715D100D984F7 /* Frameworks */,
 				52A19E9A1E7715D100D984F7 /* Resources */,
+				3CF5AEC2C1596C7D7E892A3B /* [CP] Embed Pods Frameworks */,
+				99E8C31132A49305FB2CCA86 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -298,6 +325,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3CF5AEC2C1596C7D7E892A3B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GBInternship/Pods-GBInternship-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6EFFB5221B9031AE1B92F656 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		99E8C31132A49305FB2CCA86 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GBInternship/Pods-GBInternship-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		52A19E981E7715D100D984F7 /* Sources */ = {
@@ -452,6 +527,7 @@
 		};
 		52A19ECD1E7715D100D984F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 41313FBA1C32477CF8682175 /* Pods-GBInternship.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 3PTYV272Z4;
@@ -464,6 +540,7 @@
 		};
 		52A19ECE1E7715D100D984F7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 985FA386EB8A5DD9AF6F06E8 /* Pods-GBInternship.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 3PTYV272Z4;

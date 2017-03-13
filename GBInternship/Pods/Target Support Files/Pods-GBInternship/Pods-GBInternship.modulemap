@@ -1,0 +1,6 @@
+framework module Pods_GBInternship {
+  umbrella header "Pods-GBInternship-umbrella.h"
+
+  export *
+  module * { export * }
+}
