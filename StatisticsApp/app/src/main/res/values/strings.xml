@@ -4,6 +4,8 @@
     <string name="button_ok">OK</string>
     <string name="hint_password">PASSWORD</string>
     <string name="hint_login">LOGIN</string>
+    <string name="hint_from">FROM</string>
+    <string name="hint_to">TO</string>
 
     <string name="tab_title_global">Global</string>
     <string name="tab_title_daily">Daily</string>
@@ -11,4 +13,8 @@
     <string name="choose_site">Choose site</string>
     <string name="last_update">Last update</string>
     <string name="choose_person">Choose person</string>
+    <string name="textview_date">DATE</string>
+    <string name="textview_pages">PAGES</string>
+    <string name="textview_total">TOTAL</string>
+
 </resources>

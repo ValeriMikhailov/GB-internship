@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -12,7 +17,7 @@
     tools:layout_editor_absoluteX="0dp">
 
     <TextView
-        android:id="@+id/chooseSiteTextViewDaily"
+        android:id="@+id/chooseSiteTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/choose_site"
@@ -24,7 +29,7 @@
 
     <com.jaredrummler.materialspinner.MaterialSpinner
         android:id="@+id/spinnerSiteGlobalFragment"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginLeft="16dp"
@@ -33,7 +38,7 @@
         android:layout_marginTop="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chooseSiteTextViewDaily"
+        app:layout_constraintTop_toBottomOf="@+id/chooseSiteTextView"
         app:ms_arrow_tint="@color/colorPrimaryDark" />
 
     <ListView
@@ -47,7 +52,8 @@
         android:layout_marginTop="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerSiteGlobalFragment"/>
+        app:layout_constraintTop_toBottomOf="@+id/spinnerSiteGlobalFragment"
+        android:clickable="false"/>
 
     <TextView
         android:id="@+id/lastUpdateTextView"
@@ -64,3 +70,4 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent" />
 </android.support.constraint.ConstraintLayout>
+</ScrollView>
