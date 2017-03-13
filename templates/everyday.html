@@ -1,4 +1,4 @@
-{% load static %}
+{% load staticfiles %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -8,8 +8,9 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>{{ title }}</title>
 
-  <link rel="stylesheet" href="{% static 'css/bootstrap-3.3.7/dist/css/bootstrap.css' %}">
-  <link rel="stylesheet" href="{% static 'css/bootstrap-3.3.7/dist/css/bootstrap-theme.css' %}">
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-theme.css' %}">
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
 
 </head>
 <body>
@@ -24,7 +25,9 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="../">R%ting</a>
+          <a class="navbar-brand" href="../">
+            <img class="navbar-brand__logo" alt="Statistics App" src="{% static 'logo.png' %}">
+          </a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -97,6 +100,6 @@
 
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="{% static 'css/bootstrap-3.3.7/dist/js/bootstrap.js' %}" charset="utf-8"></script>
+  <script src="{% static 'bootstrap/js/bootstrap.js'%}"  charset="utf-8"></script>
 </body>
 </html>

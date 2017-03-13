@@ -18,10 +18,11 @@ from django.contrib import admin
 
 from general_stat.views import *
 from daily_stat.views import *
+from landing_page.views import *
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', show_general_page),
+    url(r'^$', show_landing_page),
     url(r'^common/$', show_general_page),
     url(r'^everyday/$', show_daily_page)
 ]

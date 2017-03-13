@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'general_stat',
+    'landing_page'
 ]
 
 MIDDLEWARE = [
@@ -119,9 +120,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "mysite/static"),
-    #'/var/www/static/',
+    os.path.join(BASE_DIR, "static"),
 ]
