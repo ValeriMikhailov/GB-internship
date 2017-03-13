@@ -9,13 +9,13 @@
 /* Begin PBXBuildFile section */
 		52A19EA11E7715D100D984F7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A19EA01E7715D100D984F7 /* main.m */; };
 		52A19EA41E7715D100D984F7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A19EA31E7715D100D984F7 /* AppDelegate.m */; };
-		52A19EA71E7715D100D984F7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A19EA61E7715D100D984F7 /* ViewController.m */; };
 		52A19EAA1E7715D100D984F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52A19EA81E7715D100D984F7 /* Main.storyboard */; };
 		52A19EAD1E7715D100D984F7 /* GBInternship.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 52A19EAB1E7715D100D984F7 /* GBInternship.xcdatamodeld */; };
 		52A19EAF1E7715D100D984F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52A19EAE1E7715D100D984F7 /* Assets.xcassets */; };
 		52A19EB21E7715D100D984F7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52A19EB01E7715D100D984F7 /* LaunchScreen.storyboard */; };
 		52A19EBD1E7715D100D984F7 /* GBInternshipTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A19EBC1E7715D100D984F7 /* GBInternshipTests.m */; };
 		52A19EC81E7715D100D984F7 /* GBInternshipUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A19EC71E7715D100D984F7 /* GBInternshipUITests.m */; };
+		52A19EDA1E77195000D984F7 /* GBServerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A19ED91E77195000D984F7 /* GBServerManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,8 +40,6 @@
 		52A19EA01E7715D100D984F7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		52A19EA21E7715D100D984F7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		52A19EA31E7715D100D984F7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		52A19EA51E7715D100D984F7 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		52A19EA61E7715D100D984F7 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		52A19EA91E7715D100D984F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		52A19EAC1E7715D100D984F7 /* GBInternship.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GBInternship.xcdatamodel; sourceTree = "<group>"; };
 		52A19EAE1E7715D100D984F7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -53,6 +51,8 @@
 		52A19EC31E7715D100D984F7 /* GBInternshipUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GBInternshipUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		52A19EC71E7715D100D984F7 /* GBInternshipUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GBInternshipUITests.m; sourceTree = "<group>"; };
 		52A19EC91E7715D100D984F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		52A19ED81E77195000D984F7 /* GBServerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBServerManager.h; sourceTree = "<group>"; };
+		52A19ED91E77195000D984F7 /* GBServerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBServerManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,10 +103,11 @@
 		52A19E9E1E7715D100D984F7 /* GBInternship */ = {
 			isa = PBXGroup;
 			children = (
+				52A19ED51E7718DE00D984F7 /* Models */,
+				52A19ED61E7718E500D984F7 /* Controllers */,
+				52A19ED71E7718FF00D984F7 /* API */,
 				52A19EA21E7715D100D984F7 /* AppDelegate.h */,
 				52A19EA31E7715D100D984F7 /* AppDelegate.m */,
-				52A19EA51E7715D100D984F7 /* ViewController.h */,
-				52A19EA61E7715D100D984F7 /* ViewController.m */,
 				52A19EA81E7715D100D984F7 /* Main.storyboard */,
 				52A19EAE1E7715D100D984F7 /* Assets.xcassets */,
 				52A19EB01E7715D100D984F7 /* LaunchScreen.storyboard */,
@@ -141,6 +142,29 @@
 				52A19EC91E7715D100D984F7 /* Info.plist */,
 			);
 			path = GBInternshipUITests;
+			sourceTree = "<group>";
+		};
+		52A19ED51E7718DE00D984F7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		52A19ED61E7718E500D984F7 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		52A19ED71E7718FF00D984F7 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				52A19ED81E77195000D984F7 /* GBServerManager.h */,
+				52A19ED91E77195000D984F7 /* GBServerManager.m */,
+			);
+			name = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -280,10 +304,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52A19EA71E7715D100D984F7 /* ViewController.m in Sources */,
 				52A19EA41E7715D100D984F7 /* AppDelegate.m in Sources */,
 				52A19EAD1E7715D100D984F7 /* GBInternship.xcdatamodeld in Sources */,
 				52A19EA11E7715D100D984F7 /* main.m in Sources */,
+				52A19EDA1E77195000D984F7 /* GBServerManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
