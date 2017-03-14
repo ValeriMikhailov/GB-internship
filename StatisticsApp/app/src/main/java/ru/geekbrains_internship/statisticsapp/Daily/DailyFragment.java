@@ -1,17 +1,27 @@
 package ru.geekbrains_internship.statisticsapp.Daily;
 
+
+import android.app.DatePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethod;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jaredrummler.materialspinner.MaterialSpinner;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import ru.geekbrains_internship.statisticsapp.R;
 
@@ -20,19 +30,24 @@ import ru.geekbrains_internship.statisticsapp.R;
  */
 
 public class DailyFragment extends Fragment {
+
+    private EditText from, to;
+    private DatePickerDialog chooseDate;
+
     public DailyFragment() {
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_daily, container, false);
 
+        //спиннер выбора сайта
         MaterialSpinner spinnerSite = (MaterialSpinner) view.findViewById(R.id.spinnerSiteDailyFragment);
         spinnerSite.setItems("lenta.ru", "pochta.ru", "android.com", "material.io", "mail.ru");
         spinnerSite.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
@@ -42,6 +57,7 @@ public class DailyFragment extends Fragment {
             }
         });
 
+        //спиннер выбора персоны
         MaterialSpinner spinnerPerson = (MaterialSpinner) view.findViewById(R.id.choosePerson);
         spinnerPerson.setItems("Путин", "Навальный", "Жириновский", "Медведев");
         spinnerPerson.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
@@ -51,8 +67,15 @@ public class DailyFragment extends Fragment {
             }
         });
 
+        //EditText для ввода дат
+        from = (EditText) view.findViewById(R.id.from);
+        to = (EditText) view.findViewById(R.id.to);
+        from.setOnClickListener(chooseDateClick);
+        to.setOnClickListener(chooseDateClick);
+
+
         ListView listView = (ListView) view.findViewById(R.id.listViewDailyFragment);
-        final String[] names = new String[] {"Путин", "Навальный", "Жириновский", "Медведев"};
+        final String[] names = new String[]{"Путин", "Навальный", "Жириновский", "Медведев"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, names);
         listView.setAdapter(adapter);
 
@@ -67,8 +90,33 @@ public class DailyFragment extends Fragment {
                 Toast.makeText(getActivity(), "Выбран " + item, Toast.LENGTH_SHORT).show();
             }
         });
-
         return view;
     }
+
+    //обработка нажатия EditText для выбора даты
+    public View.OnClickListener chooseDateClick = new View.OnClickListener() {
+        @Override
+        public void onClick(final View view) {
+            Calendar calendar = Calendar.getInstance();
+            final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+            chooseDate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+                    Calendar newCalendar = Calendar.getInstance();
+                    newCalendar.set(year, monthOfYear, dayOfMonth);
+                    switch (view.getId()) {
+                        case R.id.from:
+                            Toast.makeText(getActivity(), "нажат фром", Toast.LENGTH_SHORT);
+                            from.setText(dateFormat.format(newCalendar.getTime()));
+                            break;
+                        case R.id.to:
+                            to.setText(dateFormat.format(newCalendar.getTime()));
+                            break;
+                    }
+                }
+            }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+            chooseDate.show();
+        }
+    };
 }
 
