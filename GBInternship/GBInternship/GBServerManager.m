@@ -49,6 +49,13 @@ static NSString* originLink = @"http://www._______________";
     return manager;
 }
 
+#pragma mark - Help methods -
+
+- (void) calculatingFetchDuration {
+    
+    //Calculating how long the data wasn't update
+}
+
 
 
 
