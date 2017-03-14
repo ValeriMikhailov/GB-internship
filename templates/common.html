@@ -43,18 +43,25 @@
     <div class="container">
         <h1>Статистика упоминаний</h1>
         <br>
-        <form class="form-horizontal">
+        <form class="form-horizontal" action="/common/" method="post">{% csrf_token %}
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="site" class="col-sm-2 control-label">Сайт</label>
                     <div class="col-sm-10">
-                        <select class="form-control" id="site">
+                        <select class="form-control" id="site" name="site_id">
                             {% for site in sites %}
-                                <option value={{ site.id }}>{{ site.name }}</option>
+                              <option value={{ site.id }}
+                                {% if site.id == site_id %}
+                                selected
+                                {% endif %}>{{ site.name }}
+                              </option>
                             {% endfor %}
                         </select>
                     </div>
                 </div>
+            </div>
+            <div class="col-sm-6">
+              <input type="submit" class="btn btn-primary" value="Применить">
             </div>
         </form>
         <br>
@@ -64,21 +71,12 @@
                 <th>Личность</th>
                 <th>Рейтинг</th>
             </tr>
-            {% for site in list_sites.0 %}
+            {% for string in general_stat %}
                 <tr>
-                    <td>{{ site.personName }}</td>
-                    <td>{{ site.rank }}</td>
+                    <td>{{ string.personName }}</td>
+                    <td>{{ string.rank }}</td>
                 </tr>
             {% endfor %}
-
-            <tr>
-                <td>Жириновский В. В.</td>
-                <td>43543</td>
-            </tr>
-            <tr>
-                <td>Навальный А. А.</td>
-                <td>4236</td>
-            </tr>
         </table>
     </div>
 
