@@ -1,4 +1,50 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16D32" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="GBKeyWords" representedClassName="GBKeyWords" syncable="YES" codeGenerationType="class">
+        <attribute name="keyWord" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="keyWordID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="person" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GBPerson" inverseName="personKeyWord" inverseEntity="GBPerson" syncable="YES"/>
+        <relationship name="statistic" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GBStatistics" inverseName="keyWords" inverseEntity="GBStatistics" syncable="YES"/>
+    </entity>
+    <entity name="GBPages" representedClassName="GBPages" syncable="YES" codeGenerationType="class">
+        <attribute name="pageDateOfFirstScan" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="pageDateOfLastScan" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="pageID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="pageURL" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="sites" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GBSites" inverseName="pages" inverseEntity="GBSites" syncable="YES"/>
+        <relationship name="statistics" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GBStatistics" inverseName="pages" inverseEntity="GBStatistics" syncable="YES"/>
+    </entity>
+    <entity name="GBPerson" representedClassName="GBPerson" syncable="YES" codeGenerationType="class">
+        <attribute name="personFirstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="personID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="personLastName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="personKeyWord" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GBKeyWords" inverseName="person" inverseEntity="GBKeyWords" syncable="YES"/>
+    </entity>
+    <entity name="GBSites" representedClassName="GBSites" syncable="YES" codeGenerationType="class">
+        <attribute name="siteID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="sitreURL" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="pages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GBPages" inverseName="sites" inverseEntity="GBPages" syncable="YES"/>
+    </entity>
+    <entity name="GBStatistics" representedClassName="GBStatistics" syncable="YES" codeGenerationType="class">
+        <attribute name="statisticDateOfScan" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="statisticKeyWord" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="statisticPage" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="keyWords" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GBKeyWords" inverseName="statistic" inverseEntity="GBKeyWords" syncable="YES"/>
+        <relationship name="pages" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GBPages" inverseName="statistics" inverseEntity="GBPages" syncable="YES"/>
+    </entity>
+    <entity name="GBUser" representedClassName="GBUser" syncable="YES" codeGenerationType="class">
+        <attribute name="userID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="userIsAdmin" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="userLastVisitDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="userLogin" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userPassword" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="GBUser" positionX="-63" positionY="-18" width="128" height="118"/>
+        <element name="GBPerson" positionX="-441" positionY="185" width="128" height="103"/>
+        <element name="GBKeyWords" positionX="-236" positionY="198" width="128" height="103"/>
+        <element name="GBStatistics" positionX="-9" positionY="198" width="128" height="118"/>
+        <element name="GBPages" positionX="-243" positionY="45" width="128" height="133"/>
+        <element name="GBSites" positionX="-434" positionY="63" width="128" height="88"/>
+    </elements>
 </model>
