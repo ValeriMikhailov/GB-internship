@@ -4,7 +4,7 @@ import ru.geekbrains.rest.model.Keyword;
 import ru.geekbrains.rest.model.Person;
 import ru.geekbrains.rest.model.Site;
 
-import java.util.Set;
+import java.util.List;
 
 public interface AdminRepository {
 
@@ -16,7 +16,7 @@ public interface AdminRepository {
 
     void deletePerson(int personId);
 
-    Set<Keyword> getKeywords(int personId);
+    List<Keyword> getKeywords(int personId);
 
     int createKeyword(int personId, String name);
 

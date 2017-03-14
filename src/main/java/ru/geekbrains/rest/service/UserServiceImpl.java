@@ -8,7 +8,7 @@ import ru.geekbrains.rest.model.Site;
 import ru.geekbrains.rest.repository.UserRepository;
 
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -27,12 +27,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Set<Person> getPersons() {
+    public List<Person> getPersons() {
         return repository.getPersons();
     }
 
     @Override
-    public Set<Site> getSites() {
+    public List<Site> getSites() {
         return repository.getSites();
     }
 }

@@ -5,7 +5,7 @@ import ru.geekbrains.rest.model.Person;
 import ru.geekbrains.rest.model.Site;
 
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.List;
 
 public interface UserRepository {
 
@@ -13,7 +13,7 @@ public interface UserRepository {
 
     JSONObject statsByDate(int siteId, int personId, LocalDate start, LocalDate end);
 
-    Set<Person> getPersons();
+    List<Person> getPersons();
 
-    Set<Site> getSites();
+    List<Site> getSites();
 }

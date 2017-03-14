@@ -7,7 +7,7 @@ import ru.geekbrains.rest.model.Person;
 import ru.geekbrains.rest.model.Site;
 import ru.geekbrains.rest.repository.AdminRepository;
 
-import java.util.Set;
+import java.util.List;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -36,7 +36,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public Set<Keyword> getKeywords(int personId) {
+    public List<Keyword> getKeywords(int personId) {
         return repository.getKeywords(personId);
     }
 
