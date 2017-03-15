@@ -1,13 +1,13 @@
 package ru.geekbrains.dbService.dataSets;
 
-public class PersonRank {
+public class PersonSiteRank {
     private int siteId;
     private String personName;
     private int rank;
 
-    public PersonRank(int siteId, String name, int rank) {
+    public PersonSiteRank(int siteId, String personName, int rank) {
         this.siteId = siteId;
-        this.personName = name;
+        this.personName = personName;
         this.rank = rank;
     }
 
@@ -15,7 +15,7 @@ public class PersonRank {
         return siteId;
     }
 
-    public String getName() {
+    public String getPersonName() {
         return personName;
     }
 
@@ -25,10 +25,9 @@ public class PersonRank {
 
     @Override
     public String toString() {
-        return "PersonRank{" +
-                "personId=" + siteId +
-                ", name=" + personName +
+        return "PersonSiteRank{" +
+                "siteId=" + siteId +
+                ", personName=" + personName  +
                 ", rank=" + rank + '}';
     }
 }
-

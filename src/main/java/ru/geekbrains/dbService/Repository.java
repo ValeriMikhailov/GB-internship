@@ -8,24 +8,25 @@ import java.util.List;
 
 public interface Repository {
 
-    ArrayList<PersonRank> getTotalStat(int siteId);
-    ArrayList<EveryDayStat> getEveryDayStat(int siteId, int personId, Date start, Date end);
+    ArrayList<PersonSiteRank> getTotalStat(String siteId);
+    ArrayList<DateNewPages> getEveryDayStat(String siteId, String personId, String startDate, String endDate);
 
-    List<Person> getAllPersons();
-    Person getPerson(int personId);
-    boolean createPerson(Person person);
-    boolean updatePerson(int personId, Person newPersonData);
-    boolean deletePerson(int personId);
+    List<iDNameObject> getAllPersons();
+    iDNameObject getPerson(String personId);
+    String createPerson(String name);
+    void updatePerson(String personId,String name);
+    void deletePerson(String personId);
 
-    List<Keyword> getKeywordsByPersonId(int personId);
-    boolean createKeywordByPersonId(int personId, Keyword keyword);
-    boolean updateKeywordByPersonId(int personId, int keywordId, Keyword newKeyword);
-    boolean deleteKeywordByPersonId(int personId, int keywordId);
+    List<iDNameObject> getKeywordsByPersonId(String personId);
+    String createKeywordByPersonId(String personId, String name);
+    void updateKeywordByPersonId(String personId, String keywordId, String keyword);
+    void deleteKeywordByPersonId(String personId, String keywordId);
 
-    boolean createSite(Site site);
-    boolean updateSite(int siteId, Site newDataSite);
-    Site getSite(int siteId);
-    boolean deleteSite(int siteId);
-    List<Site> getAllSites();
+    List<iDNameObject> getAllSites();
+    iDNameObject getSite(String siteId);
+    String createSite(String name);
+    void updateSite(String siteId, String siteName);
+    void deleteSite(String siteId);
+
 
 }

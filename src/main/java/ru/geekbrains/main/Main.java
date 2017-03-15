@@ -7,7 +7,7 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
-import ru.geekbrains.dbService.FakeDBService;
+import ru.geekbrains.dbService.DBService;
 import ru.geekbrains.dbService.Repository;
 
 public class Main {
@@ -30,7 +30,7 @@ public class Main {
 
         try {
 
-            repo = new FakeDBService();
+            repo = new DBService();
 
             int port = Integer.valueOf(portString);
 
@@ -50,7 +50,6 @@ public class Main {
             server.join();
         }catch (Exception e){
             logger.error(e.getMessage(),e);
-            System.exit(1);
         }
     }
 }
