@@ -6,6 +6,8 @@
 
     <!-- Root Context: defines shared resources visible to all other web components -->
 
+    <import resource="spring-security.xml"/>
+
     <context:annotation-config/>
 
     <context:property-placeholder location="classpath:db/mysql.properties" system-properties-mode="OVERRIDE"/>
