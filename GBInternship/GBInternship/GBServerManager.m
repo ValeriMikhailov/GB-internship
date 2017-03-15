@@ -9,7 +9,7 @@
 #import "GBServerManager.h"
 #import "AFNetworking.h"
 
-static NSString* originLink = @"http://52.89.213.205:8090/rest/user/";
+static NSString* originLink = @"http://52.89.213.205:8080/rest/user/";
 
 @interface GBServerManager ()
 
@@ -45,6 +45,46 @@ static NSString* originLink = @"http://52.89.213.205:8090/rest/user/";
     
     return manager;
 }
+
+#pragma mark - API methods - 
+
+//  Array with name and rank by siteID
+- (void) getArrayBySiteID: (NSInteger) category
+                onSuccess: (void(^)(NSArray* productsArray)) success
+                onFailure: (void(^)(NSError* error)) failure {
+    
+    NSString* link = [NSString stringWithFormat:@"%@%ld", originLink, (long)category];
+    
+    [self.sessionManager GET:link
+                  parameters:nil
+                    progress:nil
+                     success:^(NSURLSessionTask * task, id responseObject) {
+                         
+                         NSMutableArray* objectsArray = [NSMutableArray array];
+                         NSMutableArray* array = (NSMutableArray*)responseObject;
+                         
+                         for (NSUInteger i = 0; i < array.count; i++) {
+                             
+                             NSDictionary* singleProduct = array[i];
+                             
+                             NSLog(@"новый жсон: %@", singleProduct);
+                             
+                         }
+                         
+                         if (success) {
+                             
+                             success(objectsArray);
+                         }
+                         
+                     } failure:^(NSURLSessionDataTask* task, NSError* error) {
+                         NSLog(@"Error: %@", error);
+                         if (failure) {
+                             failure(error);
+                         }
+                     }];
+    
+}
+
 
 #pragma mark - Help methods -
 

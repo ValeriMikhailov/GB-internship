@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "GBDataManager.h"
+#import "GBServerManager.h"
 
 @interface AppDelegate ()
 
@@ -17,7 +18,13 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    [[GBServerManager sharedManager] getArrayBySiteID:1 onSuccess:^(NSArray *productsArray) {
+        
+    } onFailure:^(NSError *error) {
+        
+    }];
+    
     return YES;
 }
 
