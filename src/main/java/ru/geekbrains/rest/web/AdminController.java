@@ -8,6 +8,7 @@ import ru.geekbrains.rest.model.Person;
 import ru.geekbrains.rest.model.Site;
 import ru.geekbrains.rest.service.AdminService;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -39,7 +40,7 @@ public class AdminController {
     }
 
     @GetMapping(value = "/person/{personId}/keywords", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Set<Keyword> getKeywords(@PathVariable(value = "personId") int personId) {
+    public List<Keyword> getKeywords(@PathVariable(value = "personId") int personId) {
         return service.getKeywords(personId);
     }
 

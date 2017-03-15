@@ -7,11 +7,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.geekbrains.rest.model.DateRank;
 import ru.geekbrains.rest.model.Person;
+import ru.geekbrains.rest.model.PersonRank;
 import ru.geekbrains.rest.model.Site;
 import ru.geekbrains.rest.service.UserService;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -24,26 +27,24 @@ public class UserController {
     private UserService service;
 
     @GetMapping(value = "/persons", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Set<Person> getPersons() {
+    public List<Person> getPersons() {
         return service.getPersons();
     }
 
     @GetMapping(value = "/sites", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Set<Site> getSites() {
+    public List<Site> getSites() {
         return service.getSites();
     }
 
     @GetMapping(value = "/{siteId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<String> getStats(@PathVariable(value = "siteId") int siteId) {
-        JSONObject object = service.getStats(siteId);
-        return new ResponseEntity<>(object.toString(), HttpStatus.OK);
+    public List<PersonRank> getStats(@PathVariable(value = "siteId") int siteId) {
+        return service.getStats(siteId);
     }
 
     @GetMapping(value = "/{siteId}/{personId}/between", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity getStatsByDate(@PathVariable(value = "siteId") int siteId, @PathVariable(value = "personId") int personId,
+    public List<DateRank> getStatsByDate(@PathVariable(value = "siteId") int siteId, @PathVariable(value = "personId") int personId,
                                          @RequestParam(value = "start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate start,
                                          @RequestParam(value = "end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate end) {
-        JSONObject object = service.statsByDate(siteId, personId, start, end);
-        return new ResponseEntity<>(object.toString(), HttpStatus.OK);
+        return service.statsByDate(siteId, personId, start, end);
     }
 }

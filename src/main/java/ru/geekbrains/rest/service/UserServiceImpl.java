@@ -1,9 +1,10 @@
 package ru.geekbrains.rest.service;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.geekbrains.rest.model.DateRank;
 import ru.geekbrains.rest.model.Person;
+import ru.geekbrains.rest.model.PersonRank;
 import ru.geekbrains.rest.model.Site;
 import ru.geekbrains.rest.repository.UserRepository;
 
@@ -17,12 +18,12 @@ public class UserServiceImpl implements UserService {
     private UserRepository repository;
 
     @Override
-    public JSONObject getStats(int siteId) {
+    public List<PersonRank> getStats(int siteId) {
         return repository.getStats(siteId);
     }
 
     @Override
-    public JSONObject statsByDate(int siteId, int personId, LocalDate start, LocalDate end) {
+    public List<DateRank> statsByDate(int siteId, int personId, LocalDate start, LocalDate end) {
         return repository.statsByDate(siteId, personId, start, end);
     }
 
