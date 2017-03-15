@@ -2,7 +2,7 @@
 //  GBKeyWords+CoreDataProperties.h
 //  
 //
-//  Created by Stanly Shiyanovskiy on 14.03.17.
+//  Created by Stanly Shiyanovskiy on 15.03.17.
 //
 //  This file was automatically generated and should not be edited.
 //
@@ -16,8 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSFetchRequest<GBKeyWords *> *)fetchRequest;
 
-@property (nonatomic) int16_t keyWordID;
 @property (nullable, nonatomic, copy) NSString *keyWord;
+@property (nonatomic) int16_t keyWordID;
 @property (nullable, nonatomic, retain) GBPerson *person;
 @property (nullable, nonatomic, retain) NSSet<GBStatistics *> *statistic;
 

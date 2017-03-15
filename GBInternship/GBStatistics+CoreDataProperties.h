@@ -2,7 +2,7 @@
 //  GBStatistics+CoreDataProperties.h
 //  
 //
-//  Created by Stanly Shiyanovskiy on 14.03.17.
+//  Created by Stanly Shiyanovskiy on 15.03.17.
 //
 //  This file was automatically generated and should not be edited.
 //

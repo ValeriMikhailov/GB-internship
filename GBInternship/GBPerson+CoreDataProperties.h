@@ -2,7 +2,7 @@
 //  GBPerson+CoreDataProperties.h
 //  
 //
-//  Created by Stanly Shiyanovskiy on 14.03.17.
+//  Created by Stanly Shiyanovskiy on 15.03.17.
 //
 //  This file was automatically generated and should not be edited.
 //
@@ -16,8 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSFetchRequest<GBPerson *> *)fetchRequest;
 
-@property (nonatomic) int16_t personID;
 @property (nullable, nonatomic, copy) NSString *personFirstName;
+@property (nonatomic) int16_t personID;
 @property (nullable, nonatomic, copy) NSString *personLastName;
 @property (nullable, nonatomic, retain) NSSet<GBKeyWords *> *personKeyWord;
 

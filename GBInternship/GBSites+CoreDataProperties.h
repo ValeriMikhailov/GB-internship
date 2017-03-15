@@ -2,7 +2,7 @@
 //  GBSites+CoreDataProperties.h
 //  
 //
-//  Created by Stanly Shiyanovskiy on 14.03.17.
+//  Created by Stanly Shiyanovskiy on 15.03.17.
 //
 //  This file was automatically generated and should not be edited.
 //
@@ -18,16 +18,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic) int16_t siteID;
 @property (nullable, nonatomic, copy) NSString *sitreURL;
-@property (nullable, nonatomic, retain) NSSet<GBPages *> *pages;
+@property (nullable, nonatomic, retain) NSSet<GBPages *> *sitePages;
 
 @end
 
 @interface GBSites (CoreDataGeneratedAccessors)
 
-- (void)addPagesObject:(GBPages *)value;
-- (void)removePagesObject:(GBPages *)value;
-- (void)addPages:(NSSet<GBPages *> *)values;
-- (void)removePages:(NSSet<GBPages *> *)values;
+- (void)addSitePagesObject:(GBPages *)value;
+- (void)removeSitePagesObject:(GBPages *)value;
+- (void)addSitePages:(NSSet<GBPages *> *)values;
+- (void)removeSitePages:(NSSet<GBPages *> *)values;
 
 @end
 

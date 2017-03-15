@@ -2,7 +2,7 @@
 //  GBPerson+CoreDataProperties.m
 //  
 //
-//  Created by Stanly Shiyanovskiy on 14.03.17.
+//  Created by Stanly Shiyanovskiy on 15.03.17.
 //
 //  This file was automatically generated and should not be edited.
 //
@@ -15,8 +15,8 @@
 	return [[NSFetchRequest alloc] initWithEntityName:@"GBPerson"];
 }
 
-@dynamic personID;
 @dynamic personFirstName;
+@dynamic personID;
 @dynamic personLastName;
 @dynamic personKeyWord;
 

@@ -9,8 +9,7 @@
 #import "GBServerManager.h"
 #import "AFNetworking.h"
 
-#warning Here must be infinitive link to fetch data
-static NSString* originLink = @"http://www._______________";
+static NSString* originLink = @"http://52.89.213.205:8090/rest/user/";
 
 @interface GBServerManager ()
 
@@ -26,10 +25,8 @@ static NSString* originLink = @"http://www._______________";
     self = [super init];
     
     if (self) {
-
-#warning Here we can change link or add another ending
-        NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"____/rest", originLink]];
-        self.sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:url];
+        
+        self.sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:originLink]];
     }
     
     return self;

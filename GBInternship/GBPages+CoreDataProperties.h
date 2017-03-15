@@ -2,7 +2,7 @@
 //  GBPages+CoreDataProperties.h
 //  
 //
-//  Created by Stanly Shiyanovskiy on 14.03.17.
+//  Created by Stanly Shiyanovskiy on 15.03.17.
 //
 //  This file was automatically generated and should not be edited.
 //
@@ -16,12 +16,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSFetchRequest<GBPages *> *)fetchRequest;
 
-@property (nonatomic) int16_t pageID;
-@property (nullable, nonatomic, copy) NSString *pageURL;
 @property (nullable, nonatomic, copy) NSDate *pageDateOfFirstScan;
 @property (nullable, nonatomic, copy) NSDate *pageDateOfLastScan;
-@property (nullable, nonatomic, retain) NSSet<GBStatistics *> *statistics;
+@property (nonatomic) int16_t pageID;
+@property (nullable, nonatomic, copy) NSString *pageURL;
 @property (nullable, nonatomic, retain) GBSites *sites;
+@property (nullable, nonatomic, retain) NSSet<GBStatistics *> *statistics;
 
 @end
 

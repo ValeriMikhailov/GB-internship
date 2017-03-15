@@ -11,7 +11,7 @@
         <attribute name="pageDateOfLastScan" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="pageID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="pageURL" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="sites" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GBSites" inverseName="pages" inverseEntity="GBSites" syncable="YES"/>
+        <relationship name="sites" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GBSites" inverseName="sitePages" inverseEntity="GBSites" syncable="YES"/>
         <relationship name="statistics" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GBStatistics" inverseName="pages" inverseEntity="GBStatistics" syncable="YES"/>
     </entity>
     <entity name="GBPerson" representedClassName="GBPerson" syncable="YES" codeGenerationType="class">
@@ -23,7 +23,7 @@
     <entity name="GBSites" representedClassName="GBSites" syncable="YES" codeGenerationType="class">
         <attribute name="siteID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="sitreURL" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="pages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GBPages" inverseName="sites" inverseEntity="GBPages" syncable="YES"/>
+        <relationship name="sitePages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GBPages" inverseName="sites" inverseEntity="GBPages" syncable="YES"/>
     </entity>
     <entity name="GBStatistics" representedClassName="GBStatistics" syncable="YES" codeGenerationType="class">
         <attribute name="statisticDateOfScan" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -40,11 +40,11 @@
         <attribute name="userPassword" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="GBUser" positionX="-63" positionY="-18" width="128" height="118"/>
-        <element name="GBPerson" positionX="-441" positionY="185" width="128" height="103"/>
         <element name="GBKeyWords" positionX="-236" positionY="198" width="128" height="103"/>
-        <element name="GBStatistics" positionX="-9" positionY="198" width="128" height="118"/>
         <element name="GBPages" positionX="-243" positionY="45" width="128" height="133"/>
+        <element name="GBPerson" positionX="-441" positionY="185" width="128" height="103"/>
         <element name="GBSites" positionX="-434" positionY="63" width="128" height="88"/>
+        <element name="GBStatistics" positionX="-9" positionY="198" width="128" height="118"/>
+        <element name="GBUser" positionX="-63" positionY="-18" width="128" height="118"/>
     </elements>
 </model>
