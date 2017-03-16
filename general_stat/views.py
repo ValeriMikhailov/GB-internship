@@ -17,7 +17,6 @@ def get_general_stat(site_id):
 
 def show_general_page(request):
     title = 'Общая статистика'
-
     sites = get_sites()
 
     if request.method == "POST":
@@ -27,8 +26,8 @@ def show_general_page(request):
         site_id = sites[0]["id"]
         general_stat = get_general_stat(site_id)
 
-    return render(request, 'common.html',{'sites': sites,
+    return render(request, 'common.html',{'title': title,
+                                          'sites': sites,
                                           'general_stat': general_stat,
-                                          'title': title,
-                                          'site_id': site_id
+                                          'site_id': site_id,
                                           })
