@@ -4,12 +4,10 @@ package ru.geekbrains_internship.statisticsapp.Daily;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethod;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
@@ -29,7 +27,7 @@ import ru.geekbrains_internship.statisticsapp.R;
  * Created by GooDi on 12.03.2017.
  */
 
-public class DailyFragment extends Fragment {
+public class DailyFragment extends Fragment implements View.OnFocusChangeListener {
 
     private EditText from, to;
     private DatePickerDialog chooseDate;
@@ -70,9 +68,8 @@ public class DailyFragment extends Fragment {
         //EditText для ввода дат
         from = (EditText) view.findViewById(R.id.from);
         to = (EditText) view.findViewById(R.id.to);
-        from.setOnClickListener(chooseDateClick);
-        to.setOnClickListener(chooseDateClick);
-
+        from.setOnFocusChangeListener(this);
+        to.setOnFocusChangeListener(this);
 
         ListView listView = (ListView) view.findViewById(R.id.listViewDailyFragment);
         final String[] names = new String[]{"Путин", "Навальный", "Жириновский", "Медведев"};
@@ -90,33 +87,51 @@ public class DailyFragment extends Fragment {
                 Toast.makeText(getActivity(), "Выбран " + item, Toast.LENGTH_SHORT).show();
             }
         });
+
+        View viewFocus = getActivity().getCurrentFocus();
+        if (viewFocus != null) {
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+        }
+
         return view;
     }
 
-    //обработка нажатия EditText для выбора даты
-    public View.OnClickListener chooseDateClick = new View.OnClickListener() {
-        @Override
-        public void onClick(final View view) {
-            Calendar calendar = Calendar.getInstance();
-            final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-            chooseDate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-                @Override
-                public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
-                    Calendar newCalendar = Calendar.getInstance();
-                    newCalendar.set(year, monthOfYear, dayOfMonth);
-                    switch (view.getId()) {
-                        case R.id.from:
-                            Toast.makeText(getActivity(), "нажат фром", Toast.LENGTH_SHORT);
-                            from.setText(dateFormat.format(newCalendar.getTime()));
-                            break;
-                        case R.id.to:
-                            to.setText(dateFormat.format(newCalendar.getTime()));
-                            break;
-                    }
-                }
-            }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+    //вызывается когда сменился фокус на EditText
+    //Потом проверка, если в фокусе, то инициировать диалог и показать
+    @Override
+    public void onFocusChange(View view, boolean hasFocus) {
+        initDateDialog(view);
+        if (hasFocus) {
             chooseDate.show();
         }
-    };
+
+    }
+
+    //инициализация диалога выбора даты
+    private void initDateDialog(final View view) {
+        Calendar calendar = Calendar.getInstance();
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        chooseDate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newCalendar = Calendar.getInstance();
+                newCalendar.set(year, monthOfYear, dayOfMonth);
+                switch (view.getId()) {
+                  case R.id.from:
+                   from.setText(dateFormat.format(newCalendar.getTime()));
+                  break;
+                  case R.id.to:
+                    to.setText(dateFormat.format(newCalendar.getTime()));
+                    break;
+            }
+
+              }
+        }, calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH));
+        //ограничение. нельзя выбрать дату больше текущей
+        chooseDate.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+    }
 }
 

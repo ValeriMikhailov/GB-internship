@@ -13,7 +13,9 @@
         android:background="@color/backgroundActivityColor"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="25dp">
+        tools:layout_editor_absoluteY="25dp"
+        android:focusableInTouchMode="true"
+        android:windowSoftInputMode="stateAlwaysHidden">
 
         <TextView
             android:id="@+id/textView2"
@@ -131,7 +133,7 @@
             android:layout_marginRight="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
-            android:clickable="false"
+            android:listSelector="@color/backgroundActivityColor"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
