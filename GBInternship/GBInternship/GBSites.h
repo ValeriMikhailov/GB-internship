@@ -11,6 +11,6 @@
 @interface GBSites : NSObject
 
 @property (assign, nonatomic) NSInteger siteID;
-@property (strong, nonatomic) NSString* siteURL;
+@property (copy, nonatomic) NSString* siteURL;
 
 @end

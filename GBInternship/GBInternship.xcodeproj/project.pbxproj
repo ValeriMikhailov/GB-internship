@@ -19,6 +19,7 @@
 		52A19EE11E771E9400D984F7 /* GBPersistentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A19EE01E771E9400D984F7 /* GBPersistentManager.m */; };
 		52A19EE41E78705D00D984F7 /* GBDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A19EE31E78705D00D984F7 /* GBDataManager.m */; };
 		52A19FBA1E7AC74A00D984F7 /* GBSites.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A19FB91E7AC74A00D984F7 /* GBSites.m */; };
+		52A19FBD1E7ACCAC00D984F7 /* GBPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A19FBC1E7ACCAC00D984F7 /* GBPerson.m */; };
 		7FB6AA40162AFBEDF17230E5 /* Pods_GBInternship.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55110263F3E6B74E9D02DAB5 /* Pods_GBInternship.framework */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +65,8 @@
 		52A19EE31E78705D00D984F7 /* GBDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBDataManager.m; sourceTree = "<group>"; };
 		52A19FB81E7AC74A00D984F7 /* GBSites.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBSites.h; sourceTree = "<group>"; };
 		52A19FB91E7AC74A00D984F7 /* GBSites.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBSites.m; sourceTree = "<group>"; };
+		52A19FBB1E7ACCAC00D984F7 /* GBPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBPerson.h; sourceTree = "<group>"; };
+		52A19FBC1E7ACCAC00D984F7 /* GBPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBPerson.m; sourceTree = "<group>"; };
 		55110263F3E6B74E9D02DAB5 /* Pods_GBInternship.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GBInternship.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		985FA386EB8A5DD9AF6F06E8 /* Pods-GBInternship.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GBInternship.release.xcconfig"; path = "Pods/Target Support Files/Pods-GBInternship/Pods-GBInternship.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -183,6 +186,8 @@
 			children = (
 				52A19FB81E7AC74A00D984F7 /* GBSites.h */,
 				52A19FB91E7AC74A00D984F7 /* GBSites.m */,
+				52A19FBB1E7ACCAC00D984F7 /* GBPerson.h */,
+				52A19FBC1E7ACCAC00D984F7 /* GBPerson.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -407,6 +412,7 @@
 				52A19EE11E771E9400D984F7 /* GBPersistentManager.m in Sources */,
 				52A19EA41E7715D100D984F7 /* AppDelegate.m in Sources */,
 				52A19EAD1E7715D100D984F7 /* GBInternship.xcdatamodeld in Sources */,
+				52A19FBD1E7ACCAC00D984F7 /* GBPerson.m in Sources */,
 				52A19FBA1E7AC74A00D984F7 /* GBSites.m in Sources */,
 				52A19EA11E7715D100D984F7 /* main.m in Sources */,
 			);

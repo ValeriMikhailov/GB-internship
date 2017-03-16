@@ -9,6 +9,7 @@
 #import "GBServerManager.h"
 #import "AFNetworking.h"
 #import "GBSites.h"
+#import "GBPerson.h"
 
 static NSString* originLink = @"http://52.89.213.205:8080/rest/user/";
 
@@ -47,9 +48,24 @@ static NSString* originLink = @"http://52.89.213.205:8080/rest/user/";
     return manager;
 }
 
-#pragma mark - API methods - 
+#pragma mark - API methods -
 
 //  Array with siteID and it's name (URL)
+/* Example how to use this method:
+ 
+ [[GBServerManager sharedManager] getArrayOfAvaliableSitesOnSuccess:^(NSArray *productsArray) {
+ 
+ NSLog(@"**********************");
+ for (id obj in productsArray) {
+ 
+ NSLog(@"%@", obj);
+ }
+ 
+ } onFailure:^(NSError *error) {
+ 
+ }];
+ 
+*/
 - (void) getArrayOfAvaliableSitesOnSuccess: (void(^)(NSArray*productsArray)) success
                                  onFailure: (void(^)(NSError* error)) failure {
     
@@ -91,12 +107,12 @@ static NSString* originLink = @"http://52.89.213.205:8080/rest/user/";
     
 }
 
-//  Array with name and rank by siteID
-- (void) getArrayBySiteID: (NSInteger) category
-                onSuccess: (void(^)(NSArray* productsArray)) success
-                onFailure: (void(^)(NSError* error)) failure {
+//  Array with personID and it's name (URL)
+
+- (void) getArrayOfAvaliablePersonsOnSuccess: (void(^)(NSArray*productsArray)) success
+                                 onFailure: (void(^)(NSError* error)) failure {
     
-    NSString* link = [NSString stringWithFormat:@"%@%ld", originLink, (long)category];
+    NSString* link = [NSString stringWithFormat:@"%@persons", originLink];
     
     [self.sessionManager GET:link
                   parameters:nil
@@ -109,8 +125,14 @@ static NSString* originLink = @"http://52.89.213.205:8080/rest/user/";
                          for (NSUInteger i = 0; i < array.count; i++) {
                              
                              NSDictionary* singleProduct = array[i];
+                             GBPerson* person = [GBPerson new];
                              
-                             NSLog(@"новый жсон: %@", singleProduct);
+                             person.personID = [[singleProduct objectForKey:@"id"] integerValue];
+                             person.personName = [singleProduct objectForKey:@"personName"];
+                             
+                             [objectsArray addObject:person];
+                             
+                             NSLog(@"allPersons жсон: %@", singleProduct);
                              
                          }
                          
@@ -127,6 +149,51 @@ static NSString* originLink = @"http://52.89.213.205:8080/rest/user/";
                      }];
     
 }
+
+
+//  Array with name and rank by siteID
+- (void) getArrayBySiteID: (NSInteger) siteID
+                onSuccess: (void(^)(NSArray* productsArray)) success
+                onFailure: (void(^)(NSError* error)) failure {
+    
+    NSString* link = [NSString stringWithFormat:@"%@%ld", originLink, (long)siteID];
+    
+    [self.sessionManager GET:link
+                  parameters:nil
+                    progress:nil
+                     success:^(NSURLSessionTask * task, id responseObject) {
+                         
+                         NSMutableArray* objectsArray = [NSMutableArray array];
+                         NSMutableArray* array = (NSMutableArray*)responseObject;
+                         
+                         for (NSUInteger i = 0; i < array.count; i++) {
+                             
+                             NSDictionary* singleProduct = array[i];
+                             
+                             GBPerson* person = [GBPerson new];
+                             
+                             person.personName = [singleProduct objectForKey:@"personName"];
+                             person.personRank = [[singleProduct objectForKey:@"rank"] integerValue];
+                             
+                             [objectsArray addObject:person];
+                             
+                         }
+                         
+                         if (success) {
+                             
+                             success(objectsArray);
+                         }
+                         
+                     } failure:^(NSURLSessionDataTask* task, NSError* error) {
+                         NSLog(@"Error: %@", error);
+                         if (failure) {
+                             failure(error);
+                         }
+                     }];
+    
+}
+
+
 
 
 #pragma mark - Help methods -
