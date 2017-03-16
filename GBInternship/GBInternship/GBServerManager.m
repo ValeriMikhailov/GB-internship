@@ -8,6 +8,7 @@
 
 #import "GBServerManager.h"
 #import "AFNetworking.h"
+#import "GBSites.h"
 
 static NSString* originLink = @"http://52.89.213.205:8080/rest/user/";
 
@@ -47,6 +48,48 @@ static NSString* originLink = @"http://52.89.213.205:8080/rest/user/";
 }
 
 #pragma mark - API methods - 
+
+//  Array with siteID and it's name (URL)
+- (void) getArrayOfAvaliableSitesOnSuccess: (void(^)(NSArray*productsArray)) success
+                                 onFailure: (void(^)(NSError* error)) failure {
+    
+    NSString* link = [NSString stringWithFormat:@"%@sites", originLink];
+    
+    [self.sessionManager GET:link
+                  parameters:nil
+                    progress:nil
+                     success:^(NSURLSessionTask * task, id responseObject) {
+                         
+                         NSMutableArray* objectsArray = [NSMutableArray array];
+                         NSMutableArray* array = (NSMutableArray*)responseObject;
+                         
+                         for (NSUInteger i = 0; i < array.count; i++) {
+                             
+                             NSDictionary* singleProduct = array[i];
+                             GBSites* site = [GBSites new];
+                             
+                             site.siteID = [[singleProduct objectForKey:@"id"] integerValue];
+                             site.siteURL = [singleProduct objectForKey:@"name"];
+                             
+                             [objectsArray addObject:site];
+                             
+                             NSLog(@"новый жсон: %@", singleProduct);
+                             
+                         }
+                         
+                         if (success) {
+                             
+                             success(objectsArray);
+                         }
+                         
+                     } failure:^(NSURLSessionDataTask* task, NSError* error) {
+                         NSLog(@"Error: %@", error);
+                         if (failure) {
+                             failure(error);
+                         }
+                     }];
+    
+}
 
 //  Array with name and rank by siteID
 - (void) getArrayBySiteID: (NSInteger) category

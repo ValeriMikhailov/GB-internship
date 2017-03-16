@@ -12,6 +12,8 @@
 
 + (GBServerManager*) sharedManager;
 
+- (void) getArrayOfAvaliableSitesOnSuccess: (void(^)(NSArray*productsArray)) success
+                                 onFailure: (void(^)(NSError* error)) failure;
 - (void) getArrayBySiteID: (NSInteger) category
                 onSuccess: (void(^)(NSArray* productsArray)) success
                 onFailure: (void(^)(NSError* error)) failure;

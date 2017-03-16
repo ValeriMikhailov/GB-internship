@@ -19,12 +19,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    [[GBServerManager sharedManager] getArrayBySiteID:1 onSuccess:^(NSArray *productsArray) {
-        
-    } onFailure:^(NSError *error) {
-        
-    }];
-    
     return YES;
 }
 
