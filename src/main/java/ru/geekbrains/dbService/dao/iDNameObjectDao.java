@@ -8,7 +8,6 @@ import ru.geekbrains.dbService.dataSets.iDNameObject;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 
 
 public class iDNameObjectDao {
@@ -71,11 +70,10 @@ public class iDNameObjectDao {
 
     public ArrayList<PersonSiteRank> getTotalStatistics(String siteId)throws SQLException{
         ArrayList<PersonSiteRank> array = new ArrayList<>();
-        return executor.execQuery("select s.id, p.name, sum(ppr.rank) from persons p" +
+        return executor.execQuery("select pg.siteId, p.name, sum(ppr.rank) from persons p" +
                 " inner join person_page_rank ppr on p.id=ppr.personId" +
                 " inner join pages pg on ppr.pageId=pg.id" +
-                " inner join sites s on s.id=pg.siteId where s.id=" + siteId +
-                " group by p.name", result -> {
+                "  where pg.siteId=" + siteId + " group by p.name", result -> {
             while(result.next()) {
                 array.add(new PersonSiteRank(result.getInt(1),result.getString(2), result.getInt(3)));
             }
@@ -86,10 +84,10 @@ public class iDNameObjectDao {
     public ArrayList<DateNewPages> getEveryDayStatistics(String siteId, String personId,
                                                             String start, String end)throws SQLException{
         ArrayList<DateNewPages> array = new ArrayList<>();
-        return executor.execQuery("select pg.foundDateTime, count(*)  from pages pg" +
+        return executor.execQuery("select Date(pg.foundDateTime), count(*)  from pages pg" +
                 " inner join sites s on s.id=pg.siteId inner join person_page_rank ppr on ppr.pageId=pg.id" +
                 " inner join persons p on p.id = ppr.personId where (p.id="+ personId + ") and (s.id="+ siteId +
-                ") and (pg.FoundDateTime between '"+ start + "' and '" + end + "') group by pg.foundDateTime",
+                ") and (pg.foundDateTime between '"+ start + "' and '" + end + "') group by Date(pg.foundDateTime)",
                 result -> {
             while(result.next()) {
                 array.add(new DateNewPages(result.getString(1), result.getInt(2)));

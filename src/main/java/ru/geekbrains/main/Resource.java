@@ -3,8 +3,6 @@ package ru.geekbrains.main;
 import com.google.gson.Gson;
 
 import javax.ws.rs.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 @Path("rest")
 public class Resource {
@@ -27,15 +25,14 @@ public class Resource {
      * Get every day statistics
      * @param siteId
      * @param personId
-     * @param startDate Date in the form of string for example 10.08.15 10:50:00
-     * @param endDate Date in the form of string for example 10.08.15 10:50:00
+     * @param startDate Date in the form of string for example 2010-08-15
+     * @param endDate Date in the form of string for example 2010-08-15
      * @return Json string
-     * @throws ParseException
      */
     @GET
     @Path("user/{siteId}/{personId}/between")
     @Produces("application/json;charset=UTF-8")
-    public String getEveryDayStat(@PathParam("siteId") String siteId, @PathParam("personId") String personId,
+    public String getEveryDayStatistics(@PathParam("siteId") String siteId, @PathParam("personId") String personId,
                                   @QueryParam("start") String startDate, @QueryParam("end") String endDate)  {
         Gson gson = new Gson();
         String json = gson.toJson(Main.repo.getEveryDayStat(siteId,personId, startDate, endDate));

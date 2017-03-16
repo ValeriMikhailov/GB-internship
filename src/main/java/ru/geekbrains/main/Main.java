@@ -51,5 +51,6 @@ public class Main {
         }catch (Exception e){
             logger.error(e.getMessage(),e);
         }
+        repo.closeConnection();
     }
 }

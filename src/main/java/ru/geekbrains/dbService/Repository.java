@@ -1,9 +1,10 @@
 package ru.geekbrains.dbService;
 
-import ru.geekbrains.dbService.dataSets.*;
+import ru.geekbrains.dbService.dataSets.DateNewPages;
+import ru.geekbrains.dbService.dataSets.PersonSiteRank;
+import ru.geekbrains.dbService.dataSets.iDNameObject;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public interface Repository {
@@ -27,6 +28,8 @@ public interface Repository {
     String createSite(String name);
     void updateSite(String siteId, String siteName);
     void deleteSite(String siteId);
+
+    void closeConnection();
 
 
 }
