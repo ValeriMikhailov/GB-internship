@@ -49,12 +49,16 @@
                     <label for="site" class="col-sm-2 control-label">Сайт</label>
                     <div class="col-sm-10">
                         <select class="form-control" id="site" name="site_id">
+
+
                             {% for site in sites %}
                               <option value={{ site.id }}
                                 {% if site.id == site_id %}
                                 selected
                                 {% endif %}>{{ site.name }}
                               </option>
+
+
                             {% endfor %}
                         </select>
                     </div>
