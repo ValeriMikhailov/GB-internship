@@ -1,19 +1,19 @@
+package model;
+
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.StringProperty;
 
 /**
- * Created by StrategDZR on 04.03.2017.
+ * Created by Alexey Shein on 04.03.2017.
  */
 @SuppressWarnings("ALL")
-class Keywords {
+public class Sites {
     private IntegerProperty ID;
     private StringProperty name;
-    private IntegerProperty PersonsID;
 
-    public Keywords(IntegerProperty ID, StringProperty name, IntegerProperty personsID) {
+    public Sites(IntegerProperty ID, StringProperty name) {
         this.ID = ID;
         this.name = name;
-        PersonsID = personsID;
     }
 
     public int getID() {
@@ -38,17 +38,5 @@ class Keywords {
 
     public void setName(String name) {
         this.name.set(name);
-    }
-
-    public int getPersonsID() {
-        return PersonsID.get();
-    }
-
-    public IntegerProperty personsIDProperty() {
-        return PersonsID;
-    }
-
-    public void setPersonsID(int personsID) {
-        this.PersonsID.set(personsID);
     }
 }

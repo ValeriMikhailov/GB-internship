@@ -1,29 +1,34 @@
+package model;
+
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 /**
  * Created by Alexey Shein on 04.03.2017.
  */
+
 @SuppressWarnings("ALL")
-class Sites {
+public class Persons {
     private IntegerProperty ID;
     private StringProperty name;
 
-    public Sites(IntegerProperty ID, StringProperty name) {
-        this.ID = ID;
-        this.name = name;
+    public Persons(int ID, String name) {
+        this.ID = new SimpleIntegerProperty(ID);
+        this.name = new SimpleStringProperty(name);
     }
 
-    public int getID() {
+    public int getId() {
         return ID.get();
     }
 
-    public IntegerProperty IDProperty() {
-        return ID;
+    public void setId(int ID) {
+        this.ID.set(ID);
     }
 
-    public void setID(int ID) {
-        this.ID.set(ID);
+    public IntegerProperty IdProperty() {
+        return ID;
     }
 
     public String getName() {

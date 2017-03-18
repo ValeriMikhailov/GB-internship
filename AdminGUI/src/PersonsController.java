@@ -1,6 +1,7 @@
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import model.Persons;
 
 
 public class PersonsController {
@@ -20,7 +21,7 @@ public class PersonsController {
         nameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
     }
 
-    public void setMain(Main main){
+    void setMain(Main main){
         Main main1 = main;
         personsTable.setItems(main.getPersonsData());
     }

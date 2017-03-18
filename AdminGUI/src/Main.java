@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import model.Persons;
 
 import java.io.IOException;
 
@@ -14,8 +15,8 @@ public class Main extends Application {
     private Stage primaryStage;
     private BorderPane rootLayout;
     private ObservableList<Persons> personsData = FXCollections.observableArrayList();
-    //private ObservableList<Sites> sitesData = FXCollections.observableArrayList();
-    //private ObservableList<Keywords> keywordsData = FXCollections.observableArrayList();
+    //private ObservableList<model.Sites> sitesData = FXCollections.observableArrayList();
+    //private ObservableList<model.Keywords> keywordsData = FXCollections.observableArrayList();
 
     public Main() {
         personsData.add(new Persons(1, "Petrov"));
@@ -36,7 +37,7 @@ public class Main extends Application {
     private void initRootLayout() {
         try{
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("RootLayout.fxml"));
+            loader.setLocation(Main.class.getResource("views/RootLayout.fxml"));
             rootLayout = loader.load();
 
             Scene scene = new Scene(rootLayout);
@@ -48,14 +49,14 @@ public class Main extends Application {
         }
     }
 
-    ObservableList<Persons> getPersonsData() {
+    public ObservableList<Persons> getPersonsData() {
         return personsData;
     }
 
     private void showPersons() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("AdminGUI.fxml"));
+            loader.setLocation(Main.class.getResource("views/AdminGUI.fxml"));
             AnchorPane Persons = loader.load();
 
             rootLayout.setCenter(Persons);
