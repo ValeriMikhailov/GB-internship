@@ -1,14 +1,16 @@
+package rest;
+
 /**
  * Created by Alexey Shein
  * on 15/03/2017.
  * Class for working with API
  */
 
-public class RestAPI {
+public class API {
 
     private String URL = "";
 
-    public RestAPI(String URL) {
+    public API(String URL) {
         this.URL = URL;
     }
 
