@@ -26,7 +26,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public List<PersonRank> getStats(int siteId) {
         List<PersonRank> personRanks = new ArrayList<>();
-        SqlRowSet rowSet = jdbcTemplate.queryForRowSet("SELECT pages.siteId, name, sum(rank) FROM persons " +
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet("SELECT pages.siteId, name, sum(rank), min(DATE(foundDateTime)) FROM persons " +
                 "INNER JOIN person_page_rank AS ppr ON persons.id=ppr.personId " +
                 "INNER JOIN pages ON ppr.pageId=pages.id WHERE pages.siteId=? GROUP BY name", siteId);
         while (rowSet.next()) {
@@ -34,6 +34,7 @@ public class UserRepositoryImpl implements UserRepository {
             personRank.setSiteId(rowSet.getInt(1));
             personRank.setPersonName(rowSet.getString(2));
             personRank.setRank(rowSet.getInt(3));
+            personRank.setStartDate(rowSet.getDate(4).toLocalDate());
             personRanks.add(personRank);
         }
         return personRanks;
