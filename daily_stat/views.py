@@ -4,7 +4,10 @@ import import_bd
 import requests
 import datetime
 
+
 import general_stat.views
+
+from django.contrib import auth
 
 # Create your views here.
 
@@ -73,6 +76,7 @@ def show_daily_page(request):
                                              'site_id': site_id,
                                              'person_id': person_id,
                                              'start': start,
-                                             'end': end
+                                             'end': end,
+                                             #'username': auth.get_user(request).is_authenticated
 
                                              })
