@@ -1,9 +1,6 @@
 package ru.geekbrains.rest.service;
 
-import ru.geekbrains.rest.model.DateRank;
-import ru.geekbrains.rest.model.Person;
-import ru.geekbrains.rest.model.PersonRank;
-import ru.geekbrains.rest.model.Site;
+import ru.geekbrains.rest.model.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -17,4 +14,6 @@ public interface UserService {
     List<Person> getPersons();
 
     List<Site> getSites();
+
+    void registerUser(UserDto user);
 }

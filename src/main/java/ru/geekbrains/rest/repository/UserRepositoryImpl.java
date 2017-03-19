@@ -1,19 +1,21 @@
 package ru.geekbrains.rest.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
-import ru.geekbrains.rest.model.DateRank;
-import ru.geekbrains.rest.model.Person;
-import ru.geekbrains.rest.model.PersonRank;
-import ru.geekbrains.rest.model.Site;
+import ru.geekbrains.rest.model.*;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
@@ -66,5 +68,30 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public List<Site> getSites() {
         return jdbcTemplate.query("SELECT * FROM sites", SITE_ROW_MAPPER);
+    }
+
+    @Override
+    public void registerUser(User user) {
+        jdbcTemplate.update("INSERT INTO users (username, password) VALUES (?, ?)", user.getName(), user.getPassword());
+        insertRoles(user);
+    }
+
+    private void insertRoles(User user) {
+        Set<Role> roles = user.getRoles();
+        Iterator<Role> iterator = roles.iterator();
+
+        jdbcTemplate.batchUpdate("INSERT INTO user_roles (username, role) VALUES (?, ?)",
+                new BatchPreparedStatementSetter() {
+                    @Override
+                    public void setValues(PreparedStatement ps, int i) throws SQLException {
+                        ps.setString(1, user.getName());
+                        ps.setString(2, iterator.next().name());
+                    }
+
+                    @Override
+                    public int getBatchSize() {
+                        return roles.size();
+                    }
+                });
     }
 }

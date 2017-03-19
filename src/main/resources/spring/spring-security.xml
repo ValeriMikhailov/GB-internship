@@ -9,16 +9,30 @@
 
     <http pattern="/**" use-expressions="true" name="restSecurityFilterChain" create-session="stateless">
         <http-basic/>
-        <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/user/**" access="permitAll()"/>
+        <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" requires-channel="https"/>
+        <intercept-url pattern="/user/registerUser" access="permitAll()" requires-channel="https"/>
+        <intercept-url pattern="/user/**" access="isAuthenticated()" requires-channel="https"/>
         <csrf disabled="true"/>
     </http>
 
+    <!--<authentication-manager>-->
+        <!--<authentication-provider>-->
+            <!--<userDto-service>-->
+                <!--<userDto name="admin" password="admin" authorities="ROLE_ADMIN"/>-->
+            <!--</userDto-service>-->
+        <!--</authentication-provider>-->
+    <!--</authentication-manager>-->
+
+    <beans:bean class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" id="encoder"/>
+
     <authentication-manager>
         <authentication-provider>
-            <user-service>
-                <user name="admin" password="admin" authorities="ROLE_ADMIN"/>
-            </user-service>
+            <password-encoder ref="encoder"/>
+            <jdbc-user-service data-source-ref="dataSource"
+                               users-by-username-query=
+                                       "SELECT username,password, TRUE FROM users WHERE username=?"
+                               authorities-by-username-query=
+                                       "SELECT username, role FROM user_roles WHERE username =?"/>
         </authentication-provider>
     </authentication-manager>
 
