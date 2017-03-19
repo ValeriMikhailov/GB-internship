@@ -10,3 +10,8 @@ img.app-store-badge {
 img.google-play-badge {
   width: 160px;
 }
+
+.h1-button {
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
