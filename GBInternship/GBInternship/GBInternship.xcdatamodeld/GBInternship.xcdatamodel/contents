@@ -1,40 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16D32" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
-    <entity name="GBKeyWord" representedClassName="GBKeyWord" syncable="YES">
-        <attribute name="keyWord" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="keyWordID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="person" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GBPersonCD" inverseName="keyWord" inverseEntity="GBPersonCD" syncable="YES"/>
-        <relationship name="rank" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="GBRank" inverseName="keyWord" inverseEntity="GBRank" syncable="YES"/>
-    </entity>
-    <entity name="GBPage" representedClassName="GBPage" syncable="YES">
-        <attribute name="foundDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="lastScanDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="pageID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="pageURL" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="rankPage" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="GBRank" inverseName="page" inverseEntity="GBRank" syncable="YES"/>
-        <relationship name="site" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GBSite" inverseName="pages" inverseEntity="GBSite" syncable="YES"/>
-    </entity>
-    <entity name="GBPersonCD" representedClassName="GBPersonCD" syncable="YES">
-        <attribute name="personID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="personName" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="keyWord" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="GBKeyWord" inverseName="person" inverseEntity="GBKeyWord" syncable="YES"/>
-    </entity>
-    <entity name="GBRank" representedClassName="GBRank" syncable="YES">
-        <attribute name="dateScan" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="rankScore" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="keyWord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GBKeyWord" inverseName="rank" inverseEntity="GBKeyWord" syncable="YES"/>
-        <relationship name="page" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GBPage" inverseName="rankPage" inverseEntity="GBPage" syncable="YES"/>
-    </entity>
-    <entity name="GBSite" representedClassName="GBSite" syncable="YES">
-        <attribute name="siteID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="siteURL" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="pages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="GBPage" inverseName="site" inverseEntity="GBPage" syncable="YES"/>
-    </entity>
-    <elements>
-        <element name="GBKeyWord" positionX="97" positionY="-18" width="128" height="103"/>
-        <element name="GBPage" positionX="423" positionY="-18" width="128" height="133"/>
-        <element name="GBPersonCD" positionX="-63" positionY="-18" width="128" height="88"/>
-        <element name="GBRank" positionX="259" positionY="-18" width="128" height="103"/>
-        <element name="GBSite" positionX="592" positionY="-16" width="128" height="88"/>
-    </elements>
+    <elements/>
 </model>
