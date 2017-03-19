@@ -3,6 +3,7 @@ from fake_bd import *
 import import_bd
 import requests
 import datetime
+import calendar
 
 
 import general_stat.views
@@ -13,9 +14,7 @@ from django.contrib import auth
 
 def get_persons():
     request = requests.get(import_bd.persons_url)
-    print(request)
     persons = request.json()
-    print(persons)
     return persons
 
 
@@ -37,10 +36,6 @@ def show_daily_page(request):
 
     dn = datetime.date.today()
     dn = dn.replace(month=dn.month - 1)  # !!!! ломается если month <=1
-
-    print(dn)
-
-
 
     if request.method == "POST":
         site_id = int(request.POST["site_id"][0])
@@ -69,7 +64,13 @@ def show_daily_page(request):
 
     daily_stat = get_daily_stat(site_id, person_id, f_start,f_end)
 
-    return render(request, 'everyday.html', {'persons': persons,
+    chart_data = []
+    for day_stat in daily_stat:
+        date_object=[int(x) for x in day_stat["date"].split("-")]
+        print(date_object)
+        chart_data.append([calendar.timegm(datetime.date(date_object[0],date_object[1],date_object[2]).timetuple()) * 1000, day_stat["countNewPages"]])
+
+    return render(request, 'daily_stat/everyday.html', {'persons': persons,
                                              'title': title,
                                              'sites': sites,
                                              'daily_stat': daily_stat,
@@ -77,6 +78,7 @@ def show_daily_page(request):
                                              'person_id': person_id,
                                              'start': start,
                                              'end': end,
+                                             'chart_data': chart_data
                                              #'username': auth.get_user(request).is_authenticated
 
                                              })

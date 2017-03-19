@@ -24,9 +24,14 @@ def show_general_page(request):
         site_id = sites[0]["id"]
 
     general_stat = get_general_stat(site_id)
+    chart_data = []
+    for person_rank in general_stat:
+        chart_data.append([person_rank["personName"], person_rank["rank"]])
 
-    return render(request, 'common.html',{'title': title,
+
+    return render(request, 'general_stat/common.html',{'title': title,
                                           'sites': sites,
                                           'general_stat': general_stat,
                                           'site_id': site_id,
+                                          'chart_data': chart_data
                                           })

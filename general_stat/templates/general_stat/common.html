@@ -41,35 +41,46 @@
     </div>
 
     <div class="container">
-        <h1>Статистика упоминаний</h1>
-        <br>
         <form class="form-horizontal" action="/common/" method="post">{% csrf_token %}
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="site" class="col-sm-2 control-label">Сайт</label>
-                    <div class="col-sm-10">
-                        <select class="form-control" id="site" name="site_id">
-
-
-                            {% for site in sites %}
-                              <option value={{ site.id }}
-                                {% if site.id == site_id %}
-                                selected
-                                {% endif %}>{{ site.name }}
-                              </option>
-
-
-                            {% endfor %}
-                        </select>
-                    </div>
-                </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-5">
+                  <h1>Статистика упоминаний</h1>
+              </div>
+              <div class="col-sm-12 col-md-7">
+                  <input type="submit" class="btn btn-primary h1-button" value="Показать">
+              </div>
             </div>
-            <div class="col-sm-6">
-              <input type="submit" class="btn btn-primary" value="Применить">
+            <br>
+            <div class="row">
+              <div class="col-sm-6">
+                  <div class="form-group">
+                      <label for="site" class="col-sm-2 control-label">Сайт</label>
+                      <div class="col-sm-10">
+                          <select class="form-control" id="site" name="site_id">
+
+
+                              {% for site in sites %}
+                                <option value={{ site.id }}
+                                  {% if site.id == site_id %}
+                                  selected
+                                  {% endif %}>{{ site.name }}
+                                </option>
+
+
+                              {% endfor %}
+                          </select>
+                      </div>
+                  </div>
+              </div>
             </div>
         </form>
         <br>
-
+        <div class="row">
+          <div class="col-xs-12">
+            <div id="placeholder" style="width:600px;height:300px"></div>
+          </div>
+        </div>
+        <br>
         <table class="table table-striped" id="site">
             <tr>
                 <th>Личность</th>
@@ -86,5 +97,25 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="{% static 'bootstrap/js/bootstrap.js'%}"  charset="utf-8"></script>
+    <script src="{% static 'js/flot/jquery.flot.js' %}" charset="utf-8"></script>
+    <script src="{% static 'js/flot/jquery.flot.categories.js' %}" charset="utf-8"></script>
+    <script type="text/javascript">
+    var chart_data = {{chart_data|safe}}
+    $(function() {
+      $.plot("#placeholder", [ chart_data ], {
+        series: {
+          bars: {
+            show: true,
+            barWidth: 0.6,
+            align: "center"
+          }
+        },
+        xaxis: {
+          mode: "categories",
+          tickLength: 0
+        }
+      });
+    });
+    </script>
   </body>
   </html>
