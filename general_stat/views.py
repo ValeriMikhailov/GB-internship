@@ -12,7 +12,6 @@ def get_sites():
 def get_general_stat(site_id):
     request = requests.get(import_bd.general_stat_url + str(site_id))
     general_stat = [x for x in request.json() if x["siteId"] == site_id]
-    print(general_stat)
     return general_stat
 
 def show_general_page(request):
@@ -21,10 +20,10 @@ def show_general_page(request):
 
     if request.method == "POST":
         site_id = int(request.POST["site_id"][0])
-        general_stat = get_general_stat(site_id)
     else:
         site_id = sites[0]["id"]
-        general_stat = get_general_stat(site_id)
+
+    general_stat = get_general_stat(site_id)
 
     return render(request, 'common.html',{'title': title,
                                           'sites': sites,
