@@ -9,14 +9,14 @@ public class DateRank {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 
-    private int rank;
+    private int countNewPages;
 
     public DateRank() {
     }
 
     public DateRank(LocalDate date, int rank) {
         this.date = date;
-        this.rank = rank;
+        this.countNewPages = rank;
     }
 
     public LocalDate getDate() {
@@ -27,11 +27,11 @@ public class DateRank {
         this.date = date;
     }
 
-    public int getRank() {
-        return rank;
+    public int getCountNewPages() {
+        return countNewPages;
     }
 
-    public void setRank(int rank) {
-        this.rank = rank;
+    public void setCountNewPages(int countNewPages) {
+        this.countNewPages = countNewPages;
     }
 }
