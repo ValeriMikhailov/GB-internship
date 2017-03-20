@@ -11,15 +11,15 @@ import javafx.beans.property.StringProperty;
 
 @SuppressWarnings("ALL")
 public class Persons {
-    private IntegerProperty ID;
-    private StringProperty name;
+    private static IntegerProperty ID;
+    private static StringProperty name;
 
     public Persons(int ID, String name) {
         this.ID = new SimpleIntegerProperty(ID);
         this.name = new SimpleStringProperty(name);
     }
 
-    public int getId() {
+    public static int getId() {
         return ID.get();
     }
 
@@ -31,7 +31,7 @@ public class Persons {
         return ID;
     }
 
-    public String getName() {
+    public static String getName() {
         return name.get();
     }
 
