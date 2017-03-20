@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
@@ -38,12 +39,15 @@ public class DailyFragment extends Fragment implements View.OnFocusChangeListene
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_daily, container, false);
+
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         //спиннер выбора сайта
         MaterialSpinner spinnerSite = (MaterialSpinner) view.findViewById(R.id.spinnerSiteDailyFragment);
@@ -66,9 +70,10 @@ public class DailyFragment extends Fragment implements View.OnFocusChangeListene
         });
 
         //EditText для ввода дат
+
         from = (EditText) view.findViewById(R.id.from);
-        to = (EditText) view.findViewById(R.id.to);
         from.setOnFocusChangeListener(this);
+        to = (EditText) view.findViewById(R.id.to);
         to.setOnFocusChangeListener(this);
 
         ListView listView = (ListView) view.findViewById(R.id.listViewDailyFragment);
@@ -88,11 +93,7 @@ public class DailyFragment extends Fragment implements View.OnFocusChangeListene
             }
         });
 
-        View viewFocus = getActivity().getCurrentFocus();
-        if (viewFocus != null) {
-            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
-        }
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         return view;
     }
@@ -103,6 +104,8 @@ public class DailyFragment extends Fragment implements View.OnFocusChangeListene
     public void onFocusChange(View view, boolean hasFocus) {
         initDateDialog(view);
         if (hasFocus) {
+            ((InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE))
+                    .hideSoftInputFromWindow(view.getWindowToken(), 0);
             chooseDate.show();
         }
 
@@ -133,5 +136,7 @@ public class DailyFragment extends Fragment implements View.OnFocusChangeListene
         //ограничение. нельзя выбрать дату больше текущей
         chooseDate.getDatePicker().setMaxDate(calendar.getTimeInMillis());
     }
+
+
 }
 

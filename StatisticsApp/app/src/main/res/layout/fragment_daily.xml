@@ -2,20 +2,28 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:animateLayoutChanges="true"
+    android:fadeScrollbars="false"
+    android:fillViewport="true"
+    android:isScrollContainer="true"
+    android:scrollbarAlwaysDrawVerticalTrack="true"
+    android:scrollbars="vertical"
+    app:layout_scrollFlags="scroll">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/daily_fragment_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/backgroundActivityColor"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="25dp"
         android:focusableInTouchMode="true"
-        android:windowSoftInputMode="stateAlwaysHidden">
+        android:orientation="vertical"
+        android:visibility="visible"
+        android:windowSoftInputMode="stateAlwaysHidden"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="25dp">
 
         <TextView
             android:id="@+id/textView2"
@@ -47,6 +55,7 @@
             android:id="@+id/input_from"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginStart="16dp"
@@ -78,6 +87,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
             android:orientation="horizontal"
             android:visibility="visible"
@@ -127,7 +137,7 @@
         <ListView
             android:id="@+id/listViewDailyFragment"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="194dp"
             android:layout_marginEnd="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
@@ -152,7 +162,9 @@
             android:textSize="10sp"
             android:visibility="visible"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewTotal" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewTotal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="90dp" />
 
         <TextView
             android:id="@+id/textViewDate"
@@ -220,7 +232,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5" />
+            app:layout_constraintGuide_percent="0.5"
+            tools:layout_editor_absoluteX="160dp"
+            tools:layout_editor_absoluteY="25dp" />
 
     </android.support.constraint.ConstraintLayout>
+
 </ScrollView>
