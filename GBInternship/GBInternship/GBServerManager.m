@@ -11,7 +11,7 @@
 #import "GBSites.h"
 #import "GBPerson.h"
 
-static NSString* originLink = @"http://52.89.213.205:8080/rest/user/";
+static NSString* originLink = @"http://52.89.213.205:8090/rest/user/";
 
 @interface GBServerManager ()
 
@@ -50,7 +50,7 @@ static NSString* originLink = @"http://52.89.213.205:8080/rest/user/";
 
 #pragma mark - API methods -
 
-//  Array with siteID and it's name (URL)
+//  Array with siteID, it's name (URL) and startDate statistic
 /* Example how to use this method:
  
  [[GBServerManager sharedManager] getArrayOfAvaliableSitesOnSuccess:^(NSArray *productsArray) {
@@ -66,7 +66,7 @@ static NSString* originLink = @"http://52.89.213.205:8080/rest/user/";
  }];
  
 */
-- (void) getArrayOfAvaliableSitesOnSuccess: (void(^)(NSArray*productsArray)) success
+- (void) getArrayOfAvaliableSitesOnSuccess: (void(^)(NSArray*personsArray)) success
                                  onFailure: (void(^)(NSError* error)) failure {
     
     NSString* link = [NSString stringWithFormat:@"%@sites", originLink];
@@ -109,7 +109,7 @@ static NSString* originLink = @"http://52.89.213.205:8080/rest/user/";
 
 //  Array with personID and it's name (URL)
 
-- (void) getArrayOfAvaliablePersonsOnSuccess: (void(^)(NSArray*productsArray)) success
+- (void) getArrayOfAvaliablePersonsOnSuccess: (void(^)(NSArray*personsArray)) success
                                  onFailure: (void(^)(NSError* error)) failure {
     
     NSString* link = [NSString stringWithFormat:@"%@persons", originLink];
@@ -153,7 +153,7 @@ static NSString* originLink = @"http://52.89.213.205:8080/rest/user/";
 
 //  Array with name and rank by siteID
 - (void) getArrayBySiteID: (NSInteger) siteID
-                onSuccess: (void(^)(NSArray* productsArray)) success
+                onSuccess: (void(^)(NSArray* personsArray)) success
                 onFailure: (void(^)(NSError* error)) failure {
     
     NSString* link = [NSString stringWithFormat:@"%@%ld", originLink, (long)siteID];
@@ -174,6 +174,7 @@ static NSString* originLink = @"http://52.89.213.205:8080/rest/user/";
                              
                              person.personName = [singleProduct objectForKey:@"personName"];
                              person.personRank = [[singleProduct objectForKey:@"rank"] integerValue];
+                             person.startStatDate = [self dateFromString:[singleProduct objectForKey:@"startDate"]];
                              
                              [objectsArray addObject:person];
                              
@@ -197,6 +198,14 @@ static NSString* originLink = @"http://52.89.213.205:8080/rest/user/";
 
 
 #pragma mark - Help methods -
+
+- (NSDate*) dateFromString:(NSString*) string {
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    return [dateFormatter dateFromString:string];
+}
 
 - (void) calculatingFetchDuration {
     

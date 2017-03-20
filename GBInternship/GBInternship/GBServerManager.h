@@ -13,16 +13,16 @@
 + (GBServerManager*) sharedManager;
 
 // All sites
-- (void) getArrayOfAvaliableSitesOnSuccess: (void(^)(NSArray*productsArray)) success
+- (void) getArrayOfAvaliableSitesOnSuccess: (void(^)(NSArray*personsArray)) success
                                  onFailure: (void(^)(NSError* error)) failure;
 
 // All persons
-- (void) getArrayOfAvaliablePersonsOnSuccess: (void(^)(NSArray*productsArray)) success
+- (void) getArrayOfAvaliablePersonsOnSuccess: (void(^)(NSArray*personsArray)) success
                                    onFailure: (void(^)(NSError* error)) failure;
 
 // Fetch by siteID
 - (void) getArrayBySiteID: (NSInteger) siteID
-                onSuccess: (void(^)(NSArray* productsArray)) success
+                onSuccess: (void(^)(NSArray* personsArray)) success
                 onFailure: (void(^)(NSError* error)) failure;
 
 @end

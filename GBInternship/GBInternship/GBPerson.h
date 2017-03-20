@@ -13,6 +13,7 @@
 @property (assign, nonatomic) NSUInteger personID;
 @property (copy, nonatomic) NSString* personName;
 @property (assign, nonatomic) NSUInteger personRank;
+@property (copy, nonatomic) NSDate* startStatDate;
 
 
 @end
