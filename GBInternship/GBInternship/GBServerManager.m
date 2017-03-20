@@ -207,10 +207,7 @@ static NSString* originLink = @"http://52.89.213.205:8090/rest/user/";
     return [dateFormatter dateFromString:string];
 }
 
-- (void) calculatingFetchDuration {
-    
-    //Calculating how long the data wasn't update
-}
+
 
 
 

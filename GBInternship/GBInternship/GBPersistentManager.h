@@ -10,4 +10,15 @@
 
 @interface GBPersistentManager : NSObject
 
+// Get all avaliable sites
+
+
+// Get all persons with their ranks
+
+
+// Get site by siteID
+
+
+// Get daily statistic by siteID, personID and date
+
 @end

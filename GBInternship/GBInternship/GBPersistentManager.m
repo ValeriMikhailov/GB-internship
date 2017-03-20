@@ -7,6 +7,8 @@
 //
 
 #import "GBPersistentManager.h"
+#import "GBServerManager.h"
+#import "GBDataManager.h"
 
 @implementation GBPersistentManager
 
@@ -34,5 +36,19 @@
 }
 
 //
+
+#pragma nark - Helpful methods - 
+
+- (BOOL) connectedToInternet {
+    
+    NSString *URLString = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://www.google.com"] encoding:NSASCIIStringEncoding error:nil];
+    
+    return ( URLString != NULL ) ? YES : NO;
+}
+
+- (void) calculatingFetchDuration {
+    
+    //Calculating how long the data wasn't update
+}
 
 @end
