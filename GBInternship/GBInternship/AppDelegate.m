@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import <AFNetworking/AFNetworking.h> 
+#import <AFOAuth2Manager/AFOAuth2Manager.h>
 #import "GBPersistentManager.h"
 #import "GBDataManager.h"
 #import "GBServerManager.h"
@@ -22,20 +24,12 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
-    NSArray* stat = [[GBPersistentManager sharedManager]
-                        getStatisticBySiteID:1 onSuccess:^(NSArray *statisticArray) {
-                            
-                        } onFailure:^(NSError *error) {
-                            
-                        }];
-    
-    NSLog(@"**********************");
-    for (GBStatistic* obj in stat) {
+   
+    [[GBServerManager sharedManager] getArrayOfAvaliablePersonsOnSuccess:^(NSArray *personsArray) {
+        NSLog(@"%@", personsArray);
+    } onFailure:^(NSError *error) {
         
-        NSLog(@"%d - %@", obj.rank, obj.personID.personName);
-    }
-    
+    }];
     return YES;
 }
 

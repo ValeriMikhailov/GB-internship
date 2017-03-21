@@ -11,7 +11,7 @@
 #import "GBSites.h"
 #import "GBPerson.h"
 
-static NSString* originLink = @"http://52.89.213.205:8090/rest/user/";
+static NSString* originLink = @"https://52.89.213.205:8443/rest/user/";
 
 @interface GBServerManager ()
 
@@ -29,6 +29,12 @@ static NSString* originLink = @"http://52.89.213.205:8090/rest/user/";
     if (self) {
         
         self.sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:originLink]];
+        self.sessionManager.requestSerializer = [AFHTTPRequestSerializer serializer];
+        self.sessionManager.securityPolicy.allowInvalidCertificates = YES;
+        self.sessionManager.securityPolicy.validatesDomainName = NO;
+        self.sessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
+        [self.sessionManager.requestSerializer setAuthorizationHeaderFieldWithUsername:@"user@gmail.com" password:@"user"];
+        [self.sessionManager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     }
     
     return self;
