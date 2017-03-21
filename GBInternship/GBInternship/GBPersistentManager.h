@@ -17,7 +17,8 @@
                                  onFailure: (void(^)(NSError* error)) failure;
 
 // Get all persons with their ranks
-
+- (NSArray*) getArrayOfAvaliablePersonsOnSuccess: (void(^)(NSArray* personsArray)) success
+                                       onFailure: (void(^)(NSError* error)) failure;
 
 // Get site by siteID
 

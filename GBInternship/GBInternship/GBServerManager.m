@@ -128,11 +128,11 @@ static NSString* originLink = @"http://52.89.213.205:8090/rest/user/";
                              GBPerson* person = [GBPerson new];
                              
                              person.personID = [[singleProduct objectForKey:@"id"] integerValue];
-                             person.personName = [singleProduct objectForKey:@"personName"];
+                             person.personName = [singleProduct objectForKey:@"name"];
                              
                              [objectsArray addObject:person];
                              
-                             NSLog(@"allPersons жсон: %@", singleProduct);
+                             //NSLog(@"allPersons жсон: %@", singleProduct);
                              
                          }
                          

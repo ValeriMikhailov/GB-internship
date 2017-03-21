@@ -10,6 +10,7 @@
 #import "GBServerManager.h"
 #import "GBDataManager.h"
 #import "GBSitesCD+CoreDataClass.h"
+#import "GBPersonCD+CoreDataProperties.h"
 
 @implementation GBPersistentManager
 
@@ -72,6 +73,43 @@
     
     return sites;
     
+}
+
+// Get all persons with their ranks
+- (NSArray*) getArrayOfAvaliablePersonsOnSuccess: (void(^)(NSArray* personsArray)) success
+                                       onFailure: (void(^)(NSError* error)) failure{
+    
+    NSArray* persons = [NSArray array];
+    
+    if ([self connectedToInternet] || ![self shouldUpdateDataFromServer]) {
+        
+        // Get data from DB
+        
+        persons = [[GBDataManager sharedManager] allObjectsByEntityName:@"GBPersonCD"];
+        
+    } else {
+        
+        // Get data from Server
+        
+        [[GBServerManager sharedManager]
+         getArrayOfAvaliablePersonsOnSuccess:^(NSArray *personsArray) {
+            
+            [persons arrayByAddingObjectsFromArray:personsArray];
+            
+            for (GBPersonCD* obj in personsArray) {
+                
+                [[GBDataManager sharedManager] savePersonWithID:obj.personID andName:obj.personName];
+                
+            }
+            
+        } onFailure:^(NSError *error) {
+            
+            
+        }];
+        
+    }
+    
+    return persons;
 }
 
 #pragma nark - Helpful methods - 

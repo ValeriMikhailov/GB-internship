@@ -10,9 +10,8 @@
 #import "GBPersistentManager.h"
 #import "GBDataManager.h"
 #import "GBServerManager.h"
-#import "GBSites.h"
-#import "GBPerson.h"
 #import "GBUser+CoreDataClass.h"
+#import "GBPersonCD+CoreDataProperties.h"
 
 @interface AppDelegate ()
 
@@ -22,6 +21,19 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    NSArray* persons = [[GBPersistentManager sharedManager]
+                        getArrayOfAvaliablePersonsOnSuccess:^(NSArray *personsArray) {
+                            
+                        } onFailure:^(NSError *error) {
+                            
+                        }];
+    
+    NSLog(@"**********************");
+    for (GBPersonCD* obj in persons) {
+        
+        NSLog(@"%d - %@", obj.personID, obj.personName);
+    }
     
     return YES;
 }

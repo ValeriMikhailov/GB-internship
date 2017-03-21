@@ -20,6 +20,7 @@
 + (GBDataManager*) sharedManager;
 
 - (void) saveSiteWithID:(NSInteger)ID andName:(NSString*)URL;
+- (void) savePersonWithID:(NSInteger)ID andName:(NSString*)name;
 
 - (NSArray*) allObjectsByEntityName:(NSString*)string;
 - (void) deleteAllObjectsByEntityName:(NSString*)string;

@@ -8,6 +8,7 @@
 
 #import "GBDataManager.h"
 #import "GBSitesCD+CoreDataClass.h"
+#import "GBPersonCD+CoreDataProperties.h"
 
 @implementation GBDataManager
 
@@ -51,6 +52,30 @@
         site.siteID = ID;
         site.siteURL = URL;
         [site.managedObjectContext save:nil];
+    }
+}
+
+- (void) savePersonWithID:(NSInteger)ID andName:(NSString*)name {
+    
+    NSEntityDescription* person =
+    [NSEntityDescription entityForName:@"GBPersonCD"
+                inManagedObjectContext:self.managedObjectContext];
+    
+    NSFetchRequest* request = [[NSFetchRequest alloc] init];
+    [request setEntity:person];
+    [request setFetchLimit:1];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"personName == %@", name]];
+    
+    NSError *error = nil;
+    NSUInteger count = [self.managedObjectContext countForFetchRequest:request error:&error];
+    
+    if (!count) {
+        
+        NSLog(@"НЕА!");
+        GBPersonCD* person = [NSEntityDescription insertNewObjectForEntityForName:@"GBPersonCD" inManagedObjectContext:self.managedObjectContext];
+        person.personID = ID;
+        person.personName = name;
+        [person.managedObjectContext save:nil];
     }
 }
 
