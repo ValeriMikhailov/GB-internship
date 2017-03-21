@@ -21,6 +21,7 @@
 
 - (void) saveSiteWithID:(NSInteger)ID andName:(NSString*)URL;
 - (void) savePersonWithID:(NSInteger)ID andName:(NSString*)name;
+- (void) saveStatisticWithSiteID:(NSInteger)ID andPersonName:(NSString*)name andRank:(NSInteger)rank;
 
 - (NSArray*) allObjectsByEntityName:(NSString*)string;
 - (void) deleteAllObjectsByEntityName:(NSString*)string;

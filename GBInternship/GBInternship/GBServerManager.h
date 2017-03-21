@@ -22,7 +22,7 @@
 
 // Fetch by siteID
 - (void) getArrayBySiteID: (NSInteger) siteID
-                onSuccess: (void(^)(NSArray* personsArray)) success
+                onSuccess: (void(^)(NSArray* statisticArray)) success
                 onFailure: (void(^)(NSError* error)) failure;
 
 @end

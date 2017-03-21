@@ -153,7 +153,7 @@ static NSString* originLink = @"http://52.89.213.205:8090/rest/user/";
 
 //  Array with name and rank by siteID
 - (void) getArrayBySiteID: (NSInteger) siteID
-                onSuccess: (void(^)(NSArray* personsArray)) success
+                onSuccess: (void(^)(NSArray* statisticArray)) success
                 onFailure: (void(^)(NSError* error)) failure {
     
     NSString* link = [NSString stringWithFormat:@"%@%ld", originLink, (long)siteID];

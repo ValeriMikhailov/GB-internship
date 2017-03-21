@@ -11,6 +11,8 @@
 #import "GBDataManager.h"
 #import "GBSitesCD+CoreDataClass.h"
 #import "GBPersonCD+CoreDataProperties.h"
+#import "GBStatistic+CoreDataClass.h"
+#import "GBPerson.h"
 
 @implementation GBPersistentManager
 
@@ -81,7 +83,7 @@
     
     NSArray* persons = [NSArray array];
     
-    if ([self connectedToInternet] || ![self shouldUpdateDataFromServer]) {
+    if (![self connectedToInternet] || ![self shouldUpdateDataFromServer]) {
         
         // Get data from DB
         
@@ -110,6 +112,37 @@
     }
     
     return persons;
+}
+
+// Get statistic by siteID
+- (NSArray*) getStatisticBySiteID: (NSInteger) siteID
+                        onSuccess: (void(^)(NSArray* statisticArray)) success
+                        onFailure: (void(^)(NSError* error)) failure {
+    
+    NSArray* statistic = [NSArray array];
+    
+    if (![self connectedToInternet] || ![self shouldUpdateDataFromServer]) {
+        
+        // Get data from DB
+        
+        //statistic = [[GBDataManager sharedManager] allObjectsByEntityName:@"GBStatistic"];
+        
+    } else {
+        
+        // Get data from Server
+        
+        [[GBServerManager sharedManager] getArrayBySiteID:siteID
+                                                onSuccess:^(NSArray *statisticArray) {
+
+                                                
+                                                } onFailure:^(NSError *error) {
+                                                
+                                                }];
+        
+    }
+    
+    return statistic;
+    
 }
 
 #pragma nark - Helpful methods - 

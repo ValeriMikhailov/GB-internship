@@ -9,6 +9,7 @@
 #import "GBDataManager.h"
 #import "GBSitesCD+CoreDataClass.h"
 #import "GBPersonCD+CoreDataProperties.h"
+#import "GBStatistic+CoreDataClass.h"
 
 @implementation GBDataManager
 
@@ -33,21 +34,10 @@
 
 - (void) saveSiteWithID:(NSInteger)ID andName:(NSString*)URL {
     
-    NSEntityDescription* site =
-    [NSEntityDescription entityForName:@"GBSitesCD"
-                inManagedObjectContext:self.managedObjectContext];
+    BOOL duplicate = [self isEntityInCoreData:@"GBSitesCD" HasPredicate:@"siteURL" withValue:URL];
     
-    NSFetchRequest* request = [[NSFetchRequest alloc] init];
-    [request setEntity:site];
-    [request setFetchLimit:1];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"siteURL == %@", URL]];
-    
-    NSError *error = nil;
-    NSUInteger count = [self.managedObjectContext countForFetchRequest:request error:&error];
-    
-    if (!count) {
-        
-        NSLog(@"НЕА!");
+    if (!duplicate) {
+
         GBSitesCD* site = [NSEntityDescription insertNewObjectForEntityForName:@"GBSitesCD" inManagedObjectContext:self.managedObjectContext];
         site.siteID = ID;
         site.siteURL = URL;
@@ -57,26 +47,22 @@
 
 - (void) savePersonWithID:(NSInteger)ID andName:(NSString*)name {
     
-    NSEntityDescription* person =
-    [NSEntityDescription entityForName:@"GBPersonCD"
-                inManagedObjectContext:self.managedObjectContext];
+    BOOL duplicate = [self isEntityInCoreData:@"GBPersonCD" HasPredicate:@"personName" withValue:name];
     
-    NSFetchRequest* request = [[NSFetchRequest alloc] init];
-    [request setEntity:person];
-    [request setFetchLimit:1];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"personName == %@", name]];
-    
-    NSError *error = nil;
-    NSUInteger count = [self.managedObjectContext countForFetchRequest:request error:&error];
-    
-    if (!count) {
+    if (!duplicate) {
         
-        NSLog(@"НЕА!");
         GBPersonCD* person = [NSEntityDescription insertNewObjectForEntityForName:@"GBPersonCD" inManagedObjectContext:self.managedObjectContext];
         person.personID = ID;
         person.personName = name;
         [person.managedObjectContext save:nil];
     }
+}
+
+- (void) saveStatisticWithSiteID:(NSInteger)ID
+                   andPersonName:(NSString*)name
+                         andRank:(NSInteger)rank {
+    
+    
 }
 
 #pragma mark - Fetch from DB methods - 
@@ -113,6 +99,25 @@
     }
     
     [self.managedObjectContext save:nil];
+}
+
+- (BOOL) isEntityInCoreData:(NSString*)entity
+               HasPredicate:(NSString*)predicate
+                  withValue:(NSString*)value {
+    
+    NSEntityDescription* entityObject =
+    [NSEntityDescription entityForName:entity
+                inManagedObjectContext:self.managedObjectContext];
+    
+    NSFetchRequest* request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityObject];
+    [request setFetchLimit:1];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"%@ == %d", predicate, value]];
+    
+    NSError *error = nil;
+    NSUInteger count = [self.managedObjectContext countForFetchRequest:request error:&error];
+    
+    return count > 0 ? YES : NO;
 }
 
 #pragma mark - Core Data stack

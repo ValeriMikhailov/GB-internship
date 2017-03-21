@@ -20,7 +20,10 @@
 - (NSArray*) getArrayOfAvaliablePersonsOnSuccess: (void(^)(NSArray* personsArray)) success
                                        onFailure: (void(^)(NSError* error)) failure;
 
-// Get site by siteID
+// Get statistic by siteID
+- (NSArray*) getStatisticBySiteID: (NSInteger) siteID
+                        onSuccess: (void(^)(NSArray* statisticArray)) success
+                        onFailure: (void(^)(NSError* error)) failure;
 
 
 // Get daily statistic by siteID, personID and date

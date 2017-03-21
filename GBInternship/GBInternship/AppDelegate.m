@@ -12,6 +12,7 @@
 #import "GBServerManager.h"
 #import "GBUser+CoreDataClass.h"
 #import "GBPersonCD+CoreDataProperties.h"
+#import "GBStatistic+CoreDataClass.h"
 
 @interface AppDelegate ()
 
@@ -22,17 +23,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    NSArray* persons = [[GBPersistentManager sharedManager]
-                        getArrayOfAvaliablePersonsOnSuccess:^(NSArray *personsArray) {
+    NSArray* stat = [[GBPersistentManager sharedManager]
+                        getStatisticBySiteID:1 onSuccess:^(NSArray *statisticArray) {
                             
                         } onFailure:^(NSError *error) {
                             
                         }];
     
     NSLog(@"**********************");
-    for (GBPersonCD* obj in persons) {
+    for (GBStatistic* obj in stat) {
         
-        NSLog(@"%d - %@", obj.personID, obj.personName);
+        NSLog(@"%d - %@", obj.rank, obj.personID.personName);
     }
     
     return YES;
