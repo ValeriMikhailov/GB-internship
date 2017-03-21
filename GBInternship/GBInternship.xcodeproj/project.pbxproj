@@ -249,6 +249,8 @@
 		52A19EDB1E771D2000D984F7 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				52A19EE21E78705D00D984F7 /* GBDataManager.h */,
+				52A19EE31E78705D00D984F7 /* GBDataManager.m */,
 				52FEFAAC1E807220007E5972 /* GBPersonCD+CoreDataClass.h */,
 				52FEFAAD1E807220007E5972 /* GBPersonCD+CoreDataClass.m */,
 				52FEFAAE1E807220007E5972 /* GBPersonCD+CoreDataProperties.h */,
@@ -273,8 +275,6 @@
 				52FEFAC11E807220007E5972 /* GBKeyWord+CoreDataClass.m */,
 				52FEFAC21E807220007E5972 /* GBKeyWord+CoreDataProperties.h */,
 				52FEFAC31E807220007E5972 /* GBKeyWord+CoreDataProperties.m */,
-				52A19EE21E78705D00D984F7 /* GBDataManager.h */,
-				52A19EE31E78705D00D984F7 /* GBDataManager.m */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";

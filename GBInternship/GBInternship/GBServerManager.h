@@ -13,7 +13,7 @@
 + (GBServerManager*) sharedManager;
 
 // All sites
-- (void) getArrayOfAvaliableSitesOnSuccess: (void(^)(NSArray*personsArray)) success
+- (void) getArrayOfAvaliableSitesOnSuccess: (void(^)(NSArray* sitesArray)) success
                                  onFailure: (void(^)(NSError* error)) failure;
 
 // All persons

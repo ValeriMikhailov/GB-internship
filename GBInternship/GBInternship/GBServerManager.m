@@ -66,7 +66,7 @@ static NSString* originLink = @"http://52.89.213.205:8090/rest/user/";
  }];
  
 */
-- (void) getArrayOfAvaliableSitesOnSuccess: (void(^)(NSArray*personsArray)) success
+- (void) getArrayOfAvaliableSitesOnSuccess: (void(^)(NSArray* sitesArray)) success
                                  onFailure: (void(^)(NSError* error)) failure {
     
     NSString* link = [NSString stringWithFormat:@"%@sites", originLink];

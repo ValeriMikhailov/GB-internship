@@ -7,10 +7,12 @@
 //
 
 #import "AppDelegate.h"
+#import "GBPersistentManager.h"
 #import "GBDataManager.h"
 #import "GBServerManager.h"
 #import "GBSites.h"
 #import "GBPerson.h"
+#import "GBUser+CoreDataClass.h"
 
 @interface AppDelegate ()
 
@@ -20,7 +22,6 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-     
     
     return YES;
 }

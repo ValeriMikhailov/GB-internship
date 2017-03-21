@@ -10,8 +10,11 @@
 
 @interface GBPersistentManager : NSObject
 
-// Get all avaliable sites
++ (GBPersistentManager*) sharedManager;
 
+// Get all avaliable sites
+- (NSArray*) getArrayOfAvaliableSitesOnSuccess: (void(^)(NSArray* sitesArray)) success
+                                 onFailure: (void(^)(NSError* error)) failure;
 
 // Get all persons with their ranks
 

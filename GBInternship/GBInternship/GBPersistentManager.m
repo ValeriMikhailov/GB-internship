@@ -9,6 +9,7 @@
 #import "GBPersistentManager.h"
 #import "GBServerManager.h"
 #import "GBDataManager.h"
+#import "GBSitesCD+CoreDataClass.h"
 
 @implementation GBPersistentManager
 
@@ -35,7 +36,43 @@
     return manager;
 }
 
-//
+// Get all avaliable sites
+
+- (NSArray*) getArrayOfAvaliableSitesOnSuccess: (void(^)(NSArray* sitesArray)) success
+                                 onFailure: (void(^)(NSError* error)) failure {
+    
+    NSArray* sites = [NSArray array];
+    
+    if (![self connectedToInternet] || ![self shouldUpdateDataFromServer]) {
+        
+        // Get data from DB
+        
+        sites = [[GBDataManager sharedManager] allObjectsByEntityName:@"GBSitesCD"];
+        
+    } else {
+        
+        // Get data from Server
+        
+        [[GBServerManager sharedManager] getArrayOfAvaliableSitesOnSuccess:^(NSArray *sitesArray) {
+            
+            [sites arrayByAddingObjectsFromArray:sitesArray];
+            
+            for (GBSitesCD* obj in sitesArray) {
+                
+                [[GBDataManager sharedManager] saveSiteWithID:obj.siteID andName:obj.siteURL];
+                
+            }
+            
+        } onFailure:^(NSError *error) {
+            
+            
+        }];
+        
+    }
+    
+    return sites;
+    
+}
 
 #pragma nark - Helpful methods - 
 
@@ -46,9 +83,9 @@
     return ( URLString != NULL ) ? YES : NO;
 }
 
-- (void) calculatingFetchDuration {
+- (BOOL) shouldUpdateDataFromServer {
     
-    //Calculating how long the data wasn't update
+    return YES;
 }
 
 @end
