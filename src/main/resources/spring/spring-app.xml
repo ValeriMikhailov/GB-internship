@@ -17,7 +17,18 @@
           p:driverClassName="com.mysql.jdbc.Driver"
           p:url="${database.url}"
           p:username="${database.username}"
-          p:password="${database.password}"/>
+          p:password="${database.password}"
+          p:testOnBorrow="true"
+          p:validationQuery="SELECT 1 FROM sites"
+          p:validationInterval="30000"
+          p:maxActive="40"
+          p:minIdle="10"
+          p:maxIdle="20"
+          p:timeBetweenEvictionRunsMillis="34000"
+          p:minEvictableIdleTimeMillis="55000"
+          p:removeAbandoned="true"
+          p:removeAbandonedTimeout="55"
+    />
 
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
         <constructor-arg ref="dataSource"/>
