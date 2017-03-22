@@ -1,0 +1,12 @@
+.img-center {
+	margin: 0 auto;
+}
+
+img.img-circle {
+  width: 200px;
+  height: 200px;
+}
+
+footer {
+    margin: 50px 0;
+}

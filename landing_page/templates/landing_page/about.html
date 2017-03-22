@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block custom_css %}
+    <link rel="stylesheet" href="{% static 'css/round-about.css' %}">
+{% endblock custom_css %}
+
+{% block content %}
+
+        <!-- Introduction Row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Давайте знакомиться!
+                    <small>О компании</small>
+                </h1>
+                <p>Мы - молодая IT-компания, с собственным продуктом <strong>Statistics App</strong>. <br>Это универсальный инструмент, для определения популярности кого угодно, и где угодно. <br>Узнать, кто популярнее на новостном сайте, о какой религии чаще пишут в ЖЖ, у кого больше шансов на выборах - для нас это не проблема.</p>
+            </div>
+        </div>
+
+        <!-- Team Members Row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Команда</h2>
+            </div>
+            <div class="col-lg-4 col-sm-6 text-center">
+                <img class="img-circle img-responsive img-center" src="{% static 'images/team/evbunakov.png'%}" alt="">
+                <h3>Евгений GooDi Бунаков
+                    <small></small>
+                </h3>
+                <p>Android developer</p>
+            </div>
+            <div class="col-lg-4 col-sm-6 text-center">
+                <img class="img-circle img-responsive img-center" src="{% static 'images/team/vturov.png'%}" alt="">
+                <h3>Валерий Туров
+                </h3>
+                <p>Тим-лидер, Краулер (Java)</p>
+            </div>
+            <div class="col-lg-4 col-sm-6 text-center">
+                <img class="img-circle img-responsive img-center" src="{% static 'images/team/ashein.png'%}" alt="">
+                <h3>Алексей Шеин
+                </h3>
+                <p>Desktop application (Java)</p>
+            </div>
+            <div class="col-lg-4 col-sm-6 text-center">
+                <img class="img-circle img-responsive img-center" src="{% static 'images/team/skorobov.png'%}" alt="">
+                <h3>Семен Коробов
+                </h3>
+                <p>REST-сервис</p>
+            </div>
+            <div class="col-lg-4 col-sm-6 text-center">
+                <img class="img-circle img-responsive img-center" src="{% static 'images/team/asviderski.png'%}" alt="">
+                <h3>Андрей Свидерский
+                </h3>
+                <p>REST-сервис</p>
+            </div>
+            <div class="col-lg-4 col-sm-6 text-center">
+                <img class="img-circle img-responsive img-center" src="{% static 'images/team/vgrigorev.png'%}" alt="">
+                <h3>Владислав Григорьев
+                </h3>
+                <p>Веб-разработка (Django)</p>
+            </div>
+            <div class="col-lg-4 col-sm-6 text-center">
+                <img class="img-circle img-responsive img-center" src="{% static 'images/team/sshiyanovski.png'%}" alt="">
+                <h3>Станислав Шияновский
+                </h3>
+                <p>iOS developer</p>
+            </div>
+            <div class="col-lg-4 col-sm-6 text-center">
+                <img class="img-circle img-responsive img-center" src="{% static 'images/team/aalekseev.png'%}" alt="">
+                <h3>Анатолий Алексеев
+                </h3>
+                <p>Веб-разработка (Django)</p>
+            </div>
+            <div class="col-lg-4 col-sm-6 text-center">
+                <img class="img-circle img-responsive img-center" src="{% static 'images/team/asedov.png'%}" alt="">
+                <h3>Александр Седов
+                </h3>
+                <p>Краулер (Java)</p>
+            </div>
+
+        </div>
+
+        <hr>
+
+{% endblock content %}

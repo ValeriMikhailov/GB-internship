@@ -23,6 +23,7 @@ from landing_page.views import *
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', show_landing_page),
+    url(r'^about/$', show_about_page),
     url(r'^common/$', show_general_page),
     url(r'^everyday/$', show_daily_page)
 ]
