@@ -10,7 +10,7 @@
     <http pattern="/**" use-expressions="true" name="restSecurityFilterChain" create-session="stateless">
         <http-basic/>
         <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" requires-channel="https"/>
-        <intercept-url pattern="/user/registerUser" access="permitAll()" requires-channel="https"/>
+        <intercept-url pattern="/user/signup" access="permitAll()" requires-channel="https"/>
         <intercept-url pattern="/user/**" access="isAuthenticated()" requires-channel="https"/>
         <csrf disabled="true"/>
     </http>

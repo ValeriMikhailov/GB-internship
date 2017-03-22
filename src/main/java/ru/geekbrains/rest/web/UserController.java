@@ -41,7 +41,7 @@ public class UserController {
         return service.statsByDate(siteId, personId, start, end);
     }
 
-    @PostMapping(value = "/registerUser", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @PostMapping(value = "/signup", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void registerUser(@RequestBody UserDto userDto) {
         service.registerUser(userDto);
     }

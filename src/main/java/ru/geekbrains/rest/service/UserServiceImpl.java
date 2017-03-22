@@ -48,5 +48,4 @@ public class UserServiceImpl implements UserService {
         repository.registerUser(u);
     }
 
-
 }

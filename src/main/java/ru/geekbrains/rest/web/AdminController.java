@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.rest.model.Keyword;
 import ru.geekbrains.rest.model.Person;
 import ru.geekbrains.rest.model.Site;
+import ru.geekbrains.rest.model.UserDto;
 import ru.geekbrains.rest.service.AdminService;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping(AdminController.ADMIN_REST_URL)
@@ -81,6 +81,11 @@ public class AdminController {
     @PutMapping(value = "/sites/{siteId}")
     public void updateSite(@PathVariable(value = "siteId") int siteId, @RequestParam(value = "name") String name) {
         service.updateSite(siteId, name);
+    }
+
+    @PostMapping(value = "/signup", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public void registerAdmin(@RequestBody UserDto userDto) {
+        service.registerAdmin(userDto);
     }
 
 }

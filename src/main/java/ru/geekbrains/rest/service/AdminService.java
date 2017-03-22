@@ -3,6 +3,7 @@ package ru.geekbrains.rest.service;
 import ru.geekbrains.rest.model.Keyword;
 import ru.geekbrains.rest.model.Person;
 import ru.geekbrains.rest.model.Site;
+import ru.geekbrains.rest.model.UserDto;
 
 import java.util.List;
 
@@ -31,4 +32,6 @@ public interface AdminService {
     void updateSite(int siteId, String name);
 
     void deleteSite(int siteId);
+
+    void registerAdmin(UserDto user);
 }

@@ -1,16 +1,18 @@
 package ru.geekbrains.rest.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.geekbrains.rest.model.Keyword;
-import ru.geekbrains.rest.model.Person;
-import ru.geekbrains.rest.model.Site;
+import ru.geekbrains.rest.model.*;
 import ru.geekbrains.rest.repository.AdminRepository;
 
-import java.util.List;
+import java.util.*;
 
 @Service
 public class AdminServiceImpl implements AdminService {
+
+    @Autowired
+    private BCryptPasswordEncoder encoder;
 
     @Autowired
     private AdminRepository repository;
@@ -73,5 +75,15 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void deleteSite(int siteId) {
         repository.deleteSite(siteId);
+    }
+
+    @Override
+    public void registerAdmin(UserDto user) {
+        User u = new User();
+        u.setName(user.getUserName());
+        Set<Role> roles = new HashSet<>(Arrays.asList(Role.ROLE_USER, Role.ROLE_ADMIN));
+        u.setRoles(roles);
+        u.setPassword(encoder.encode(user.getPassword()));
+        repository.registerAdmin(u);
     }
 }
