@@ -7,8 +7,8 @@
 //
 
 #import "GBDataManager.h"
-#import "GBSitesCD+CoreDataClass.h"
-#import "GBPersonCD+CoreDataProperties.h"
+#import "GBSite+CoreDataClass.h"
+#import "GBPerson+CoreDataClass.h"
 #import "GBStatistic+CoreDataClass.h"
 
 @implementation GBDataManager
@@ -34,11 +34,23 @@
 
 - (void) saveSiteWithID:(NSInteger)ID andName:(NSString*)URL {
     
-    BOOL duplicate = [self isEntityInCoreData:@"GBSitesCD" HasPredicate:@"siteURL" withValue:URL];
+    NSEntityDescription* entityObject =
+    [NSEntityDescription entityForName:@"GBSite"
+                inManagedObjectContext:self.managedObjectContext];
+    
+    NSFetchRequest* request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityObject];
+    [request setFetchLimit:1];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"siteURL == %@", URL]];
+    
+    NSError *error = nil;
+    NSUInteger count = [self.managedObjectContext countForFetchRequest:request error:&error];
+    
+    BOOL duplicate = count > 0 ? YES : NO;
     
     if (!duplicate) {
 
-        GBSitesCD* site = [NSEntityDescription insertNewObjectForEntityForName:@"GBSitesCD" inManagedObjectContext:self.managedObjectContext];
+        GBSite* site = [NSEntityDescription insertNewObjectForEntityForName:@"GBSite" inManagedObjectContext:self.managedObjectContext];
         site.siteID = ID;
         site.siteURL = URL;
         [site.managedObjectContext save:nil];
@@ -47,11 +59,23 @@
 
 - (void) savePersonWithID:(NSInteger)ID andName:(NSString*)name {
     
-    BOOL duplicate = [self isEntityInCoreData:@"GBPersonCD" HasPredicate:@"personName" withValue:name];
+    NSEntityDescription* entityObject =
+    [NSEntityDescription entityForName:@"GBPerson"
+                inManagedObjectContext:self.managedObjectContext];
+    
+    NSFetchRequest* request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityObject];
+    [request setFetchLimit:1];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"personName == %@", name]];
+    
+    NSError *error = nil;
+    NSUInteger count = [self.managedObjectContext countForFetchRequest:request error:&error];
+    
+    BOOL duplicate = count > 0 ? YES : NO;
     
     if (!duplicate) {
         
-        GBPersonCD* person = [NSEntityDescription insertNewObjectForEntityForName:@"GBPersonCD" inManagedObjectContext:self.managedObjectContext];
+        GBPerson* person = [NSEntityDescription insertNewObjectForEntityForName:@"GBPerson" inManagedObjectContext:self.managedObjectContext];
         person.personID = ID;
         person.personName = name;
         [person.managedObjectContext save:nil];
@@ -60,12 +84,129 @@
 
 - (void) saveStatisticWithSiteID:(NSInteger)ID
                    andPersonName:(NSString*)name
+                    andStartDate:(NSDate*) startDate
                          andRank:(NSInteger)rank {
+    
+    NSEntityDescription* entityObject =
+    [NSEntityDescription entityForName:@"GBStatistic"
+                inManagedObjectContext:self.managedObjectContext];
+    
+    NSFetchRequest* request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityObject];
+    [request setFetchLimit:1];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"ANY sites.siteID == %d AND ANY persons.personName == %@", ID, name]];
+    
+    NSError *error = nil;
+    NSUInteger count = [self.managedObjectContext countForFetchRequest:request error:&error];
+    
+    BOOL duplicate = count > 0 ? YES : NO;
+    
+    if (!duplicate) {
+        
+        GBStatistic* statistic = [NSEntityDescription insertNewObjectForEntityForName:@"GBStatistic" inManagedObjectContext:self.managedObjectContext];
+        
+        // Get person entity
+        NSEntityDescription* entity = [NSEntityDescription entityForName:@"GBPerson" inManagedObjectContext:self.managedObjectContext];
+        NSFetchRequest* request = [[NSFetchRequest alloc] init];
+        [request setEntity:entity];
+        [request setPredicate:[NSPredicate predicateWithFormat:@"personName == %@", name]];
+        NSArray* persons = [self.managedObjectContext executeFetchRequest:request error:nil];
+        //NSLog(@"%lu", (unsigned long)persons.count);
+        GBPerson* person = [persons firstObject];
+        
+        // Get site entity
+        NSEntityDescription* entity2 = [NSEntityDescription entityForName:@"GBSite" inManagedObjectContext:self.managedObjectContext];
+        NSFetchRequest* request2 = [[NSFetchRequest alloc] init];
+        [request2 setEntity:entity2];
+        [request2 setPredicate:[NSPredicate predicateWithFormat:@"siteID == %d", ID]];
+        NSArray* sites = [self.managedObjectContext executeFetchRequest:request2 error:nil];
+        //NSLog(@"%lu", (unsigned long)sites.count);
+        GBSite* site = [sites firstObject];
+        
+        [statistic addPersonsObject:person];
+        [statistic addSitesObject:site];
+        statistic.rank = rank;
+        statistic.startDate = startDate;
+        
+        //NSLog(@"statistic %@", statistic);
+        [statistic.managedObjectContext save:nil];
+    }
     
     
 }
 
+- (void) saveDailyStatBySiteID: (NSInteger) siteID
+                   andPersonID: (NSInteger) personID
+                       andDate: (NSDate*) date
+                       andRank: (NSInteger) rank {
+    
+    NSEntityDescription* entityObject =
+    [NSEntityDescription entityForName:@"GBStatistic"
+                inManagedObjectContext:self.managedObjectContext];
+    
+    NSFetchRequest* request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityObject];
+    [request setFetchLimit:1];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"ANY sites.siteID == %d AND ANY persons.personID == %d AND ANY date == %@", siteID, personID, date]];
+    
+    NSError *error = nil;
+    NSUInteger count = [self.managedObjectContext countForFetchRequest:request error:&error];
+    
+    BOOL duplicate = count > 0 ? YES : NO;
+    
+    if (!duplicate) {
+    
+        GBStatistic* statistic =
+        [NSEntityDescription insertNewObjectForEntityForName:@"GBStatistic"
+                                      inManagedObjectContext:self.managedObjectContext];
+        
+        // Get person entity
+        NSEntityDescription* entity = [NSEntityDescription entityForName:@"GBPerson" inManagedObjectContext:self.managedObjectContext];
+        NSFetchRequest* request = [[NSFetchRequest alloc] init];
+        [request setEntity:entity];
+        [request setPredicate:[NSPredicate predicateWithFormat:@"personID == %d", personID]];
+        NSArray* persons = [self.managedObjectContext executeFetchRequest:request error:nil];
+        //NSLog(@"%lu", (unsigned long)persons.count);
+        GBPerson* person = [persons firstObject];
+        
+        // Get site entity
+        NSEntityDescription* entity2 = [NSEntityDescription entityForName:@"GBSite" inManagedObjectContext:self.managedObjectContext];
+        NSFetchRequest* request2 = [[NSFetchRequest alloc] init];
+        [request2 setEntity:entity2];
+        [request2 setPredicate:[NSPredicate predicateWithFormat:@"siteID == %d", siteID]];
+        NSArray* sites = [self.managedObjectContext executeFetchRequest:request2 error:nil];
+        //NSLog(@"%lu", (unsigned long)sites.count);
+        GBSite* site = [sites firstObject];
+        NSLog(@"%@", site.siteURL);
+        
+        statistic.rank = rank;
+        statistic.date = date;
+        [statistic addPersonsObject:person];
+        [statistic addSitesObject:site];
+        [statistic.managedObjectContext save:nil];
+    }
+    
+    
+
+}
+
 #pragma mark - Fetch from DB methods - 
+
+- (NSArray*) allStatisticForSite: (NSInteger) siteID {
+
+    NSEntityDescription* entity = [NSEntityDescription entityForName:@"GBStatistic" inManagedObjectContext:self.managedObjectContext];
+    NSFetchRequest* request = [[NSFetchRequest alloc] init];
+    [request setEntity:entity];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"ANY sites.siteID == %d AND startDate != nil", siteID]];
+    NSArray* stat = [self.managedObjectContext executeFetchRequest:request error:nil];
+
+    for (GBStatistic* st in stat) {
+        NSLog(@"%d, %@ - %lu", st.rank, st.date, st.persons.count);
+        
+    }
+    
+    return stat;
+}
 
 
 #pragma mark - Helpful methods -
@@ -99,25 +240,6 @@
     }
     
     [self.managedObjectContext save:nil];
-}
-
-- (BOOL) isEntityInCoreData:(NSString*)entity
-               HasPredicate:(NSString*)predicate
-                  withValue:(NSString*)value {
-    
-    NSEntityDescription* entityObject =
-    [NSEntityDescription entityForName:entity
-                inManagedObjectContext:self.managedObjectContext];
-    
-    NSFetchRequest* request = [[NSFetchRequest alloc] init];
-    [request setEntity:entityObject];
-    [request setFetchLimit:1];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"%@ == %d", predicate, value]];
-    
-    NSError *error = nil;
-    NSUInteger count = [self.managedObjectContext countForFetchRequest:request error:&error];
-    
-    return count > 0 ? YES : NO;
 }
 
 #pragma mark - Core Data stack

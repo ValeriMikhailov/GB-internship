@@ -25,4 +25,12 @@
                 onSuccess: (void(^)(NSArray* statisticArray)) success
                 onFailure: (void(^)(NSError* error)) failure;
 
+// Get daily statistic by siteID, personID and date
+- (void) getArrayDailyBySiteID: (NSInteger) siteID
+                   andPersonID: (NSInteger) personID
+           andBetweenFirstDate: (NSDate*) firstDate
+                    andEndDate: (NSDate*) endDate
+                     onSuccess: (void(^)(NSArray* statisticArray)) success
+                     onFailure: (void(^)(NSError* error)) failure;
+
 @end

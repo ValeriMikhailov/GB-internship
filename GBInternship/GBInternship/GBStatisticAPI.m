@@ -1,13 +1,13 @@
 //
-//  GBUser+CoreDataClass.m
+//  GBStatisticAPI.m
 //  GBInternship
 //
 //  Created by Stanly Shiyanovskiy on 21.03.17.
 //  Copyright © 2017 Stanly Shiyanovskiy. All rights reserved.
 //
 
-#import "GBUser+CoreDataClass.h"
+#import "GBStatisticAPI.h"
 
-@implementation GBUser
+@implementation GBStatisticAPI
 
 @end

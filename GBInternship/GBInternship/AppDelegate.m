@@ -7,16 +7,20 @@
 //
 
 #import "AppDelegate.h"
-#import <AFNetworking/AFNetworking.h> 
-#import <AFOAuth2Manager/AFOAuth2Manager.h>
 #import "GBPersistentManager.h"
 #import "GBDataManager.h"
 #import "GBServerManager.h"
 #import "GBUser+CoreDataClass.h"
-#import "GBPersonCD+CoreDataProperties.h"
+#import "GBPerson+CoreDataClass.h"
 #import "GBStatistic+CoreDataClass.h"
+#import "GBSite+CoreDataClass.h"
+#import "GBPersonAPI.h"
+#import "GBSiteAPI.h"
+#import "GBStatisticAPI.h"
 
 @interface AppDelegate ()
+
+@property (strong, nonatomic) NSMutableArray* tmp;
 
 @end
 
@@ -24,15 +28,37 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-   
-    [[GBServerManager sharedManager] getArrayOfAvaliablePersonsOnSuccess:^(NSArray *personsArray) {
-        NSLog(@"%@", personsArray);
+    
+    [[GBServerManager sharedManager] getArrayOfAvaliableSitesOnSuccess:^(NSArray *sitesArray) {
+        
     } onFailure:^(NSError *error) {
         
     }];
+    
+    [[GBServerManager sharedManager] getArrayOfAvaliablePersonsOnSuccess:^(NSArray *personsArray) {
+        
+    } onFailure:^(NSError *error) {
+        
+    }];
+    
     return YES;
 }
 
+- (NSDate*) dateFromString:(NSString*) string {
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    return [dateFormatter dateFromString:string];
+}
+
+- (NSString*) stringFromDate:(NSDate*) date {
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    return [dateFormatter stringFromDate:date];
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

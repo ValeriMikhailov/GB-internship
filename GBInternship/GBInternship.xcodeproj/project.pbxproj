@@ -18,20 +18,17 @@
 		52A19EDA1E77195000D984F7 /* GBServerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A19ED91E77195000D984F7 /* GBServerManager.m */; };
 		52A19EE11E771E9400D984F7 /* GBPersistentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A19EE01E771E9400D984F7 /* GBPersistentManager.m */; };
 		52A19EE41E78705D00D984F7 /* GBDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A19EE31E78705D00D984F7 /* GBDataManager.m */; };
-		52A19FBA1E7AC74A00D984F7 /* GBSites.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A19FB91E7AC74A00D984F7 /* GBSites.m */; };
-		52A19FBD1E7ACCAC00D984F7 /* GBPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A19FBC1E7ACCAC00D984F7 /* GBPerson.m */; };
-		52FEFAC41E807220007E5972 /* GBPersonCD+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FEFAAD1E807220007E5972 /* GBPersonCD+CoreDataClass.m */; };
-		52FEFAC51E807220007E5972 /* GBPersonCD+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FEFAAF1E807220007E5972 /* GBPersonCD+CoreDataProperties.m */; };
-		52FEFAC61E807220007E5972 /* GBSitesCD+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FEFAB11E807220007E5972 /* GBSitesCD+CoreDataClass.m */; };
-		52FEFAC71E807220007E5972 /* GBSitesCD+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FEFAB31E807220007E5972 /* GBSitesCD+CoreDataProperties.m */; };
-		52FEFAC81E807220007E5972 /* GBStatistic+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FEFAB51E807220007E5972 /* GBStatistic+CoreDataClass.m */; };
-		52FEFAC91E807220007E5972 /* GBStatistic+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FEFAB71E807220007E5972 /* GBStatistic+CoreDataProperties.m */; };
-		52FEFACA1E807220007E5972 /* GBUser+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FEFAB91E807220007E5972 /* GBUser+CoreDataClass.m */; };
-		52FEFACB1E807220007E5972 /* GBUser+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FEFABB1E807220007E5972 /* GBUser+CoreDataProperties.m */; };
-		52FEFACC1E807220007E5972 /* GBPages+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FEFABD1E807220007E5972 /* GBPages+CoreDataClass.m */; };
-		52FEFACD1E807220007E5972 /* GBPages+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FEFABF1E807220007E5972 /* GBPages+CoreDataProperties.m */; };
-		52FEFACE1E807220007E5972 /* GBKeyWord+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FEFAC11E807220007E5972 /* GBKeyWord+CoreDataClass.m */; };
-		52FEFACF1E807220007E5972 /* GBKeyWord+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FEFAC31E807220007E5972 /* GBKeyWord+CoreDataProperties.m */; };
+		52FEFAE31E818DE9007E5972 /* GBPerson+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FEFAD41E818DE9007E5972 /* GBPerson+CoreDataClass.m */; };
+		52FEFAE41E818DE9007E5972 /* GBPerson+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FEFAD61E818DE9007E5972 /* GBPerson+CoreDataProperties.m */; };
+		52FEFAE51E818DE9007E5972 /* GBSite+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FEFAD81E818DE9007E5972 /* GBSite+CoreDataClass.m */; };
+		52FEFAE61E818DE9007E5972 /* GBSite+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FEFADA1E818DE9007E5972 /* GBSite+CoreDataProperties.m */; };
+		52FEFAE71E818DE9007E5972 /* GBUser+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FEFADC1E818DE9007E5972 /* GBUser+CoreDataClass.m */; };
+		52FEFAE81E818DE9007E5972 /* GBUser+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FEFADE1E818DE9007E5972 /* GBUser+CoreDataProperties.m */; };
+		52FEFAE91E818DE9007E5972 /* GBStatistic+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FEFAE01E818DE9007E5972 /* GBStatistic+CoreDataClass.m */; };
+		52FEFAEA1E818DE9007E5972 /* GBStatistic+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FEFAE21E818DE9007E5972 /* GBStatistic+CoreDataProperties.m */; };
+		52FEFAEE1E819C22007E5972 /* GBPersonAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FEFAED1E819C22007E5972 /* GBPersonAPI.m */; };
+		52FEFAF11E819C43007E5972 /* GBSiteAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FEFAF01E819C43007E5972 /* GBSiteAPI.m */; };
+		52FEFAF41E819C52007E5972 /* GBStatisticAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FEFAF31E819C52007E5972 /* GBStatisticAPI.m */; };
 		7FB6AA40162AFBEDF17230E5 /* Pods_GBInternship.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55110263F3E6B74E9D02DAB5 /* Pods_GBInternship.framework */; };
 /* End PBXBuildFile section */
 
@@ -75,34 +72,28 @@
 		52A19EE01E771E9400D984F7 /* GBPersistentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBPersistentManager.m; sourceTree = "<group>"; };
 		52A19EE21E78705D00D984F7 /* GBDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBDataManager.h; sourceTree = "<group>"; };
 		52A19EE31E78705D00D984F7 /* GBDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBDataManager.m; sourceTree = "<group>"; };
-		52A19FB81E7AC74A00D984F7 /* GBSites.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBSites.h; sourceTree = "<group>"; };
-		52A19FB91E7AC74A00D984F7 /* GBSites.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBSites.m; sourceTree = "<group>"; };
-		52A19FBB1E7ACCAC00D984F7 /* GBPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBPerson.h; sourceTree = "<group>"; };
-		52A19FBC1E7ACCAC00D984F7 /* GBPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBPerson.m; sourceTree = "<group>"; };
-		52FEFAAC1E807220007E5972 /* GBPersonCD+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GBPersonCD+CoreDataClass.h"; sourceTree = "<group>"; };
-		52FEFAAD1E807220007E5972 /* GBPersonCD+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GBPersonCD+CoreDataClass.m"; sourceTree = "<group>"; };
-		52FEFAAE1E807220007E5972 /* GBPersonCD+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GBPersonCD+CoreDataProperties.h"; sourceTree = "<group>"; };
-		52FEFAAF1E807220007E5972 /* GBPersonCD+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GBPersonCD+CoreDataProperties.m"; sourceTree = "<group>"; };
-		52FEFAB01E807220007E5972 /* GBSitesCD+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GBSitesCD+CoreDataClass.h"; sourceTree = "<group>"; };
-		52FEFAB11E807220007E5972 /* GBSitesCD+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GBSitesCD+CoreDataClass.m"; sourceTree = "<group>"; };
-		52FEFAB21E807220007E5972 /* GBSitesCD+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GBSitesCD+CoreDataProperties.h"; sourceTree = "<group>"; };
-		52FEFAB31E807220007E5972 /* GBSitesCD+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GBSitesCD+CoreDataProperties.m"; sourceTree = "<group>"; };
-		52FEFAB41E807220007E5972 /* GBStatistic+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GBStatistic+CoreDataClass.h"; sourceTree = "<group>"; };
-		52FEFAB51E807220007E5972 /* GBStatistic+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GBStatistic+CoreDataClass.m"; sourceTree = "<group>"; };
-		52FEFAB61E807220007E5972 /* GBStatistic+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GBStatistic+CoreDataProperties.h"; sourceTree = "<group>"; };
-		52FEFAB71E807220007E5972 /* GBStatistic+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GBStatistic+CoreDataProperties.m"; sourceTree = "<group>"; };
-		52FEFAB81E807220007E5972 /* GBUser+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GBUser+CoreDataClass.h"; sourceTree = "<group>"; };
-		52FEFAB91E807220007E5972 /* GBUser+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GBUser+CoreDataClass.m"; sourceTree = "<group>"; };
-		52FEFABA1E807220007E5972 /* GBUser+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GBUser+CoreDataProperties.h"; sourceTree = "<group>"; };
-		52FEFABB1E807220007E5972 /* GBUser+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GBUser+CoreDataProperties.m"; sourceTree = "<group>"; };
-		52FEFABC1E807220007E5972 /* GBPages+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GBPages+CoreDataClass.h"; sourceTree = "<group>"; };
-		52FEFABD1E807220007E5972 /* GBPages+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GBPages+CoreDataClass.m"; sourceTree = "<group>"; };
-		52FEFABE1E807220007E5972 /* GBPages+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GBPages+CoreDataProperties.h"; sourceTree = "<group>"; };
-		52FEFABF1E807220007E5972 /* GBPages+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GBPages+CoreDataProperties.m"; sourceTree = "<group>"; };
-		52FEFAC01E807220007E5972 /* GBKeyWord+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GBKeyWord+CoreDataClass.h"; sourceTree = "<group>"; };
-		52FEFAC11E807220007E5972 /* GBKeyWord+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GBKeyWord+CoreDataClass.m"; sourceTree = "<group>"; };
-		52FEFAC21E807220007E5972 /* GBKeyWord+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GBKeyWord+CoreDataProperties.h"; sourceTree = "<group>"; };
-		52FEFAC31E807220007E5972 /* GBKeyWord+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GBKeyWord+CoreDataProperties.m"; sourceTree = "<group>"; };
+		52FEFAD31E818DE9007E5972 /* GBPerson+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GBPerson+CoreDataClass.h"; sourceTree = "<group>"; };
+		52FEFAD41E818DE9007E5972 /* GBPerson+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GBPerson+CoreDataClass.m"; sourceTree = "<group>"; };
+		52FEFAD51E818DE9007E5972 /* GBPerson+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GBPerson+CoreDataProperties.h"; sourceTree = "<group>"; };
+		52FEFAD61E818DE9007E5972 /* GBPerson+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GBPerson+CoreDataProperties.m"; sourceTree = "<group>"; };
+		52FEFAD71E818DE9007E5972 /* GBSite+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GBSite+CoreDataClass.h"; sourceTree = "<group>"; };
+		52FEFAD81E818DE9007E5972 /* GBSite+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GBSite+CoreDataClass.m"; sourceTree = "<group>"; };
+		52FEFAD91E818DE9007E5972 /* GBSite+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GBSite+CoreDataProperties.h"; sourceTree = "<group>"; };
+		52FEFADA1E818DE9007E5972 /* GBSite+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GBSite+CoreDataProperties.m"; sourceTree = "<group>"; };
+		52FEFADB1E818DE9007E5972 /* GBUser+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GBUser+CoreDataClass.h"; sourceTree = "<group>"; };
+		52FEFADC1E818DE9007E5972 /* GBUser+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GBUser+CoreDataClass.m"; sourceTree = "<group>"; };
+		52FEFADD1E818DE9007E5972 /* GBUser+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GBUser+CoreDataProperties.h"; sourceTree = "<group>"; };
+		52FEFADE1E818DE9007E5972 /* GBUser+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GBUser+CoreDataProperties.m"; sourceTree = "<group>"; };
+		52FEFADF1E818DE9007E5972 /* GBStatistic+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GBStatistic+CoreDataClass.h"; sourceTree = "<group>"; };
+		52FEFAE01E818DE9007E5972 /* GBStatistic+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GBStatistic+CoreDataClass.m"; sourceTree = "<group>"; };
+		52FEFAE11E818DE9007E5972 /* GBStatistic+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GBStatistic+CoreDataProperties.h"; sourceTree = "<group>"; };
+		52FEFAE21E818DE9007E5972 /* GBStatistic+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GBStatistic+CoreDataProperties.m"; sourceTree = "<group>"; };
+		52FEFAEC1E819C22007E5972 /* GBPersonAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBPersonAPI.h; sourceTree = "<group>"; };
+		52FEFAED1E819C22007E5972 /* GBPersonAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBPersonAPI.m; sourceTree = "<group>"; };
+		52FEFAEF1E819C43007E5972 /* GBSiteAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBSiteAPI.h; sourceTree = "<group>"; };
+		52FEFAF01E819C43007E5972 /* GBSiteAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBSiteAPI.m; sourceTree = "<group>"; };
+		52FEFAF21E819C52007E5972 /* GBStatisticAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBStatisticAPI.h; sourceTree = "<group>"; };
+		52FEFAF31E819C52007E5972 /* GBStatisticAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBStatisticAPI.m; sourceTree = "<group>"; };
 		55110263F3E6B74E9D02DAB5 /* Pods_GBInternship.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GBInternship.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		985FA386EB8A5DD9AF6F06E8 /* Pods-GBInternship.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GBInternship.release.xcconfig"; path = "Pods/Target Support Files/Pods-GBInternship/Pods-GBInternship.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -177,8 +168,7 @@
 			children = (
 				52A19ED51E7718DE00D984F7 /* Models */,
 				52A19ED61E7718E500D984F7 /* Controllers */,
-				52A19ED71E7718FF00D984F7 /* API */,
-				52A19EDB1E771D2000D984F7 /* CoreData */,
+				52A19ED71E7718FF00D984F7 /* Managers */,
 				52A19EA21E7715D100D984F7 /* AppDelegate.h */,
 				52A19EA31E7715D100D984F7 /* AppDelegate.m */,
 				52A19EA81E7715D100D984F7 /* Main.storyboard */,
@@ -220,10 +210,23 @@
 		52A19ED51E7718DE00D984F7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				52A19FB81E7AC74A00D984F7 /* GBSites.h */,
-				52A19FB91E7AC74A00D984F7 /* GBSites.m */,
-				52A19FBB1E7ACCAC00D984F7 /* GBPerson.h */,
-				52A19FBC1E7ACCAC00D984F7 /* GBPerson.m */,
+				52FEFAEB1E819B98007E5972 /* API models */,
+				52FEFAD31E818DE9007E5972 /* GBPerson+CoreDataClass.h */,
+				52FEFAD41E818DE9007E5972 /* GBPerson+CoreDataClass.m */,
+				52FEFAD51E818DE9007E5972 /* GBPerson+CoreDataProperties.h */,
+				52FEFAD61E818DE9007E5972 /* GBPerson+CoreDataProperties.m */,
+				52FEFAD71E818DE9007E5972 /* GBSite+CoreDataClass.h */,
+				52FEFAD81E818DE9007E5972 /* GBSite+CoreDataClass.m */,
+				52FEFAD91E818DE9007E5972 /* GBSite+CoreDataProperties.h */,
+				52FEFADA1E818DE9007E5972 /* GBSite+CoreDataProperties.m */,
+				52FEFADB1E818DE9007E5972 /* GBUser+CoreDataClass.h */,
+				52FEFADC1E818DE9007E5972 /* GBUser+CoreDataClass.m */,
+				52FEFADD1E818DE9007E5972 /* GBUser+CoreDataProperties.h */,
+				52FEFADE1E818DE9007E5972 /* GBUser+CoreDataProperties.m */,
+				52FEFADF1E818DE9007E5972 /* GBStatistic+CoreDataClass.h */,
+				52FEFAE01E818DE9007E5972 /* GBStatistic+CoreDataClass.m */,
+				52FEFAE11E818DE9007E5972 /* GBStatistic+CoreDataProperties.h */,
+				52FEFAE21E818DE9007E5972 /* GBStatistic+CoreDataProperties.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -235,48 +238,30 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		52A19ED71E7718FF00D984F7 /* API */ = {
+		52A19ED71E7718FF00D984F7 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
 				52A19ED81E77195000D984F7 /* GBServerManager.h */,
 				52A19ED91E77195000D984F7 /* GBServerManager.m */,
 				52A19EDF1E771E9400D984F7 /* GBPersistentManager.h */,
 				52A19EE01E771E9400D984F7 /* GBPersistentManager.m */,
-			);
-			name = API;
-			sourceTree = "<group>";
-		};
-		52A19EDB1E771D2000D984F7 /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
 				52A19EE21E78705D00D984F7 /* GBDataManager.h */,
 				52A19EE31E78705D00D984F7 /* GBDataManager.m */,
-				52FEFAAC1E807220007E5972 /* GBPersonCD+CoreDataClass.h */,
-				52FEFAAD1E807220007E5972 /* GBPersonCD+CoreDataClass.m */,
-				52FEFAAE1E807220007E5972 /* GBPersonCD+CoreDataProperties.h */,
-				52FEFAAF1E807220007E5972 /* GBPersonCD+CoreDataProperties.m */,
-				52FEFAB01E807220007E5972 /* GBSitesCD+CoreDataClass.h */,
-				52FEFAB11E807220007E5972 /* GBSitesCD+CoreDataClass.m */,
-				52FEFAB21E807220007E5972 /* GBSitesCD+CoreDataProperties.h */,
-				52FEFAB31E807220007E5972 /* GBSitesCD+CoreDataProperties.m */,
-				52FEFAB41E807220007E5972 /* GBStatistic+CoreDataClass.h */,
-				52FEFAB51E807220007E5972 /* GBStatistic+CoreDataClass.m */,
-				52FEFAB61E807220007E5972 /* GBStatistic+CoreDataProperties.h */,
-				52FEFAB71E807220007E5972 /* GBStatistic+CoreDataProperties.m */,
-				52FEFAB81E807220007E5972 /* GBUser+CoreDataClass.h */,
-				52FEFAB91E807220007E5972 /* GBUser+CoreDataClass.m */,
-				52FEFABA1E807220007E5972 /* GBUser+CoreDataProperties.h */,
-				52FEFABB1E807220007E5972 /* GBUser+CoreDataProperties.m */,
-				52FEFABC1E807220007E5972 /* GBPages+CoreDataClass.h */,
-				52FEFABD1E807220007E5972 /* GBPages+CoreDataClass.m */,
-				52FEFABE1E807220007E5972 /* GBPages+CoreDataProperties.h */,
-				52FEFABF1E807220007E5972 /* GBPages+CoreDataProperties.m */,
-				52FEFAC01E807220007E5972 /* GBKeyWord+CoreDataClass.h */,
-				52FEFAC11E807220007E5972 /* GBKeyWord+CoreDataClass.m */,
-				52FEFAC21E807220007E5972 /* GBKeyWord+CoreDataProperties.h */,
-				52FEFAC31E807220007E5972 /* GBKeyWord+CoreDataProperties.m */,
 			);
-			name = CoreData;
+			name = Managers;
+			sourceTree = "<group>";
+		};
+		52FEFAEB1E819B98007E5972 /* API models */ = {
+			isa = PBXGroup;
+			children = (
+				52FEFAEC1E819C22007E5972 /* GBPersonAPI.h */,
+				52FEFAED1E819C22007E5972 /* GBPersonAPI.m */,
+				52FEFAEF1E819C43007E5972 /* GBSiteAPI.h */,
+				52FEFAF01E819C43007E5972 /* GBSiteAPI.m */,
+				52FEFAF21E819C52007E5972 /* GBStatisticAPI.h */,
+				52FEFAF31E819C52007E5972 /* GBStatisticAPI.m */,
+			);
+			name = "API models";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -467,26 +452,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52FEFAC71E807220007E5972 /* GBSitesCD+CoreDataProperties.m in Sources */,
 				52A19EE41E78705D00D984F7 /* GBDataManager.m in Sources */,
+				52FEFAE51E818DE9007E5972 /* GBSite+CoreDataClass.m in Sources */,
 				52A19EDA1E77195000D984F7 /* GBServerManager.m in Sources */,
+				52FEFAF41E819C52007E5972 /* GBStatisticAPI.m in Sources */,
+				52FEFAE61E818DE9007E5972 /* GBSite+CoreDataProperties.m in Sources */,
 				52A19EE11E771E9400D984F7 /* GBPersistentManager.m in Sources */,
-				52FEFACA1E807220007E5972 /* GBUser+CoreDataClass.m in Sources */,
+				52FEFAE91E818DE9007E5972 /* GBStatistic+CoreDataClass.m in Sources */,
+				52FEFAE71E818DE9007E5972 /* GBUser+CoreDataClass.m in Sources */,
+				52FEFAE41E818DE9007E5972 /* GBPerson+CoreDataProperties.m in Sources */,
+				52FEFAEA1E818DE9007E5972 /* GBStatistic+CoreDataProperties.m in Sources */,
+				52FEFAE31E818DE9007E5972 /* GBPerson+CoreDataClass.m in Sources */,
 				52A19EA41E7715D100D984F7 /* AppDelegate.m in Sources */,
-				52FEFACE1E807220007E5972 /* GBKeyWord+CoreDataClass.m in Sources */,
-				52FEFAC81E807220007E5972 /* GBStatistic+CoreDataClass.m in Sources */,
-				52FEFACD1E807220007E5972 /* GBPages+CoreDataProperties.m in Sources */,
-				52FEFAC41E807220007E5972 /* GBPersonCD+CoreDataClass.m in Sources */,
+				52FEFAE81E818DE9007E5972 /* GBUser+CoreDataProperties.m in Sources */,
+				52FEFAEE1E819C22007E5972 /* GBPersonAPI.m in Sources */,
 				52A19EAD1E7715D100D984F7 /* GBInternship.xcdatamodeld in Sources */,
-				52FEFACB1E807220007E5972 /* GBUser+CoreDataProperties.m in Sources */,
-				52FEFAC91E807220007E5972 /* GBStatistic+CoreDataProperties.m in Sources */,
-				52A19FBD1E7ACCAC00D984F7 /* GBPerson.m in Sources */,
-				52FEFACF1E807220007E5972 /* GBKeyWord+CoreDataProperties.m in Sources */,
-				52A19FBA1E7AC74A00D984F7 /* GBSites.m in Sources */,
-				52FEFAC51E807220007E5972 /* GBPersonCD+CoreDataProperties.m in Sources */,
+				52FEFAF11E819C43007E5972 /* GBSiteAPI.m in Sources */,
 				52A19EA11E7715D100D984F7 /* main.m in Sources */,
-				52FEFACC1E807220007E5972 /* GBPages+CoreDataClass.m in Sources */,
-				52FEFAC61E807220007E5972 /* GBSitesCD+CoreDataClass.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

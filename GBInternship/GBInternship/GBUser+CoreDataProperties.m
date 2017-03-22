@@ -2,7 +2,7 @@
 //  GBUser+CoreDataProperties.m
 //  GBInternship
 //
-//  Created by Stanly Shiyanovskiy on 20.03.17.
+//  Created by Stanly Shiyanovskiy on 21.03.17.
 //  Copyright © 2017 Stanly Shiyanovskiy. All rights reserved.
 //
 
@@ -14,9 +14,9 @@
 	return [[NSFetchRequest alloc] initWithEntityName:@"GBUser"];
 }
 
-@dynamic userID;
+@dynamic lastVisitDate;
 @dynamic loginName;
 @dynamic password;
-@dynamic lastVisitDate;
+@dynamic userID;
 
 @end

@@ -14,7 +14,7 @@
 
 // Get all avaliable sites
 - (NSArray*) getArrayOfAvaliableSitesOnSuccess: (void(^)(NSArray* sitesArray)) success
-                                 onFailure: (void(^)(NSError* error)) failure;
+                                     onFailure: (void(^)(NSError* error)) failure;
 
 // Get all persons with their ranks
 - (NSArray*) getArrayOfAvaliablePersonsOnSuccess: (void(^)(NSArray* personsArray)) success

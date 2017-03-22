@@ -8,8 +8,11 @@
 
 #import "GBServerManager.h"
 #import "AFNetworking.h"
-#import "GBSites.h"
-#import "GBPerson.h"
+#import "GBSiteAPI.h"
+#import "GBPersonAPI.h"
+#import "GBStatisticAPI.h"
+#import <CoreData/CoreData.h>
+#import "GBDataManager.h"
 
 static NSString* originLink = @"https://52.89.213.205:8443/rest/user/";
 
@@ -57,21 +60,7 @@ static NSString* originLink = @"https://52.89.213.205:8443/rest/user/";
 #pragma mark - API methods -
 
 //  Array with siteID, it's name (URL) and startDate statistic
-/* Example how to use this method:
- 
- [[GBServerManager sharedManager] getArrayOfAvaliableSitesOnSuccess:^(NSArray *productsArray) {
- 
- NSLog(@"**********************");
- for (id obj in productsArray) {
- 
- NSLog(@"%@", obj);
- }
- 
- } onFailure:^(NSError *error) {
- 
- }];
- 
-*/
+
 - (void) getArrayOfAvaliableSitesOnSuccess: (void(^)(NSArray* sitesArray)) success
                                  onFailure: (void(^)(NSError* error)) failure {
     
@@ -88,19 +77,18 @@ static NSString* originLink = @"https://52.89.213.205:8443/rest/user/";
                          for (NSUInteger i = 0; i < array.count; i++) {
                              
                              NSDictionary* singleProduct = array[i];
-                             GBSites* site = [GBSites new];
+                             GBSiteAPI* site = [GBSiteAPI new];
                              
                              site.siteID = [[singleProduct objectForKey:@"id"] integerValue];
                              site.siteURL = [singleProduct objectForKey:@"name"];
-                             
                              [objectsArray addObject:site];
                              
-                             NSLog(@"новый жсон: %@", singleProduct);
-                             
+                             // CoreData saving
+                             [[GBDataManager sharedManager] saveSiteWithID:site.siteID
+                                                                   andName:site.siteURL];
                          }
                          
                          if (success) {
-                             
                              success(objectsArray);
                          }
                          
@@ -131,19 +119,18 @@ static NSString* originLink = @"https://52.89.213.205:8443/rest/user/";
                          for (NSUInteger i = 0; i < array.count; i++) {
                              
                              NSDictionary* singleProduct = array[i];
-                             GBPerson* person = [GBPerson new];
-                             
+                             GBPersonAPI* person = [GBPersonAPI new];
                              person.personID = [[singleProduct objectForKey:@"id"] integerValue];
                              person.personName = [singleProduct objectForKey:@"name"];
                              
                              [objectsArray addObject:person];
                              
-                             //NSLog(@"allPersons жсон: %@", singleProduct);
-                             
+                             // CoreData saving
+                             [[GBDataManager sharedManager] savePersonWithID:person.personID
+                                                                     andName:person.personName];
                          }
                          
                          if (success) {
-                             
                              success(objectsArray);
                          }
                          
@@ -175,19 +162,77 @@ static NSString* originLink = @"https://52.89.213.205:8443/rest/user/";
                          for (NSUInteger i = 0; i < array.count; i++) {
                              
                              NSDictionary* singleProduct = array[i];
-                             
-                             GBPerson* person = [GBPerson new];
-                             
+                             GBPersonAPI* person = [GBPersonAPI new];
+                             GBStatisticAPI* stat = [GBStatisticAPI new];
+                             person.statistic = [NSMutableArray array];
                              person.personName = [singleProduct objectForKey:@"personName"];
-                             person.personRank = [[singleProduct objectForKey:@"rank"] integerValue];
-                             person.startStatDate = [self dateFromString:[singleProduct objectForKey:@"startDate"]];
-                             
+                             stat.rank = [[singleProduct objectForKey:@"rank"] integerValue];
+                             stat.startDate = [self dateFromString:[singleProduct objectForKey:@"startDate"]];
+                    
+                             [person.statistic addObject:stat];
                              [objectsArray addObject:person];
+                             
+                             // CoreData saving
+                             [[GBDataManager sharedManager]
+                              saveStatisticWithSiteID:siteID
+                              andPersonName:person.personName
+                              andStartDate:stat.startDate
+                              andRank:stat.rank];
                              
                          }
                          
                          if (success) {
+                             success(objectsArray);
+                         }
+                         
+                     } failure:^(NSURLSessionDataTask* task, NSError* error) {
+                         NSLog(@"Error: %@", error);
+                         if (failure) {
+                             failure(error);
+                         }
+                     }];
+    
+}
+
+// Get daily statistic by siteID, personID and date
+
+- (void) getArrayDailyBySiteID: (NSInteger) siteID
+                   andPersonID: (NSInteger) personID
+           andBetweenFirstDate: (NSDate*) firstDate
+                    andEndDate: (NSDate*) endDate
+                     onSuccess: (void(^)(NSArray* statisticArray)) success
+                     onFailure: (void(^)(NSError* error)) failure {
+    
+    NSString* link = [NSString stringWithFormat:@"%@%ld/%ld/between?start=%@&end=%@", originLink, (long)siteID, (long)personID, [self stringFromDate:firstDate], [self stringFromDate:endDate]];
+    
+    [self.sessionManager GET:link
+                  parameters:nil
+                    progress:nil
+                     success:^(NSURLSessionTask * task, id responseObject) {
+                         
+                         NSMutableArray* objectsArray = [NSMutableArray array];
+                         NSMutableArray* array = (NSMutableArray*)responseObject;
+                         
+                         for (NSUInteger i = 0; i < array.count; i++) {
                              
+                             NSDictionary* singleProduct = array[i];
+                             GBStatisticAPI* stat = [GBStatisticAPI new];
+                        
+                             stat.date = [self dateFromString:[singleProduct objectForKey:@"date"]];
+                             stat.rank = [[singleProduct objectForKey:@"countNewPages"] integerValue];
+                             
+                             [objectsArray addObject:stat];
+                             
+                             // CoreData saving
+                             [[GBDataManager sharedManager]
+                              saveDailyStatBySiteID:siteID
+                              andPersonID:personID
+                              andDate:stat.date
+                              andRank:stat.rank];
+                             
+                         }
+                         
+                         if (success) {
                              success(objectsArray);
                          }
                          
@@ -213,14 +258,13 @@ static NSString* originLink = @"https://52.89.213.205:8443/rest/user/";
     return [dateFormatter dateFromString:string];
 }
 
-
-
-
-
-
-
-
-
+- (NSString*) stringFromDate:(NSDate*) date {
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    return [dateFormatter stringFromDate:date];
+}
 
 
 @end

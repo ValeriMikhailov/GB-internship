@@ -9,10 +9,12 @@
 #import "GBPersistentManager.h"
 #import "GBServerManager.h"
 #import "GBDataManager.h"
-#import "GBSitesCD+CoreDataClass.h"
-#import "GBPersonCD+CoreDataProperties.h"
+#import "GBSite+CoreDataClass.h"
 #import "GBStatistic+CoreDataClass.h"
-#import "GBPerson.h"
+#import "GBPerson+CoreDataClass.h"
+#import "GBSiteAPI.h"
+#import "GBPersonAPI.h"
+#import "GBStatisticAPI.h"
 
 @implementation GBPersistentManager
 
@@ -42,7 +44,7 @@
 // Get all avaliable sites
 
 - (NSArray*) getArrayOfAvaliableSitesOnSuccess: (void(^)(NSArray* sitesArray)) success
-                                 onFailure: (void(^)(NSError* error)) failure {
+                                     onFailure: (void(^)(NSError* error)) failure {
     
     NSArray* sites = [NSArray array];
     
@@ -50,7 +52,7 @@
         
         // Get data from DB
         
-        sites = [[GBDataManager sharedManager] allObjectsByEntityName:@"GBSitesCD"];
+        sites = [[GBDataManager sharedManager] allObjectsByEntityName:@"GBSite"];
         
     } else {
         
@@ -60,12 +62,12 @@
             
             [sites arrayByAddingObjectsFromArray:sitesArray];
             
-            for (GBSitesCD* obj in sitesArray) {
-                
+            for (GBSiteAPI* obj in sitesArray) {
+
                 [[GBDataManager sharedManager] saveSiteWithID:obj.siteID andName:obj.siteURL];
                 
             }
-            
+        
         } onFailure:^(NSError *error) {
             
             
@@ -79,7 +81,7 @@
 
 // Get all persons with their ranks
 - (NSArray*) getArrayOfAvaliablePersonsOnSuccess: (void(^)(NSArray* personsArray)) success
-                                       onFailure: (void(^)(NSError* error)) failure{
+                                       onFailure: (void(^)(NSError* error)) failure {
     
     NSArray* persons = [NSArray array];
     
@@ -98,11 +100,11 @@
             
             [persons arrayByAddingObjectsFromArray:personsArray];
             
-            for (GBPersonCD* obj in personsArray) {
-                
-                [[GBDataManager sharedManager] savePersonWithID:obj.personID andName:obj.personName];
-                
-            }
+//            for (GBPersonCD* obj in personsArray) {
+//                
+//                [[GBDataManager sharedManager] savePersonWithID:obj.personID andName:obj.personName];
+//                
+//            }
             
         } onFailure:^(NSError *error) {
             
