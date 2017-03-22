@@ -1,8 +1,18 @@
 package ru.geekbrains.rest.model;
 
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
 public class UserDto {
+
+    @NotBlank
+    @Email
     private String userName;
+
+    @NotBlank
+    @Length(min = 4)
     private String password;
 
     public UserDto() {
