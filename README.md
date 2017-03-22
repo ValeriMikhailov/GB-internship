@@ -47,4 +47,29 @@
     } onFailure:^(NSError *error) {
         
     }];
+    
+// Вовзращает массив статистики (GBStatisticAPI) с датой и показателем рейтинга по переданным параметрам siteID, personID, startDate, endDate. Пример вывода:
+    
+    2017-03-10 - 1
+    2017-03-11 - 2
+    2017-03-12 - 2
+    2017-03-13 - 2
+    2017-03-14 - 3
+    2017-03-15 - 2
+    
+    NSDate* date1 = [self dateFromString:@"2017-03-09"];
+    NSDate* date2 = [self dateFromString:@"2017-03-15"];
+    [[GBServerManager sharedManager] getArrayDailyBySiteID:1
+                                                andPersonID:2
+                                        andBetweenFirstDate:date1
+                                                andEndDate:date2
+                                                 onSuccess:^(NSArray *statisticArray) {
+                                                     
+                                                     for (GBStatistic* obj in statisticArray) {
+                                                         NSLog(@"%@ - %hd", [self stringFromDate:obj.date], obj.rank);
+                                                     }
+                                                     
+                                                 } onFailure:^(NSError *error) {
+                                                     
+                                                 }];
 
