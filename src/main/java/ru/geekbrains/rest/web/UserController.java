@@ -2,13 +2,18 @@ package ru.geekbrains.rest.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.rest.model.*;
 import ru.geekbrains.rest.service.UserService;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(UserController.USER_REST_URL)
@@ -42,7 +47,15 @@ public class UserController {
     }
 
     @PostMapping(value = "/signup", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public void registerUser(@RequestBody UserDto userDto) {
+    public ResponseEntity registerUser(@Valid @RequestBody UserDto userDto, Errors errors) {
+        if (errors.hasErrors()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).contentType(MediaType.APPLICATION_JSON_UTF8)
+                    .body(errors.getAllErrors()
+                    .stream()
+                    .map(x -> x.getDefaultMessage())
+                    .collect(Collectors.joining(", ")));
+        }
         service.registerUser(userDto);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

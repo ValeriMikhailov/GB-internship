@@ -1,7 +1,10 @@
 package ru.geekbrains.rest.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.rest.model.Keyword;
 import ru.geekbrains.rest.model.Person;
@@ -9,7 +12,9 @@ import ru.geekbrains.rest.model.Site;
 import ru.geekbrains.rest.model.UserDto;
 import ru.geekbrains.rest.service.AdminService;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(AdminController.ADMIN_REST_URL)
@@ -84,8 +89,16 @@ public class AdminController {
     }
 
     @PostMapping(value = "/signup", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public void registerAdmin(@RequestBody UserDto userDto) {
+    public ResponseEntity registerAdmin(@Valid @RequestBody UserDto userDto, Errors errors) {
+        if (errors.hasErrors()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).contentType(MediaType.APPLICATION_JSON_UTF8)
+                    .body(errors.getAllErrors()
+                            .stream()
+                            .map(x -> x.getDefaultMessage())
+                            .collect(Collectors.joining(", ")));
+        }
         service.registerAdmin(userDto);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
 }
