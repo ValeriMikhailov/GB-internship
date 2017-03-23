@@ -29,18 +29,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    [[GBServerManager sharedManager] getArrayOfAvaliableSitesOnSuccess:^(NSArray *sitesArray) {
-        
+    [[GBPersistentManager sharedManager] getArrayOfAvaliableSitesOnSuccess:^(NSArray *sitesArray) {
+        for (GBSite* site in sitesArray) {
+            NSLog(@"site ID: %d and siteURL: %@", site.siteID, site.siteURL);
+        }
     } onFailure:^(NSError *error) {
         
     }];
-    
-    [[GBServerManager sharedManager] getArrayOfAvaliablePersonsOnSuccess:^(NSArray *personsArray) {
-        
-    } onFailure:^(NSError *error) {
-        
-    }];
-    
+     
     return YES;
 }
 

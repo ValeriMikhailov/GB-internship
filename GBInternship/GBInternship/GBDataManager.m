@@ -185,9 +185,6 @@
         [statistic addSitesObject:site];
         [statistic.managedObjectContext save:nil];
     }
-    
-    
-
 }
 
 #pragma mark - Fetch from DB methods - 
@@ -240,6 +237,18 @@
     }
     
     [self.managedObjectContext save:nil];
+}
+
+#pragma mark - For Persistent - 
+- (void) getArrayOfAvaliableSitesOnSuccess: (void(^)(NSArray* sitesArray)) success
+                                 onFailure: (void(^)(NSError* error)) failure {
+    
+    NSArray* sites = [self allObjectsByEntityName:@"GBSite"];
+    
+    if (success) {
+        success(sites);
+    }
+    
 }
 
 #pragma mark - Core Data stack

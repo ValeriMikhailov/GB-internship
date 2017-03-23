@@ -16,6 +16,14 @@
 #import "GBPersonAPI.h"
 #import "GBStatisticAPI.h"
 
+@interface GBPersistentManager ()
+
+@property (assign, nonatomic) BOOL sitesDB;
+@property (assign, nonatomic) BOOL personsDB;
+@property (assign, nonatomic) BOOL statisticDB;
+
+@end
+
 @implementation GBPersistentManager
 
 - (id)init {
@@ -43,39 +51,40 @@
 
 // Get all avaliable sites
 
-- (NSArray*) getArrayOfAvaliableSitesOnSuccess: (void(^)(NSArray* sitesArray)) success
-                                     onFailure: (void(^)(NSError* error)) failure {
+- (void) getArrayOfAvaliableSitesOnSuccess: (void(^)(NSArray* sitesArray)) success
+                                 onFailure: (void(^)(NSError* error)) failure {
     
-    NSArray* sites = [NSArray array];
-    
-    if (![self connectedToInternet] || ![self shouldUpdateDataFromServer]) {
+    if (!self.sitesDB) {
         
-        // Get data from DB
-        
-        sites = [[GBDataManager sharedManager] allObjectsByEntityName:@"GBSite"];
-        
+        if ([self connectedToInternet]) {
+            // Get data from Server
+            [[GBServerManager sharedManager] getArrayOfAvaliableSitesOnSuccess:^(NSArray *sitesArray) {
+                
+                for (GBSiteAPI* obj in sitesArray) {
+                    // Save data in DB
+                    [[GBDataManager sharedManager] saveSiteWithID:obj.siteID andName:obj.siteURL];
+                }
+                
+                if (success) {
+                    self.sitesDB = YES;
+                    success(sitesArray);
+                }
+            } onFailure:^(NSError *error) {
+            }];
+        } else {
+            
+            NSLog(@"Connect to Internet and complete DB!");
+        }
     } else {
         
-        // Get data from Server
-        
-        [[GBServerManager sharedManager] getArrayOfAvaliableSitesOnSuccess:^(NSArray *sitesArray) {
-            
-            [sites arrayByAddingObjectsFromArray:sitesArray];
-            
-            for (GBSiteAPI* obj in sitesArray) {
-
-                [[GBDataManager sharedManager] saveSiteWithID:obj.siteID andName:obj.siteURL];
-                
+        // Get data from DB
+        [[GBDataManager sharedManager] getArrayOfAvaliableSitesOnSuccess:^(NSArray *sitesArray) {
+            if (success) {
+                success(sitesArray);
             }
-        
         } onFailure:^(NSError *error) {
-            
-            
         }];
-        
     }
-    
-    return sites;
     
 }
 
@@ -89,7 +98,7 @@
         
         // Get data from DB
         
-        persons = [[GBDataManager sharedManager] allObjectsByEntityName:@"GBPersonCD"];
+        persons = [[GBDataManager sharedManager] allObjectsByEntityName:@"GBPerson"];
         
     } else {
         
@@ -126,8 +135,7 @@
     if (![self connectedToInternet] || ![self shouldUpdateDataFromServer]) {
         
         // Get data from DB
-        
-        //statistic = [[GBDataManager sharedManager] allObjectsByEntityName:@"GBStatistic"];
+    
         
     } else {
         
@@ -153,12 +161,34 @@
     
     NSString *URLString = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://www.google.com"] encoding:NSASCIIStringEncoding error:nil];
     
+    ( URLString != NULL ) ? NSLog(@"connection good") : NSLog(@"connection bad");
+    return ( URLString != NULL ) ? YES : NO;
+}
+
+- (BOOL) connectedToOurServer {
+    
+    NSString *URLString = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"https://52.89.213.205"] encoding:NSASCIIStringEncoding error:nil];
+    
+    ( URLString != NULL ) ? NSLog(@"connection good") : NSLog(@"connection bad");
     return ( URLString != NULL ) ? YES : NO;
 }
 
 - (BOOL) shouldUpdateDataFromServer {
     
     return YES;
+}
+
+- (BOOL) isLaunchedFirst {
+    
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"]) {
+        
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        return YES;
+    }
+    
+    return NO;
 }
 
 @end

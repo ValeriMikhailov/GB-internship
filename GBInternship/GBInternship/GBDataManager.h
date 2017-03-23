@@ -36,4 +36,8 @@
 - (void) deleteAllObjectsByEntityName:(NSString*)string;
 - (void) saveContext;
 
+#pragma mark - For Persistent - 
+- (void) getArrayOfAvaliableSitesOnSuccess: (void(^)(NSArray* sitesArray)) success
+                                 onFailure: (void(^)(NSError* error)) failure;
+
 @end
