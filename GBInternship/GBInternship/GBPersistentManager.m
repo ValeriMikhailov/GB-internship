@@ -89,44 +89,44 @@
 }
 
 // Get all persons with their ranks
-- (NSArray*) getArrayOfAvaliablePersonsOnSuccess: (void(^)(NSArray* personsArray)) success
-                                       onFailure: (void(^)(NSError* error)) failure {
+- (void) getArrayOfAvaliablePersonsOnSuccess: (void(^)(NSArray* personsArray)) success
+                                   onFailure: (void(^)(NSError* error)) failure {
     
-    NSArray* persons = [NSArray array];
-    
-    if (![self connectedToInternet] || ![self shouldUpdateDataFromServer]) {
-        
-        // Get data from DB
-        
-        persons = [[GBDataManager sharedManager] allObjectsByEntityName:@"GBPerson"];
-        
+    if (!self.personsDB) {
+        if ([self connectedToInternet]) {
+            // Get data from Server
+            [[GBServerManager sharedManager] getArrayOfAvaliablePersonsOnSuccess:^(NSArray *personsArray) {
+                
+                for (GBPerson* obj in personsArray) {
+                    // Save data in DB
+                    [[GBDataManager sharedManager] savePersonWithID:obj.personID andName:obj.personName];
+                }
+                
+                if (success) {
+                    self.personsDB = YES;
+                    success(personsArray);
+                }
+            } onFailure:^(NSError *error) {
+            }];
+        } else {
+            
+            NSLog(@"Connect to Internet and complete DB!");
+        }
     } else {
         
-        // Get data from Server
-        
-        [[GBServerManager sharedManager]
-         getArrayOfAvaliablePersonsOnSuccess:^(NSArray *personsArray) {
-            
-            [persons arrayByAddingObjectsFromArray:personsArray];
-            
-//            for (GBPersonCD* obj in personsArray) {
-//                
-//                [[GBDataManager sharedManager] savePersonWithID:obj.personID andName:obj.personName];
-//                
-//            }
-            
+        // Get data from DB
+        [[GBDataManager sharedManager] getArrayOfAvaliablePersosnsOnSuccess:^(NSArray *personsArray) {
+            if (success) {
+                success(personsArray);
+            }
         } onFailure:^(NSError *error) {
             
-            
         }];
-        
     }
-    
-    return persons;
 }
 
 // Get statistic by siteID
-- (NSArray*) getStatisticBySiteID: (NSInteger) siteID
+- (void) getStatisticBySiteID: (NSInteger) siteID
                         onSuccess: (void(^)(NSArray* statisticArray)) success
                         onFailure: (void(^)(NSError* error)) failure {
     
@@ -150,9 +150,6 @@
                                                 }];
         
     }
-    
-    return statistic;
-    
 }
 
 #pragma nark - Helpful methods - 

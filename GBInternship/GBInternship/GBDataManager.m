@@ -242,13 +242,18 @@
 #pragma mark - For Persistent - 
 - (void) getArrayOfAvaliableSitesOnSuccess: (void(^)(NSArray* sitesArray)) success
                                  onFailure: (void(^)(NSError* error)) failure {
-    
     NSArray* sites = [self allObjectsByEntityName:@"GBSite"];
-    
     if (success) {
         success(sites);
     }
-    
+}
+
+- (void) getArrayOfAvaliablePersosnsOnSuccess: (void(^)(NSArray* personsArray)) success
+                                    onFailure: (void(^)(NSError* error)) failure {
+    NSArray* persons = [self allObjectsByEntityName:@"GBPerson"];
+    if (success) {
+        success(persons);
+    }
 }
 
 #pragma mark - Core Data stack

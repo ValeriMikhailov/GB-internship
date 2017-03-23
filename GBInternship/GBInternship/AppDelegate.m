@@ -36,6 +36,14 @@
     } onFailure:^(NSError *error) {
         
     }];
+    
+    [[GBPersistentManager sharedManager] getArrayOfAvaliablePersonsOnSuccess:^(NSArray *personsArray) {
+        for (GBPerson* pers in personsArray) {
+            NSLog(@"pers ID: %d and Name: %@", pers.personID, pers.personName);
+        }
+    } onFailure:^(NSError *error) {
+        
+    }];
      
     return YES;
 }
