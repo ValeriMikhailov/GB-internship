@@ -41,5 +41,14 @@
                                  onFailure: (void(^)(NSError* error)) failure;
 - (void) getArrayOfAvaliablePersosnsOnSuccess: (void(^)(NSArray* personsArray)) success
                                     onFailure: (void(^)(NSError* error)) failure;
+- (void) getArrayBySiteID: (NSInteger) siteID
+                onSuccess: (void(^)(NSArray* statisticArray)) success
+                onFailure: (void(^)(NSError* error)) failure;
+- (void) getArrayDailyBySiteID: (NSInteger) siteID
+                   andPersonID: (NSInteger) personID
+           andBetweenFirstDate: (NSDate*) firstDate
+                    andEndDate: (NSDate*) endDate
+                     onSuccess: (void(^)(NSArray* statisticArray)) success
+                     onFailure: (void(^)(NSError* error)) failure;
 
 @end

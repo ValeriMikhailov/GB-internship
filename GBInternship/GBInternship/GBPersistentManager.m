@@ -18,10 +18,6 @@
 
 @interface GBPersistentManager ()
 
-@property (assign, nonatomic) BOOL sitesDB;
-@property (assign, nonatomic) BOOL personsDB;
-@property (assign, nonatomic) BOOL statisticDB;
-
 @end
 
 @implementation GBPersistentManager
@@ -54,29 +50,7 @@
 - (void) getArrayOfAvaliableSitesOnSuccess: (void(^)(NSArray* sitesArray)) success
                                  onFailure: (void(^)(NSError* error)) failure {
     
-    if (!self.sitesDB) {
-        
-        if ([self connectedToInternet]) {
-            // Get data from Server
-            [[GBServerManager sharedManager] getArrayOfAvaliableSitesOnSuccess:^(NSArray *sitesArray) {
-                
-                for (GBSiteAPI* obj in sitesArray) {
-                    // Save data in DB
-                    [[GBDataManager sharedManager] saveSiteWithID:obj.siteID andName:obj.siteURL];
-                }
-                
-                if (success) {
-                    self.sitesDB = YES;
-                    success(sitesArray);
-                }
-            } onFailure:^(NSError *error) {
-            }];
-        } else {
-            
-            NSLog(@"Connect to Internet and complete DB!");
-        }
-    } else {
-        
+    if ([self isHasDB:@"SiteDB"]) {
         // Get data from DB
         [[GBDataManager sharedManager] getArrayOfAvaliableSitesOnSuccess:^(NSArray *sitesArray) {
             if (success) {
@@ -84,36 +58,31 @@
             }
         } onFailure:^(NSError *error) {
         }];
+        
+    } else {
+        
+        // Get data from Server
+        [[GBServerManager sharedManager] getArrayOfAvaliableSitesOnSuccess:^(NSArray *sitesArray) {
+            
+            for (GBSiteAPI* obj in sitesArray) {
+                // Save data in DB
+                [[GBDataManager sharedManager] saveSiteWithID:obj.siteID andName:obj.siteURL];
+            }
+            
+            if (success) {
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"SiteDB"];
+                success(sitesArray);
+            }
+        } onFailure:^(NSError *error) {
+        }];
     }
-    
 }
 
 // Get all persons with their ranks
 - (void) getArrayOfAvaliablePersonsOnSuccess: (void(^)(NSArray* personsArray)) success
                                    onFailure: (void(^)(NSError* error)) failure {
     
-    if (!self.personsDB) {
-        if ([self connectedToInternet]) {
-            // Get data from Server
-            [[GBServerManager sharedManager] getArrayOfAvaliablePersonsOnSuccess:^(NSArray *personsArray) {
-                
-                for (GBPerson* obj in personsArray) {
-                    // Save data in DB
-                    [[GBDataManager sharedManager] savePersonWithID:obj.personID andName:obj.personName];
-                }
-                
-                if (success) {
-                    self.personsDB = YES;
-                    success(personsArray);
-                }
-            } onFailure:^(NSError *error) {
-            }];
-        } else {
-            
-            NSLog(@"Connect to Internet and complete DB!");
-        }
-    } else {
-        
+    if ([self isHasDB:@"PersonDB"]) {
         // Get data from DB
         [[GBDataManager sharedManager] getArrayOfAvaliablePersosnsOnSuccess:^(NSArray *personsArray) {
             if (success) {
@@ -122,34 +91,112 @@
         } onFailure:^(NSError *error) {
             
         }];
+        
+    } else {
+        
+        // Get data from Server
+        [[GBServerManager sharedManager] getArrayOfAvaliablePersonsOnSuccess:^(NSArray *personsArray) {
+            
+            for (GBPerson* obj in personsArray) {
+                // Save data in DB
+                [[GBDataManager sharedManager] savePersonWithID:obj.personID andName:obj.personName];
+            }
+            
+            if (success) {
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"PersonDB"];
+                success(personsArray);
+            }
+        } onFailure:^(NSError *error) {
+        }];
     }
 }
 
 // Get statistic by siteID
 - (void) getStatisticBySiteID: (NSInteger) siteID
-                        onSuccess: (void(^)(NSArray* statisticArray)) success
-                        onFailure: (void(^)(NSError* error)) failure {
+                    onSuccess: (void(^)(NSArray* statisticArray)) success
+                    onFailure: (void(^)(NSError* error)) failure {
     
-    NSArray* statistic = [NSArray array];
-    
-    if (![self connectedToInternet] || ![self shouldUpdateDataFromServer]) {
-        
+    if ([self isHasDB:@"StatisticDB"]) {
         // Get data from DB
-    
-        
+        [[GBDataManager sharedManager] getArrayBySiteID:siteID
+                                              onSuccess:^(NSArray *statisticArray) {
+                                                  if (success) {
+                                                      success(statisticArray);
+                                                  }
+                                              } onFailure:^(NSError *error) {
+                                                  
+                                              }];
     } else {
         
         // Get data from Server
-        
-        [[GBServerManager sharedManager] getArrayBySiteID:siteID
-                                                onSuccess:^(NSArray *statisticArray) {
-
-                                                
-                                                } onFailure:^(NSError *error) {
-                                                
-                                                }];
-        
+        [[GBServerManager sharedManager]
+         getArrayBySiteID:siteID
+         onSuccess:^(NSArray *statisticArray) {
+             for (GBPerson* obj in statisticArray) {
+                 
+                 NSArray* arr = [NSArray arrayWithArray:[obj.statistic allObjects]];
+                 GBStatistic* stat = [arr firstObject];
+                 
+                 [[GBDataManager sharedManager]
+                  saveStatisticWithSiteID:siteID
+                  andPersonName:obj.personName
+                  andStartDate:stat.startDate andRank:stat.rank];
+             }
+             if (success) {
+                 [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"StatisticDB"];
+                 success(statisticArray);
+             }
+         } onFailure:^(NSError *error) {
+         }];
     }
+}
+
+// Get daily statistic by siteID, personID and date
+- (void) getArrayDailyBySiteID: (NSInteger) siteID
+                   andPersonID: (NSInteger) personID
+           andBetweenFirstDate: (NSDate*) firstDate
+                    andEndDate: (NSDate*) endDate
+                     onSuccess: (void(^)(NSArray* statisticArray)) success
+                     onFailure: (void(^)(NSError* error)) failure {
+    
+    if ([self isHasDB:@"StatisticDailyDB"]) {
+        // Get data from DB
+        [[GBDataManager sharedManager] getArrayDailyBySiteID:siteID
+                                                 andPersonID:personID
+                                         andBetweenFirstDate:firstDate
+                                                  andEndDate:endDate
+                                                   onSuccess:^(NSArray *statisticArray) {
+                                            
+                                                   } onFailure:^(NSError *error) {
+                                                       
+                                                   }];
+    } else {
+        
+        // Get data from Server
+        [[GBServerManager sharedManager]
+         getArrayDailyBySiteID:siteID
+         andPersonID:personID
+         andBetweenFirstDate:firstDate
+         andEndDate:endDate
+         onSuccess:^(NSArray *statisticArray) {
+             for (GBStatistic* stat in statisticArray) {
+                 
+                 [[GBDataManager sharedManager] saveDailyStatBySiteID:siteID
+                                                          andPersonID:personID
+                                                              andDate:stat.date
+                                                              andRank:stat.rank];
+             }
+             
+             if (success) {
+                 [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"StatisticDailyDB"];
+                 success(statisticArray);
+             }
+         } onFailure:^(NSError *error) {
+            
+         }];
+    }
+
+    
 }
 
 #pragma nark - Helpful methods - 
@@ -175,17 +222,9 @@
     return YES;
 }
 
-- (BOOL) isLaunchedFirst {
+- (BOOL) isHasDB:(NSString*)entity {
     
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"]) {
-        
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        return YES;
-    }
-    
-    return NO;
+    return ([[NSUserDefaults standardUserDefaults] boolForKey:entity]) ? YES : NO;
 }
 
 @end

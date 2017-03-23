@@ -94,7 +94,7 @@
     NSFetchRequest* request = [[NSFetchRequest alloc] init];
     [request setEntity:entityObject];
     [request setFetchLimit:1];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"ANY sites.siteID == %d AND ANY persons.personName == %@", ID, name]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"persons == %@ AND startDate == %@", name, startDate]];
     
     NSError *error = nil;
     NSUInteger count = [self.managedObjectContext countForFetchRequest:request error:&error];
@@ -111,7 +111,6 @@
         [request setEntity:entity];
         [request setPredicate:[NSPredicate predicateWithFormat:@"personName == %@", name]];
         NSArray* persons = [self.managedObjectContext executeFetchRequest:request error:nil];
-        //NSLog(@"%lu", (unsigned long)persons.count);
         GBPerson* person = [persons firstObject];
         
         // Get site entity
@@ -120,15 +119,14 @@
         [request2 setEntity:entity2];
         [request2 setPredicate:[NSPredicate predicateWithFormat:@"siteID == %d", ID]];
         NSArray* sites = [self.managedObjectContext executeFetchRequest:request2 error:nil];
-        //NSLog(@"%lu", (unsigned long)sites.count);
         GBSite* site = [sites firstObject];
         
-        [statistic addPersonsObject:person];
-        [statistic addSitesObject:site];
+        statistic.persons = person;
+        statistic.sites = site;
         statistic.rank = rank;
         statistic.startDate = startDate;
         
-        //NSLog(@"statistic %@", statistic);
+        NSLog(@"statistic %@", statistic);
         [statistic.managedObjectContext save:nil];
     }
     
@@ -147,7 +145,7 @@
     NSFetchRequest* request = [[NSFetchRequest alloc] init];
     [request setEntity:entityObject];
     [request setFetchLimit:1];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"ANY sites.siteID == %d AND ANY persons.personID == %d AND ANY date == %@", siteID, personID, date]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"sites.siteID == %d AND persons.personID == %d AND ANY date == %@", siteID, personID, date]];
     
     NSError *error = nil;
     NSUInteger count = [self.managedObjectContext countForFetchRequest:request error:&error];
@@ -181,8 +179,8 @@
         
         statistic.rank = rank;
         statistic.date = date;
-        [statistic addPersonsObject:person];
-        [statistic addSitesObject:site];
+        statistic.persons = person;
+        statistic.sites = site;
         [statistic.managedObjectContext save:nil];
     }
 }
@@ -194,14 +192,27 @@
     NSEntityDescription* entity = [NSEntityDescription entityForName:@"GBStatistic" inManagedObjectContext:self.managedObjectContext];
     NSFetchRequest* request = [[NSFetchRequest alloc] init];
     [request setEntity:entity];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"ANY sites.siteID == %d AND startDate != nil", siteID]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"startDate != nil"]];
     NSArray* stat = [self.managedObjectContext executeFetchRequest:request error:nil];
 
     for (GBStatistic* st in stat) {
-        NSLog(@"%d, %@ - %lu", st.rank, st.date, st.persons.count);
+        NSLog(@"%d, %@ - %@", st.rank, st.sites.siteURL, st.persons.personName);
         
     }
     
+    return stat;
+}
+
+- (NSArray*) dailyStatisticForSite: (NSInteger) siteID
+                         andPerson: (NSInteger) personID
+                       andDateFrom: (NSDate*) startDate
+                       andDateTill: (NSDate*) endDate {
+    
+    NSEntityDescription* entity = [NSEntityDescription entityForName:@"GBStatistic" inManagedObjectContext:self.managedObjectContext];
+    NSFetchRequest* request = [[NSFetchRequest alloc] init];
+    [request setEntity:entity];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"sites.siteID == %d AND persons.personID == %d AND date > %@ AND (date < %@ OR date == %@)", siteID, personID, startDate, endDate]];
+    NSArray* stat = [self.managedObjectContext executeFetchRequest:request error:nil];
     return stat;
 }
 
@@ -253,6 +264,29 @@
     NSArray* persons = [self allObjectsByEntityName:@"GBPerson"];
     if (success) {
         success(persons);
+    }
+}
+
+- (void) getArrayBySiteID: (NSInteger) siteID
+                onSuccess: (void(^)(NSArray* statisticArray)) success
+                onFailure: (void(^)(NSError* error)) failure {
+    
+    NSArray* stat = [self allStatisticForSite:siteID];
+    if (success) {
+        success(stat);
+    }
+}
+
+- (void) getArrayDailyBySiteID: (NSInteger) siteID
+                   andPersonID: (NSInteger) personID
+           andBetweenFirstDate: (NSDate*) firstDate
+                    andEndDate: (NSDate*) endDate
+                     onSuccess: (void(^)(NSArray* statisticArray)) success
+                     onFailure: (void(^)(NSError* error)) failure {
+    
+    NSArray* stat = [self dailyStatisticForSite:siteID andPerson:personID andDateFrom:firstDate andDateTill:endDate];
+    if (success) {
+        success(stat);
     }
 }
 

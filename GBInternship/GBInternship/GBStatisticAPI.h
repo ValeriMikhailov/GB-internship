@@ -13,7 +13,7 @@
 @property (assign, nonatomic) NSInteger rank;
 @property (copy, nonatomic) NSDate* startDate;
 @property (copy, nonatomic) NSDate* date;
-@property (strong, nonatomic) NSArray* persons;
-@property (strong, nonatomic) NSMutableArray* sites;
+@property (assign, nonatomic) NSInteger personID;
+@property (assign, nonatomic) NSInteger siteID;
 
 @end

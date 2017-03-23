@@ -29,6 +29,95 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    // Examples to check fetch data from each manager
+    // GBServerManager
+    
+    [[GBServerManager sharedManager] getArrayOfAvaliableSitesOnSuccess:^(NSArray *sitesArray) {
+        for (GBSiteAPI* site in sitesArray) {
+            NSLog(@"site ID: %ld and siteURL: %@", (long)site.siteID, site.siteURL);
+        }
+    } onFailure:^(NSError *error) {
+        
+    }];
+    
+    [[GBServerManager sharedManager] getArrayOfAvaliablePersonsOnSuccess:^(NSArray *personsArray) {
+        for (GBPersonAPI* pers in personsArray) {
+            NSLog(@"pers ID: %ld and Name: %@", (long)pers.personID, pers.personName);
+        }
+    } onFailure:^(NSError *error) {
+        
+    }];
+    
+    [[GBServerManager sharedManager] getArrayBySiteID:1
+                                            onSuccess:^(NSArray *statisticArray) {
+                                                for (GBPersonAPI* pers in statisticArray) {
+                                                    NSArray* arr = [NSArray arrayWithArray:pers.statistic];
+                                                    for (GBStatisticAPI* stat in arr) {
+                                                        NSLog(@"Site: %ld, Rank: %ld, StartDate: %@", (long)stat.siteID, (long)stat.rank, [self stringFromDate:stat.startDate]);
+                                                    }
+                                                }
+                                            } onFailure:^(NSError *error) {
+                                                
+                                            }];
+    
+    NSDate* date1 = [self dateFromString:@"2017-03-09"];
+    NSDate* date2 = [self dateFromString:@"2017-03-15"];
+    [[GBServerManager sharedManager] getArrayDailyBySiteID:1
+                                               andPersonID:1
+                                       andBetweenFirstDate:date1
+                                                andEndDate:date2
+                                                 onSuccess:^(NSArray *statisticArray) {
+                                                     
+                                                     for (GBStatisticAPI* stat in statisticArray) {
+                                                         NSLog(@"Name: %ld, Site: %ld, Rank: %ld, StartDate: %@", (long)stat.personID, (long)stat.siteID, (long)stat.rank, [self stringFromDate:stat.date]);
+                                                     }
+                                                     
+                                                 } onFailure:^(NSError *error) {
+                                                     
+                                                 }];
+    
+    //GBDataManger
+    
+    [[GBDataManager sharedManager] getArrayOfAvaliableSitesOnSuccess:^(NSArray *sitesArray) {
+        for (GBSite* site in sitesArray) {
+            NSLog(@"site ID: %ld and siteURL: %@", (long)site.siteID, site.siteURL);
+        }
+    } onFailure:^(NSError *error) {
+        
+    }];
+    
+    [[GBDataManager sharedManager] getArrayOfAvaliablePersosnsOnSuccess:^(NSArray *personsArray) {
+        for (GBPerson* pers in personsArray) {
+            NSLog(@"pers ID: %ld and Name: %@", (long)pers.personID, pers.personName);
+        }
+    } onFailure:^(NSError *error) {
+        
+    }];
+    
+    [[GBDataManager sharedManager] getArrayBySiteID:1 onSuccess:^(NSArray *statisticArray) {
+        for (GBStatistic* stat in statisticArray) {
+            NSLog(@"Name: %@, Rank: %d, StartDate: %@", stat.persons.personName, stat.rank, [self stringFromDate:stat.startDate]);
+        }
+    } onFailure:^(NSError *error) {
+        
+    }];
+    
+    [[GBDataManager sharedManager] getArrayDailyBySiteID:1
+                                             andPersonID:1
+                                     andBetweenFirstDate:date1
+                                              andEndDate:date2
+                                               onSuccess:^(NSArray *statisticArray) {
+                                                   
+                                                   for (GBStatistic* stat in statisticArray) {
+                                                       NSLog(@"Name: %@, Site: %@, Rank: %d, StartDate: %@", stat.persons.personName, stat.sites.siteURL, stat.rank, [self stringFromDate:stat.date]);
+                                                   }
+                                                   
+                                               } onFailure:^(NSError *error) {
+                                                   
+                                               }];
+    
+    //GBPersistentManager
+    /*
     [[GBPersistentManager sharedManager] getArrayOfAvaliableSitesOnSuccess:^(NSArray *sitesArray) {
         for (GBSite* site in sitesArray) {
             NSLog(@"site ID: %d and siteURL: %@", site.siteID, site.siteURL);
@@ -44,7 +133,33 @@
     } onFailure:^(NSError *error) {
         
     }];
-     
+    
+    [[GBPersistentManager sharedManager]
+     getStatisticBySiteID:1
+        onSuccess:^(NSArray *statisticArray) {
+            for (GBStatistic* stat in statisticArray) {
+                NSLog(@"Name: %@, Rank: %d, StartDate: %@", stat.persons.personName, stat.rank, [self stringFromDate:stat.startDate]);
+            }
+        } onFailure:^(NSError *error) {
+            
+        }];
+
+    //NSDate* date1 = [self dateFromString:@"2017-03-09"];
+    //NSDate* date2 = [self dateFromString:@"2017-03-15"];
+    [[GBPersistentManager sharedManager] getArrayDailyBySiteID:1
+                                                   andPersonID:1
+                                           andBetweenFirstDate:date1
+                                                    andEndDate:date2
+                                                     onSuccess:^(NSArray *statisticArray) {
+                                                         
+                                                         for (GBStatisticAPI* stat in statisticArray) {
+                                                             NSLog(@"Name: %ld, Site: %ld, Rank: %ld, StartDate: %@", (long)stat.personID, (long)stat.siteID, (long)stat.rank, [self stringFromDate:stat.date]);
+                                                         }
+                                                         
+                                                     } onFailure:^(NSError *error) {
+                                                         
+                                                     }];*/
+    
     return YES;
 }
 

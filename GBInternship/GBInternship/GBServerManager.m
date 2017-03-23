@@ -84,8 +84,7 @@ static NSString* originLink = @"https://52.89.213.205:8443/rest/user/";
                              [objectsArray addObject:site];
                              
                              // CoreData saving
-                             [[GBDataManager sharedManager] saveSiteWithID:site.siteID
-                                                                   andName:site.siteURL];
+                             [[GBDataManager sharedManager] saveSiteWithID:site.siteID andName:site.siteURL];
                          }
                          
                          if (success) {
@@ -126,8 +125,7 @@ static NSString* originLink = @"https://52.89.213.205:8443/rest/user/";
                              [objectsArray addObject:person];
                              
                              // CoreData saving
-                             [[GBDataManager sharedManager] savePersonWithID:person.personID
-                                                                     andName:person.personName];
+                             [[GBDataManager sharedManager] savePersonWithID:person.personID                                                                     andName:person.personName];
                          }
                          
                          if (success) {
@@ -166,6 +164,7 @@ static NSString* originLink = @"https://52.89.213.205:8443/rest/user/";
                              GBStatisticAPI* stat = [GBStatisticAPI new];
                              person.statistic = [NSMutableArray array];
                              person.personName = [singleProduct objectForKey:@"personName"];
+                             stat.siteID = siteID;
                              stat.rank = [[singleProduct objectForKey:@"rank"] integerValue];
                              stat.startDate = [self dateFromString:[singleProduct objectForKey:@"startDate"]];
                     
@@ -173,11 +172,7 @@ static NSString* originLink = @"https://52.89.213.205:8443/rest/user/";
                              [objectsArray addObject:person];
                              
                              // CoreData saving
-                             [[GBDataManager sharedManager]
-                              saveStatisticWithSiteID:siteID
-                              andPersonName:person.personName
-                              andStartDate:stat.startDate
-                              andRank:stat.rank];
+                             [[GBDataManager sharedManager]                              saveStatisticWithSiteID:siteID                              andPersonName:person.personName                              andStartDate:stat.startDate andRank:stat.rank];
                              
                          }
                          
@@ -218,18 +213,15 @@ static NSString* originLink = @"https://52.89.213.205:8443/rest/user/";
                              NSDictionary* singleProduct = array[i];
                              GBStatisticAPI* stat = [GBStatisticAPI new];
                         
+                             stat.personID = personID;
+                             stat.siteID = siteID;
                              stat.date = [self dateFromString:[singleProduct objectForKey:@"date"]];
                              stat.rank = [[singleProduct objectForKey:@"countNewPages"] integerValue];
                              
                              [objectsArray addObject:stat];
                              
                              // CoreData saving
-                             [[GBDataManager sharedManager]
-                              saveDailyStatBySiteID:siteID
-                              andPersonID:personID
-                              andDate:stat.date
-                              andRank:stat.rank];
-                             
+                             [[GBDataManager sharedManager]                              saveDailyStatBySiteID:siteID                              andPersonID:personID andDate:stat.date andRank:stat.rank];
                          }
                          
                          if (success) {

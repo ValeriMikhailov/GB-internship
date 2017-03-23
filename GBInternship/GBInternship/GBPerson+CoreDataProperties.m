@@ -2,7 +2,7 @@
 //  GBPerson+CoreDataProperties.m
 //  GBInternship
 //
-//  Created by Stanly Shiyanovskiy on 21.03.17.
+//  Created by Stanly Shiyanovskiy on 23.03.17.
 //  Copyright © 2017 Stanly Shiyanovskiy. All rights reserved.
 //
 
