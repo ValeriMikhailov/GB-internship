@@ -1,6 +1,7 @@
 package ru.geekbrains.rest.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.NestedRuntimeException;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -10,6 +11,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.client.RestClientException;
 import ru.geekbrains.rest.model.*;
 
 import javax.sql.DataSource;
@@ -53,7 +55,8 @@ public class AdminRepositoryImpl implements AdminRepository {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("personId", personId);
         parameterSource.addValue("name", name);
-        namedParameterJdbcTemplate.update("UPDATE persons SET name=:name WHERE id=:personId", parameterSource);
+        int rows = namedParameterJdbcTemplate.update("UPDATE persons SET name=:name WHERE id=:personId", parameterSource);
+        if (rows == 0) throw new RestClientException("Не существует личности с id=" + personId);
     }
 
     @Override
@@ -64,7 +67,8 @@ public class AdminRepositoryImpl implements AdminRepository {
 
     @Override
     public void deletePerson(int personId) {
-        jdbcTemplate.update("DELETE FROM persons WHERE id=?", personId);
+        int rows = jdbcTemplate.update("DELETE FROM persons WHERE id=?", personId);
+        if (rows == 0) throw new RestClientException("Не существует личности с id=" + personId);
     }
 
     @Override
@@ -87,12 +91,15 @@ public class AdminRepositoryImpl implements AdminRepository {
         parameterSource.addValue("keywordId", keywordId);
         parameterSource.addValue("personId", personId);
         parameterSource.addValue("name", name);
-        namedParameterJdbcTemplate.update("UPDATE keywords SET name=:name WHERE id=:keywordId AND personId=:personId", parameterSource);
+        int rows = namedParameterJdbcTemplate.update("UPDATE keywords SET name=:name WHERE id=:keywordId AND personId=:personId", parameterSource);
+        if (rows == 0) throw new RestClientException("Проверьте personId и keywordId");
     }
 
     @Override
     public void deleteKeyword(int personId, int keywordId) {
-        jdbcTemplate.update("DELETE FROM keywords WHERE personId=? AND id=?", personId, keywordId);
+        int rows = jdbcTemplate.update("DELETE FROM keywords WHERE personId=? AND id=?", personId, keywordId);
+        if (rows == 0) throw new RestClientException("Проверьте personId и keywordId");
+
     }
 
     @Override
@@ -114,12 +121,14 @@ public class AdminRepositoryImpl implements AdminRepository {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("siteId", siteId);
         parameterSource.addValue("name", name);
-        namedParameterJdbcTemplate.update("UPDATE sites SET name=:name WHERE id=:siteId", parameterSource);
+        int rows = namedParameterJdbcTemplate.update("UPDATE sites SET name=:name WHERE id=:siteId", parameterSource);
+        if (rows == 0) throw new RestClientException("Проверьте siteId");
     }
 
     @Override
     public void deleteSite(int siteId) {
-        jdbcTemplate.update("DELETE FROM sites WHERE id=?", siteId);
+        int rows = jdbcTemplate.update("DELETE FROM sites WHERE id=?", siteId);
+        if (rows == 0) throw new RestClientException("Проверьте siteId");
     }
 
     @Override

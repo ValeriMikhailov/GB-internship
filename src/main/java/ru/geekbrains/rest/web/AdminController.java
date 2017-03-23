@@ -1,5 +1,6 @@
 package ru.geekbrains.rest.web;
 
+import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -25,8 +26,10 @@ public class AdminController {
     private AdminService service;
 
     @PostMapping(value = "/person", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public int createPerson(@RequestParam(value = "name") String name) {
-        return service.createPerson(name);
+    public ResponseEntity createPerson(@RequestParam(value = "name") String name) {
+        JsonObject object = new JsonObject();
+        object.addProperty("id", service.createPerson(name));
+        return ResponseEntity.status(HttpStatus.CREATED).contentType(MediaType.APPLICATION_JSON_UTF8).body(object.toString());
     }
 
     @GetMapping(value = "/person/{personId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -56,9 +59,11 @@ public class AdminController {
     }
 
     @PostMapping(value = "/person/{personId}/keywords")
-    public int createKeyword(@PathVariable(value = "personId") int personId,
-                             @RequestParam(value = "name") String name) {
-        return service.createKeyword(personId, name);
+    public ResponseEntity createKeyword(@PathVariable(value = "personId") int personId,
+                                        @RequestParam(value = "name") String name) {
+        JsonObject object = new JsonObject();
+        object.addProperty("id", service.createKeyword(personId, name));
+        return ResponseEntity.status(HttpStatus.CREATED).contentType(MediaType.APPLICATION_JSON_UTF8).body(object.toString());
     }
 
     @PutMapping(value = "/person/{personId}/keywords/{keywordId}")
@@ -79,13 +84,26 @@ public class AdminController {
     }
 
     @PostMapping(value = "/sites", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public int createSite(@RequestParam(value = "name") String name) {
-        return service.createSite(name);
+    public ResponseEntity createSite(@RequestParam(value = "name") String name) {
+        if (name.matches("^(http:\\/\\/|https:\\/\\/)?(www.)?([\\w\\.]+)\\.([a-z]{2,6}\\.?)(\\/[\\w\\.]*)*\\/?$")) {
+            JsonObject object = new JsonObject();
+            object.addProperty("id", service.createSite(name));
+            return ResponseEntity.status(HttpStatus.CREATED).contentType(MediaType.APPLICATION_JSON_UTF8).body(object.toString());
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).contentType(MediaType.APPLICATION_JSON_UTF8).body("Проверьте url сайта");
+        }
     }
 
     @PutMapping(value = "/sites/{siteId}")
-    public void updateSite(@PathVariable(value = "siteId") int siteId, @RequestParam(value = "name") String name) {
-        service.updateSite(siteId, name);
+    public ResponseEntity updateSite(@PathVariable(value = "siteId") int siteId, @RequestParam(value = "name") String name) {
+        if (name.matches("^(http:\\/\\/|https:\\/\\/)?(www.)?([\\w\\.]+)\\.([a-z]{2,6}\\.?)(\\/[\\w\\.]*)*\\/?$")) {
+            service.updateSite(siteId, name);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).contentType(MediaType.APPLICATION_JSON_UTF8).body("Проверьте url сайта");
+        }
     }
 
     @PostMapping(value = "/signup", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -100,5 +118,4 @@ public class AdminController {
         service.registerAdmin(userDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
-
 }
