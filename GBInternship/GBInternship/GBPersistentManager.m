@@ -70,7 +70,7 @@
             }
             
             if (success) {
-                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"SiteDB"];
+                //[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"SiteDB"];
                 success(sitesArray);
             }
         } onFailure:^(NSError *error) {

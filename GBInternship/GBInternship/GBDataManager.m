@@ -211,7 +211,7 @@
     NSEntityDescription* entity = [NSEntityDescription entityForName:@"GBStatistic" inManagedObjectContext:self.managedObjectContext];
     NSFetchRequest* request = [[NSFetchRequest alloc] init];
     [request setEntity:entity];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"sites.siteID == %d AND persons.personID == %d AND date > %@ AND (date < %@ OR date == %@)", siteID, personID, startDate, endDate]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"sites.siteID == %d AND persons.personID == %d AND date > %@ AND (date < %@ OR date == %@)", siteID, personID, startDate, endDate, endDate]];
     NSArray* stat = [self.managedObjectContext executeFetchRequest:request error:nil];
     return stat;
 }

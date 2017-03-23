@@ -117,48 +117,48 @@
                                                }];
     
     //GBPersistentManager
-    /*
-    [[GBPersistentManager sharedManager] getArrayOfAvaliableSitesOnSuccess:^(NSArray *sitesArray) {
-        for (GBSite* site in sitesArray) {
-            NSLog(@"site ID: %d and siteURL: %@", site.siteID, site.siteURL);
-        }
-    } onFailure:^(NSError *error) {
-        
-    }];
     
-    [[GBPersistentManager sharedManager] getArrayOfAvaliablePersonsOnSuccess:^(NSArray *personsArray) {
-        for (GBPerson* pers in personsArray) {
-            NSLog(@"pers ID: %d and Name: %@", pers.personID, pers.personName);
-        }
-    } onFailure:^(NSError *error) {
-        
-    }];
-    
-    [[GBPersistentManager sharedManager]
-     getStatisticBySiteID:1
-        onSuccess:^(NSArray *statisticArray) {
-            for (GBStatistic* stat in statisticArray) {
-                NSLog(@"Name: %@, Rank: %d, StartDate: %@", stat.persons.personName, stat.rank, [self stringFromDate:stat.startDate]);
-            }
-        } onFailure:^(NSError *error) {
-            
-        }];
-
-    //NSDate* date1 = [self dateFromString:@"2017-03-09"];
-    //NSDate* date2 = [self dateFromString:@"2017-03-15"];
-    [[GBPersistentManager sharedManager] getArrayDailyBySiteID:1
-                                                   andPersonID:1
-                                           andBetweenFirstDate:date1
-                                                    andEndDate:date2
-                                                     onSuccess:^(NSArray *statisticArray) {
-                                                         
-                                                         for (GBStatisticAPI* stat in statisticArray) {
-                                                             NSLog(@"Name: %ld, Site: %ld, Rank: %ld, StartDate: %@", (long)stat.personID, (long)stat.siteID, (long)stat.rank, [self stringFromDate:stat.date]);
-                                                         }
-                                                         
-                                                     } onFailure:^(NSError *error) {
-                                                         
-                                                     }];*/
+//    [[GBPersistentManager sharedManager] getArrayOfAvaliableSitesOnSuccess:^(NSArray *sitesArray) {
+//        for (GBSite* site in sitesArray) {
+//            NSLog(@"site ID: %d and siteURL: %@", site.siteID, site.siteURL);
+//        }
+//    } onFailure:^(NSError *error) {
+//        
+//    }];
+//    
+//    [[GBPersistentManager sharedManager] getArrayOfAvaliablePersonsOnSuccess:^(NSArray *personsArray) {
+//        for (GBPerson* pers in personsArray) {
+//            NSLog(@"pers ID: %d and Name: %@", pers.personID, pers.personName);
+//        }
+//    } onFailure:^(NSError *error) {
+//        
+//    }];
+//    
+//    [[GBPersistentManager sharedManager]
+//     getStatisticBySiteID:1
+//        onSuccess:^(NSArray *statisticArray) {
+//            for (GBStatistic* stat in statisticArray) {
+//                NSLog(@"Name: %@, Rank: %d, StartDate: %@", stat.persons.personName, stat.rank, [self stringFromDate:stat.startDate]);
+//            }
+//        } onFailure:^(NSError *error) {
+//            
+//        }];
+//
+//    //NSDate* date1 = [self dateFromString:@"2017-03-09"];
+//    //NSDate* date2 = [self dateFromString:@"2017-03-15"];
+//    [[GBPersistentManager sharedManager] getArrayDailyBySiteID:1
+//                                                   andPersonID:1
+//                                           andBetweenFirstDate:date1
+//                                                    andEndDate:date2
+//                                                     onSuccess:^(NSArray *statisticArray) {
+//                                                         
+//                                                         for (GBStatisticAPI* stat in statisticArray) {
+//                                                             NSLog(@"Name: %ld, Site: %ld, Rank: %ld, StartDate: %@", (long)stat.personID, (long)stat.siteID, (long)stat.rank, [self stringFromDate:stat.date]);
+//                                                         }
+//                                                         
+//                                                     } onFailure:^(NSError *error) {
+//                                                         
+//                                                     }];
     
     return YES;
 }
