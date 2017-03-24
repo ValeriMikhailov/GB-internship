@@ -28,7 +28,13 @@
         
     }];
     
+    [[GBDataManager sharedManager] getArrayOfAvaliablePersosnsOnSuccess:^(NSArray *personsArray) {
+        _personsArray =personsArray;
+    } onFailure:^(NSError *error) {
+        
+    }];
     
+        
 
 }
 
@@ -84,26 +90,16 @@ numberOfRowsInComponent:(NSInteger)component
     _pickedSiteTextField.text = resultString;
     [_pickedSiteTextField resignFirstResponder];
     
-    if (_personsArray.count==0){
-    
-        [[GBDataManager sharedManager] getArrayOfAvaliablePersosnsOnSuccess:^(NSArray *personsArray) {
-            _personsArray =personsArray;
-        } onFailure:^(NSError *error) {
-            
-        }];
-    }
+
  
-    
-    [[GBDataManager sharedManager] getArrayBySiteID:site.siteID onSuccess:^(NSArray *statisticArray) {
-            _statisticArray=statisticArray;
+    [[GBDataManager sharedManager] getArrayBySiteID: site.siteID onSuccess:^(NSArray *statisticArray) {
+        
+        _statisticArray=statisticArray;
     } onFailure:^(NSError *error) {
         
     }];
     
-    [_ranksTable reloadData];
-    
- 
-    
+     [_ranksTable reloadData];
 }
 
 
@@ -117,7 +113,7 @@ numberOfRowsInComponent:(NSInteger)component
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
-    return _personsArray.count;
+    return _statisticArray.count;
     
 }
 

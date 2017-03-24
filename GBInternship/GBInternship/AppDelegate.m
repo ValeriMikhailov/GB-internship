@@ -34,7 +34,7 @@
     // Examples to check fetch data from each manager
     // GBServerManager
    
-   /* [[GBServerManager sharedManager] getArrayOfAvaliableSitesOnSuccess:^(NSArray *sitesArray) {
+    [[GBServerManager sharedManager] getArrayOfAvaliableSitesOnSuccess:^(NSArray *sitesArray) {
         _sitesArray=sitesArray;
     } onFailure:^(NSError *error) {
         
@@ -46,21 +46,22 @@
         
     }];
     
-    for(GBSite* obj in _sitesArray){
+    [[GBServerManager sharedManager] getArrayBySiteID: 1
+                                            onSuccess:^(NSArray *statisticArray) {
+                                                
+                                            } onFailure:^(NSError *error) {
+                                                
+                                            }];
+    
+    /* for(GBSite* obj in _sitesArray){
         
     
     [[GBServerManager sharedManager] getArrayBySiteID: obj.siteID
                                             onSuccess:^(NSArray *statisticArray) {
-                                                for (GBPersonAPI* pers in statisticArray) {
-                                                    NSArray* arr = [NSArray arrayWithArray:pers.statistic];
-                                                    for (GBStatisticAPI* stat in arr) {
-                                                        NSLog(@"Site: %ld, Rank: %ld, StartDate: %@", (long)stat.siteID, (long)stat.rank, [self stringFromDate:stat.startDate]);
-                                                    }
-                                                }
+                                                
                                             } onFailure:^(NSError *error) {
                                                 
                                             }];
-        
     };
     
     */
@@ -172,6 +173,15 @@
 //                                                     } onFailure:^(NSError *error) {
 //                                                         
 //                                                     }];
+    
+    
+    [[GBDataManager sharedManager] getArrayBySiteID:1 onSuccess:^(NSArray *statisticArray) {
+        for (GBStatistic* stat in statisticArray) {
+            NSLog(@"Name: %@, Rank: %d, StartDate: %@", stat.persons.personName, stat.rank, [self stringFromDate:stat.startDate]);
+        }
+    } onFailure:^(NSError *error) {
+        
+    }];
     
     return YES;
 }
