@@ -15,6 +15,7 @@
 #import "GBSiteAPI.h"
 #import "GBPersonAPI.h"
 #import "GBStatisticAPI.h"
+#import "GBStatistic+CoreDataProperties.h"
 
 @interface GBPersistentManager ()
 
@@ -70,7 +71,10 @@
             }
             
             if (success) {
-                //[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"SiteDB"];
+                [[NSNotificationCenter defaultCenter]
+                 postNotificationName:@"FetchedSites"
+                 object:self];
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"SiteDB"];
                 success(sitesArray);
             }
         } onFailure:^(NSError *error) {
@@ -128,23 +132,29 @@
                                               }];
     } else {
         
+        NSMutableArray* arr = [NSMutableArray array];
         // Get data from Server
         [[GBServerManager sharedManager]
          getArrayBySiteID:siteID
          onSuccess:^(NSArray *statisticArray) {
-             for (GBPerson* obj in statisticArray) {
-                 
-                 NSArray* arr = [NSArray arrayWithArray:[obj.statistic allObjects]];
-                 GBStatistic* stat = [arr firstObject];
-                 
+             for (GBStatisticAPI* obj in statisticArray) {
+                 NSManagedObjectContext* ctx = [[GBDataManager sharedManager] managedObjectContext];
+                 NSEntityDescription *entity = [NSEntityDescription entityForName:@"GBStatistic"
+                                                           inManagedObjectContext:ctx];
+                 GBStatistic *stat = [(GBStatistic*)[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:ctx];
+                 stat.sites.siteID = siteID;
+                 stat.persons.personName = obj.personName;
+                 stat.startDate = obj.startDate;
+                 stat.rank = obj.rank;
+                 [arr addObject:stat];
                  [[GBDataManager sharedManager]
                   saveStatisticWithSiteID:siteID
                   andPersonName:obj.personName
-                  andStartDate:stat.startDate andRank:stat.rank];
+                  andStartDate:obj.startDate andRank:obj.rank];
              }
              if (success) {
                  [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"StatisticDB"];
-                 success(statisticArray);
+                 success(arr);
              }
          } onFailure:^(NSError *error) {
          }];

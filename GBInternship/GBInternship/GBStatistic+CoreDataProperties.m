@@ -20,4 +20,17 @@
 @dynamic persons;
 @dynamic sites;
 
+- (void)bindServerModel:(id)model {
+    
+    //self.sites = model.site;
+}
+
+- (void)setValue:(id)value forKey:(NSString *)key {
+    
+    if ([key isEqual:@"mean"]) {
+        key = @"average";
+    }
+    
+    [super setValue:value forKey:key];
+}
 @end

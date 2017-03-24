@@ -23,4 +23,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface GBStatistic (CoreDataGeneratedAccessors)
+
+- (void)bindServerModel:(id)model;
+- (void)setValue:(id)value forKey:(NSString *)key;
+
+@end
+
 NS_ASSUME_NONNULL_END

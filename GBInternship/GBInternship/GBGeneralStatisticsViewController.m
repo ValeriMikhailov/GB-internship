@@ -18,17 +18,21 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reloadUI)
+                                                 name:@"FetchedSites"
+                                               object:nil];
+    
      _pickedSiteTextField.inputView=[self createPicker];
     
     
-    [[GBDataManager sharedManager] getArrayOfAvaliableSitesOnSuccess:^(NSArray *sitesArray) {
-      
+    [[GBPersistentManager sharedManager] getArrayOfAvaliableSitesOnSuccess:^(NSArray *sitesArray) {
         _sitesArray =sitesArray;
     } onFailure:^(NSError *error) {
         
     }];
     
-    [[GBDataManager sharedManager] getArrayOfAvaliablePersosnsOnSuccess:^(NSArray *personsArray) {
+    [[GBPersistentManager sharedManager] getArrayOfAvaliablePersonsOnSuccess:^(NSArray *personsArray) {
         _personsArray =personsArray;
     } onFailure:^(NSError *error) {
         
@@ -39,7 +43,11 @@
 }
 
 
-
+- (void) reloadUI {
+    
+    [self.ranksTable reloadData];
+    [self.sitePicker reloadAllComponents];
+}
 
 
 - (void)didReceiveMemoryWarning {
@@ -91,11 +99,11 @@ numberOfRowsInComponent:(NSInteger)component
     [_pickedSiteTextField resignFirstResponder];
     
  
-    [[GBDataManager sharedManager] getArrayBySiteID: site.siteID onSuccess:^(NSArray *statisticArray) {
-        
-        _statisticArray=statisticArray;
-    } onFailure:^(NSError *error) {
-        
+    [[GBPersistentManager sharedManager]
+     getStatisticBySiteID:site.siteID
+     onSuccess:^(NSArray *statisticArray) {
+         _statisticArray=statisticArray;
+     } onFailure:^(NSError *error) {
     }];
     
      [_ranksTable reloadData];

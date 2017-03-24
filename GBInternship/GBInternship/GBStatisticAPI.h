@@ -16,5 +16,6 @@
 @property (copy, nonatomic) NSString* personName;
 @property (assign, nonatomic) NSInteger personID;
 @property (assign, nonatomic) NSInteger siteID;
+@property (strong, nonatomic) NSMutableArray* persons;
 
 @end

@@ -162,13 +162,14 @@ static NSString* originLink = @"https://52.89.213.205:8443/rest/user/";
                              NSDictionary* singleProduct = array[i];
                              GBPersonAPI* person = [GBPersonAPI new];
                              GBStatisticAPI* stat = [GBStatisticAPI new];
-                             
+                             stat.persons = [NSMutableArray array];
                              person.personName = [singleProduct objectForKey:@"personName"];
                              stat.personName = person.personName;
                              stat.siteID = siteID;
                              stat.rank = [[singleProduct objectForKey:@"rank"] integerValue];
                              stat.startDate = [self dateFromString:[singleProduct objectForKey:@"startDate"]];
                     
+                             [stat.persons addObject:person.personName];
                              [objectsArray addObject:stat];
                              
                              // CoreData saving
