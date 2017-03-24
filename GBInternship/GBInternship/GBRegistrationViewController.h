@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GBRegistrationViewController : UIViewController
+@interface GBRegistrationViewController : UIViewController <UITextViewDelegate>
 
 
 

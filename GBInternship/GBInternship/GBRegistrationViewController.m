@@ -10,7 +10,7 @@
 #import "GBLoginViewController.h"
 #import "GBStatisticsViewController.h"
 
-@interface GBRegistrationViewController ()
+@interface GBRegistrationViewController ()  <UITextFieldDelegate>
 
 @end
 
