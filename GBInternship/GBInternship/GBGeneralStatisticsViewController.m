@@ -62,7 +62,7 @@
 - (NSInteger)pickerView:(UIPickerView *)pickerView
 numberOfRowsInComponent:(NSInteger)component
 {
-    int count =_sitesArray.count;
+    int count = (int)_sitesArray.count;
     return count;
 }
 
@@ -90,7 +90,6 @@ numberOfRowsInComponent:(NSInteger)component
     _pickedSiteTextField.text = resultString;
     [_pickedSiteTextField resignFirstResponder];
     
-
  
     [[GBDataManager sharedManager] getArrayBySiteID: site.siteID onSuccess:^(NSArray *statisticArray) {
         

@@ -13,6 +13,7 @@
 @property (assign, nonatomic) NSInteger rank;
 @property (copy, nonatomic) NSDate* startDate;
 @property (copy, nonatomic) NSDate* date;
+@property (copy, nonatomic) NSString* personName;
 @property (assign, nonatomic) NSInteger personID;
 @property (assign, nonatomic) NSInteger siteID;
 

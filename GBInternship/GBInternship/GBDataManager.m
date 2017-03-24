@@ -94,7 +94,7 @@
     NSFetchRequest* request = [[NSFetchRequest alloc] init];
     [request setEntity:entityObject];
     [request setFetchLimit:1];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"persons == %@ AND startDate == %@", name, startDate]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"persons.personName == %@ AND startDate == %@ AND sites.siteID == %d", name, startDate, ID]];
     
     NSError *error = nil;
     NSUInteger count = [self.managedObjectContext countForFetchRequest:request error:&error];
@@ -190,7 +190,7 @@
     NSEntityDescription* entity = [NSEntityDescription entityForName:@"GBStatistic" inManagedObjectContext:self.managedObjectContext];
     NSFetchRequest* request = [[NSFetchRequest alloc] init];
     [request setEntity:entity];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"startDate != nil"]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"sites.siteID == %d", siteID]];
     NSArray* stat = [self.managedObjectContext executeFetchRequest:request error:nil];
 
     for (GBStatistic* st in stat) {

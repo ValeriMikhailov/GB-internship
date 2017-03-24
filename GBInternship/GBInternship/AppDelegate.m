@@ -33,25 +33,32 @@
     
     // Examples to check fetch data from each manager
     // GBServerManager
-   
-    [[GBServerManager sharedManager] getArrayOfAvaliableSitesOnSuccess:^(NSArray *sitesArray) {
-        _sitesArray=sitesArray;
-    } onFailure:^(NSError *error) {
-        
-    }];
     
     [[GBServerManager sharedManager] getArrayOfAvaliablePersonsOnSuccess:^(NSArray *personsArray) {
         _personsArray=personsArray;
+        for (GBPerson* person in personsArray) {
+            NSLog(@"%@", person.personName);
+        }
+        
     } onFailure:^(NSError *error) {
         
     }];
-    
-    [[GBServerManager sharedManager] getArrayBySiteID: 1
-                                            onSuccess:^(NSArray *statisticArray) {
-                                                
-                                            } onFailure:^(NSError *error) {
-                                                
-                                            }];
+   
+    [[GBServerManager sharedManager] getArrayOfAvaliableSitesOnSuccess:^(NSArray *sitesArray) {
+        _sitesArray=sitesArray;
+        
+        for (GBSite* site in sitesArray) {
+            [[GBServerManager sharedManager] getArrayBySiteID: site.siteID
+                                                    onSuccess:^(NSArray *statisticArray) {
+                                                        NSLog(@"%d", site.siteID);
+                                                    } onFailure:^(NSError *error) {
+                                                        
+                                                    }];
+        }
+        
+    } onFailure:^(NSError *error) {
+        
+    }];
     
     /* for(GBSite* obj in _sitesArray){
         
