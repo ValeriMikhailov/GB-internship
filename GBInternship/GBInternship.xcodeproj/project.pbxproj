@@ -673,6 +673,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 3PTYV272Z4;
 				INFOPLIST_FILE = GBInternshipTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = GB.GBInternshipTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -686,6 +687,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 3PTYV272Z4;
 				INFOPLIST_FILE = GBInternshipTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = GB.GBInternshipTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -698,6 +700,7 @@
 			buildSettings = {
 				DEVELOPMENT_TEAM = 3PTYV272Z4;
 				INFOPLIST_FILE = GBInternshipUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = GB.GBInternshipUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -710,6 +713,7 @@
 			buildSettings = {
 				DEVELOPMENT_TEAM = 3PTYV272Z4;
 				INFOPLIST_FILE = GBInternshipUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = GB.GBInternshipUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

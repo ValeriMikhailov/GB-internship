@@ -181,7 +181,7 @@
                                                        
                                                    }];
     } else {
-        
+        NSMutableArray* arr = [NSMutableArray array];
         // Get data from Server
         [[GBServerManager sharedManager]
          getArrayDailyBySiteID:siteID
@@ -189,8 +189,16 @@
          andBetweenFirstDate:firstDate
          andEndDate:endDate
          onSuccess:^(NSArray *statisticArray) {
-             for (GBStatistic* stat in statisticArray) {
-                 
+             for (GBStatistic* obj in statisticArray) {
+                 NSManagedObjectContext* ctx = [[GBDataManager sharedManager] managedObjectContext];
+                 NSEntityDescription *entity = [NSEntityDescription entityForName:@"GBStatistic"
+                                                           inManagedObjectContext:ctx];
+                 GBStatistic *stat = [(GBStatistic*)[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:ctx];
+                 stat.sites.siteID = siteID;
+                 stat.persons.personID = personID;
+                 stat.date = obj.date;
+                 stat.rank = obj.rank;
+                 [arr addObject:stat];
                  [[GBDataManager sharedManager] saveDailyStatBySiteID:siteID
                                                           andPersonID:personID
                                                               andDate:stat.date
@@ -199,7 +207,7 @@
              
              if (success) {
                  [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"StatisticDailyDB"];
-                 success(statisticArray);
+                 success(arr);
              }
          } onFailure:^(NSError *error) {
             
