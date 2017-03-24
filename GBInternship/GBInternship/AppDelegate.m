@@ -29,26 +29,27 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    
+    
     // Examples to check fetch data from each manager
     // GBServerManager
-    
-    [[GBServerManager sharedManager] getArrayOfAvaliableSitesOnSuccess:^(NSArray *sitesArray) {
-        for (GBSiteAPI* site in sitesArray) {
-            NSLog(@"site ID: %ld and siteURL: %@", (long)site.siteID, site.siteURL);
-        }
+   
+   /* [[GBServerManager sharedManager] getArrayOfAvaliableSitesOnSuccess:^(NSArray *sitesArray) {
+        _sitesArray=sitesArray;
     } onFailure:^(NSError *error) {
         
     }];
     
     [[GBServerManager sharedManager] getArrayOfAvaliablePersonsOnSuccess:^(NSArray *personsArray) {
-        for (GBPersonAPI* pers in personsArray) {
-            NSLog(@"pers ID: %ld and Name: %@", (long)pers.personID, pers.personName);
-        }
+        _personsArray=personsArray;
     } onFailure:^(NSError *error) {
         
     }];
     
-    [[GBServerManager sharedManager] getArrayBySiteID:1
+    for(GBSite* obj in _sitesArray){
+        
+    
+    [[GBServerManager sharedManager] getArrayBySiteID: obj.siteID
                                             onSuccess:^(NSArray *statisticArray) {
                                                 for (GBPersonAPI* pers in statisticArray) {
                                                     NSArray* arr = [NSArray arrayWithArray:pers.statistic];
@@ -59,7 +60,12 @@
                                             } onFailure:^(NSError *error) {
                                                 
                                             }];
+        
+    };
     
+    */
+    
+    /*
     NSDate* date1 = [self dateFromString:@"2017-03-09"];
     NSDate* date2 = [self dateFromString:@"2017-03-15"];
     [[GBServerManager sharedManager] getArrayDailyBySiteID:1
@@ -75,16 +81,23 @@
                                                  } onFailure:^(NSError *error) {
                                                      
                                                  }];
-    
+    */
     //GBDataManger
     
+    
+   /*
     [[GBDataManager sharedManager] getArrayOfAvaliableSitesOnSuccess:^(NSArray *sitesArray) {
         for (GBSite* site in sitesArray) {
             NSLog(@"site ID: %ld and siteURL: %@", (long)site.siteID, site.siteURL);
         }
+        _sitesArray =sitesArray;
     } onFailure:^(NSError *error) {
         
     }];
+    
+    for (GBSite* site in _sitesArray) {
+        NSLog(@"loaded site ID: %ld and siteURL: %@", (long)site.siteID, site.siteURL);
+    }
     
     [[GBDataManager sharedManager] getArrayOfAvaliablePersosnsOnSuccess:^(NSArray *personsArray) {
         for (GBPerson* pers in personsArray) {
@@ -114,7 +127,7 @@
                                                    
                                                } onFailure:^(NSError *error) {
                                                    
-                                               }];
+                                               }];*/
     
     //GBPersistentManager
     

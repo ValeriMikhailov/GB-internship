@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		049FAC7B1E849A7C00F560B2 /* 1488569581_analytics.png in Resources */ = {isa = PBXBuildFile; fileRef = 049FAC7A1E849A7C00F560B2 /* 1488569581_analytics.png */; };
+		049FAC7E1E849BBA00F560B2 /* GBLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049FAC7D1E849BBA00F560B2 /* GBLoginViewController.m */; };
+		049FAC841E849D9A00F560B2 /* GBStatisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049FAC831E849D9A00F560B2 /* GBStatisticsViewController.m */; };
+		049FAC8A1E849EF600F560B2 /* GBRegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049FAC891E849EF600F560B2 /* GBRegistrationViewController.m */; };
+		049FAC8D1E849FE400F560B2 /* GBGeneralStatisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049FAC8C1E849FE400F560B2 /* GBGeneralStatisticsViewController.m */; };
 		52A19EA11E7715D100D984F7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A19EA01E7715D100D984F7 /* main.m */; };
 		52A19EA41E7715D100D984F7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A19EA31E7715D100D984F7 /* AppDelegate.m */; };
 		52A19EAA1E7715D100D984F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52A19EA81E7715D100D984F7 /* Main.storyboard */; };
@@ -50,6 +55,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		049FAC7A1E849A7C00F560B2 /* 1488569581_analytics.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1488569581_analytics.png; sourceTree = "<group>"; };
+		049FAC7C1E849BBA00F560B2 /* GBLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBLoginViewController.h; sourceTree = "<group>"; };
+		049FAC7D1E849BBA00F560B2 /* GBLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBLoginViewController.m; sourceTree = "<group>"; };
+		049FAC821E849D9A00F560B2 /* GBStatisticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBStatisticsViewController.h; sourceTree = "<group>"; };
+		049FAC831E849D9A00F560B2 /* GBStatisticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBStatisticsViewController.m; sourceTree = "<group>"; };
+		049FAC881E849EF600F560B2 /* GBRegistrationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBRegistrationViewController.h; sourceTree = "<group>"; };
+		049FAC891E849EF600F560B2 /* GBRegistrationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBRegistrationViewController.m; sourceTree = "<group>"; };
+		049FAC8B1E849FE400F560B2 /* GBGeneralStatisticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBGeneralStatisticsViewController.h; sourceTree = "<group>"; };
+		049FAC8C1E849FE400F560B2 /* GBGeneralStatisticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBGeneralStatisticsViewController.m; sourceTree = "<group>"; };
 		41313FBA1C32477CF8682175 /* Pods-GBInternship.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GBInternship.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GBInternship/Pods-GBInternship.debug.xcconfig"; sourceTree = "<group>"; };
 		52A19E9C1E7715D100D984F7 /* GBInternship.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GBInternship.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52A19EA01E7715D100D984F7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -172,9 +186,18 @@
 				52A19EA21E7715D100D984F7 /* AppDelegate.h */,
 				52A19EA31E7715D100D984F7 /* AppDelegate.m */,
 				52A19EA81E7715D100D984F7 /* Main.storyboard */,
+				049FAC7C1E849BBA00F560B2 /* GBLoginViewController.h */,
+				049FAC7D1E849BBA00F560B2 /* GBLoginViewController.m */,
+				049FAC821E849D9A00F560B2 /* GBStatisticsViewController.h */,
+				049FAC881E849EF600F560B2 /* GBRegistrationViewController.h */,
+				049FAC891E849EF600F560B2 /* GBRegistrationViewController.m */,
+				049FAC8B1E849FE400F560B2 /* GBGeneralStatisticsViewController.h */,
+				049FAC8C1E849FE400F560B2 /* GBGeneralStatisticsViewController.m */,
+				049FAC831E849D9A00F560B2 /* GBStatisticsViewController.m */,
 				52A19EAE1E7715D100D984F7 /* Assets.xcassets */,
 				52A19EB01E7715D100D984F7 /* LaunchScreen.storyboard */,
 				52A19EB31E7715D100D984F7 /* Info.plist */,
+				049FAC7A1E849A7C00F560B2 /* 1488569581_analytics.png */,
 				52A19EAB1E7715D100D984F7 /* GBInternship.xcdatamodeld */,
 				52A19E9F1E7715D100D984F7 /* Supporting Files */,
 			);
@@ -378,6 +401,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52A19EB21E7715D100D984F7 /* LaunchScreen.storyboard in Resources */,
+				049FAC7B1E849A7C00F560B2 /* 1488569581_analytics.png in Resources */,
 				52A19EAF1E7715D100D984F7 /* Assets.xcassets in Resources */,
 				52A19EAA1E7715D100D984F7 /* Main.storyboard in Resources */,
 			);
@@ -455,12 +479,15 @@
 				52A19EE41E78705D00D984F7 /* GBDataManager.m in Sources */,
 				52FEFAE51E818DE9007E5972 /* GBSite+CoreDataClass.m in Sources */,
 				52A19EDA1E77195000D984F7 /* GBServerManager.m in Sources */,
+				049FAC7E1E849BBA00F560B2 /* GBLoginViewController.m in Sources */,
+				049FAC8A1E849EF600F560B2 /* GBRegistrationViewController.m in Sources */,
 				52FEFAF41E819C52007E5972 /* GBStatisticAPI.m in Sources */,
 				52FEFAE61E818DE9007E5972 /* GBSite+CoreDataProperties.m in Sources */,
 				52A19EE11E771E9400D984F7 /* GBPersistentManager.m in Sources */,
 				52FEFAE91E818DE9007E5972 /* GBStatistic+CoreDataClass.m in Sources */,
 				52FEFAE71E818DE9007E5972 /* GBUser+CoreDataClass.m in Sources */,
 				52FEFAE41E818DE9007E5972 /* GBPerson+CoreDataProperties.m in Sources */,
+				049FAC841E849D9A00F560B2 /* GBStatisticsViewController.m in Sources */,
 				52FEFAEA1E818DE9007E5972 /* GBStatistic+CoreDataProperties.m in Sources */,
 				52FEFAE31E818DE9007E5972 /* GBPerson+CoreDataClass.m in Sources */,
 				52A19EA41E7715D100D984F7 /* AppDelegate.m in Sources */,
@@ -468,6 +495,7 @@
 				52FEFAEE1E819C22007E5972 /* GBPersonAPI.m in Sources */,
 				52A19EAD1E7715D100D984F7 /* GBInternship.xcdatamodeld in Sources */,
 				52FEFAF11E819C43007E5972 /* GBSiteAPI.m in Sources */,
+				049FAC8D1E849FE400F560B2 /* GBGeneralStatisticsViewController.m in Sources */,
 				52A19EA11E7715D100D984F7 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

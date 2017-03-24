@@ -12,6 +12,8 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) NSArray *sitesArray;
+@property (strong, nonatomic) NSArray *personsArray;
 
 @end
 

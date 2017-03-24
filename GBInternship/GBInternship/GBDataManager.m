@@ -125,8 +125,6 @@
         statistic.sites = site;
         statistic.rank = rank;
         statistic.startDate = startDate;
-        
-        NSLog(@"statistic %@", statistic);
         [statistic.managedObjectContext save:nil];
     }
     
