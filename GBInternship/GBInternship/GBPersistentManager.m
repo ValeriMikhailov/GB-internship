@@ -206,6 +206,9 @@
              }
              
              if (success) {
+                 [[NSNotificationCenter defaultCenter]
+                  postNotificationName:@"FetchedDaily"
+                  object:self];
                  [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"StatisticDailyDB"];
                  success(arr);
              }

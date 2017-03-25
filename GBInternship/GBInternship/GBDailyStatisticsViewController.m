@@ -20,6 +20,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reloadUI)
+                                                 name:@"FetchedDaily"
+                                               object:nil];
     
     [[GBPersistentManager sharedManager] getArrayOfAvaliableSitesOnSuccess:^(NSArray *sitesArray) {
         _sitesArray =sitesArray;
@@ -46,8 +50,10 @@
 
 - (void) reloadUI {
     
-  //  [self.ranksTable reloadData];
-  //  [self.sitePicker reloadAllComponents];
+    [self.ranksTable reloadData];
+    [_sitePicker reloadAllComponents];
+    [_personPicker reloadAllComponents];
+    
 }
 
 
@@ -71,12 +77,12 @@ numberOfRowsInComponent:(NSInteger)component
     int count;
     if(pickerView.tag == sitePicker)
     {
-        count =_sitesArray.count;
+        count = (int)_sitesArray.count;
         
     }
     else if (pickerView.tag == personPicker)
     {
-        count = _personsArray.count;
+        count = (int)_personsArray.count;
     }
    
     
@@ -167,7 +173,7 @@ numberOfRowsInComponent:(NSInteger)component
                                                          
                                                      }];
      */
-    [[GBServerManager sharedManager] getArrayDailyBySiteID:_pickedSite.siteID
+    [[GBPersistentManager sharedManager] getArrayDailyBySiteID:_pickedSite.siteID
                                                andPersonID:_pickedPerson.personID
                                        andBetweenFirstDate:date1
                                                 andEndDate:date2
@@ -177,11 +183,11 @@ numberOfRowsInComponent:(NSInteger)component
                                                  } onFailure:^(NSError *error) {
                                                      
                                                  }];
-    [[GBDataManager sharedManager] getArrayDailyBySiteID:_pickedSite.siteID
-                                             andPersonID:_pickedPerson.personID
-                                     andBetweenFirstDate:date1
-                                              andEndDate:date2
-                                               onSuccess:^(NSArray *statisticArray) {
+    [[GBPersistentManager sharedManager] getArrayDailyBySiteID:_pickedSite.siteID
+                                                   andPersonID:_pickedPerson.personID
+                                           andBetweenFirstDate:date1
+                                                    andEndDate:date2
+                                                     onSuccess:^(NSArray *statisticArray) {
                                                    
                                                    for (GBStatistic* stat in statisticArray) {
                                                        NSLog(@"Name: %@, Site: %@, Rank: %d, StartDate: %@", stat.persons.personName, stat.sites.siteURL, stat.rank, [self stringFromDate:stat.date]);

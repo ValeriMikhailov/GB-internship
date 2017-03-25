@@ -192,7 +192,7 @@
     NSEntityDescription* entity = [NSEntityDescription entityForName:@"GBStatistic" inManagedObjectContext:self.managedObjectContext];
     NSFetchRequest* request = [[NSFetchRequest alloc] init];
     [request setEntity:entity];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"sites.siteID == %d", siteID]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"sites.siteID == %d AND startDate != nil", siteID]];
     NSArray* stat = [self.managedObjectContext executeFetchRequest:request error:nil];
     return stat;
 }

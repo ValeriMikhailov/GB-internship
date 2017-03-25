@@ -52,7 +52,7 @@
     
     // Examples to check fetch data from each manager
     // GBServerManager
-    
+    /*
     [[GBServerManager sharedManager] getArrayOfAvaliablePersonsOnSuccess:^(NSArray *personsArray) {
         _personsArray=personsArray;
         for (GBPerson* person in personsArray) {
@@ -78,6 +78,7 @@
     } onFailure:^(NSError *error) {
         
     }];
+    */
     
     /* for(GBSite* obj in _sitesArray){
         
@@ -90,7 +91,7 @@
                                             }];
     };
     
-    */
+    
     
     
     NSDate* date1 = [self dateFromString:@"2017-03-09"];
@@ -110,7 +111,7 @@
                                                  }];
     
     //GBDataManger
-    
+    */
     
    /*
     [[GBDataManager sharedManager] getArrayOfAvaliableSitesOnSuccess:^(NSArray *sitesArray) {
@@ -143,18 +144,18 @@
     }];*/
     
 
-    
+    /*
     [[GBDataManager sharedManager] getArrayDailyBySiteID:1
                                              andPersonID:1
                                      andBetweenFirstDate:date1
                                               andEndDate:date2
                                                onSuccess:^(NSArray *statisticArray) {
                                                    
-                                                 /*  for (GBStatistic* stat in statisticArray) {
+                                                   for (GBStatistic* stat in statisticArray) {
                                                        _statisticArray=statisticArray;
                                                        NSLog(@"Name: %@, Site: %@, Rank: %d, StartDate: %@", stat.persons.personName, stat.sites.siteURL, stat.rank, [self stringFromDate:stat.date]);
                                                    }
-                                                   */
+                                                   
                                                } onFailure:^(NSError *error) {
                                                    
                                                }];
@@ -164,7 +165,7 @@
     }
     
     //GBPersistentManager
-    /*
+    
     [[GBPersistentManager sharedManager] getArrayOfAvaliableSitesOnSuccess:^(NSArray *sitesArray) {
         for (GBSite* site in sitesArray) {
             NSLog(@"site ID: %d and siteURL: %@", site.siteID, site.siteURL);
