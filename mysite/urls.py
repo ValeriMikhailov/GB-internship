@@ -25,8 +25,9 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', show_landing_page),
     url(r'^about/$', show_about_page),
+    url(r'^contacts/$', show_contacts_page),
     url(r'^common/$', show_general_page),
     url(r'^everyday/$', show_daily_page),
-
-    url(r'^auth/$', show_auth_page)
+    url(r'^auth/$', show_auth_page),
+    url(r'^reviews/$', show_user_review_page)
 ]
