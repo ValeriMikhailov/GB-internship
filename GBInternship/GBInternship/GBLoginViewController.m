@@ -46,20 +46,13 @@
 }
 
 #pragma mark - Actions
-
-
 - (IBAction)loginUser:(id)sender {
     
     NSUserDefaults* df = [NSUserDefaults standardUserDefaults];
     
-    if (
-        
-        
-        [self.usernameFld.text isEqualToString:[df objectForKey:@"username"]] && [self.passwordFld.text isEqualToString:[df objectForKey:@"password"]])
-    {
+    if ([self.usernameFld.text isEqualToString:[df objectForKey:@"username"]] && [self.passwordFld.text isEqualToString:[df objectForKey:@"password"]]) {
         NSLog(@"login credentials accepted");
         [self openStatisticsView];
-        
         
         self.usernameFld.text = nil;
         self.passwordFld.text = nil;
@@ -83,33 +76,28 @@
 }
 
 
-
 - (void) openStatisticsView {
     
     UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     GBStatisticsViewController* vc = [sb instantiateViewControllerWithIdentifier:@"GBStatisticsNavigationController"];
     [self presentViewController:vc animated:YES completion:nil];
     
-    
 }
 
-
-
 #pragma mark - UITextFieldDelegate
-
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    if ([textField isEqual:self.usernameFld]) {
+        [self.passwordFld becomeFirstResponder];
+    } else {
+        [textField resignFirstResponder];
+    }
     
     return YES;
 }
 
 #pragma mark - keyboard movements
-
-
-- (void)keyboardWillShow:(NSNotification *)notification
-{
+- (void)keyboardWillShow:(NSNotification *)notification {
     CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     
     [UIView animateWithDuration:0.3 animations:^{
@@ -119,8 +107,7 @@
     }];
 }
 
--(void)keyboardWillHide:(NSNotification *)notification
-{
+-(void)keyboardWillHide:(NSNotification *)notification {
     [UIView animateWithDuration:0.3 animations:^{
         CGRect f = self.view.frame;
         f.origin.y = 0.0f;
