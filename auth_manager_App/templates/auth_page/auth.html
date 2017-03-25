@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>страница авторизации</title>
+</head>
+<body>
+
+<form action="/auth/" method="post">{% csrf_token %}
+    <p>Email:<br><input required type="text" name="user"></p>
+    <p>Пароль:<br><input required type="password" name="password"></p>
+    <p><input type="submit" value="Войти"></p>
+</form>
+
+</body>
+</html>

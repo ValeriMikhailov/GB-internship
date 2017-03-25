@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'general_stat',
     'landing_page',
-    'daily_stat'
+    'daily_stat',
+    'auth_manager_App'
 ]
 
 MIDDLEWARE = [

@@ -19,11 +19,14 @@ from django.contrib import admin
 from general_stat.views import *
 from daily_stat.views import *
 from landing_page.views import *
+from auth_manager_App.views import *
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', show_landing_page),
     url(r'^about/$', show_about_page),
     url(r'^common/$', show_general_page),
-    url(r'^everyday/$', show_daily_page)
+    url(r'^everyday/$', show_daily_page),
+
+    url(r'^auth/$', show_auth_page)
 ]
