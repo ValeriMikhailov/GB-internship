@@ -1,16 +1,40 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>страница авторизации</title>
-</head>
-<body>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
 
-<form action="/auth/" method="post">{% csrf_token %}
-    <p>Email:<br><input required type="text" name="user"></p>
-    <p>Пароль:<br><input required type="password" name="password"></p>
-    <p><input type="submit" value="Войти"></p>
-</form>
+    <title>Signin Template for Bootstrap</title>
 
-</body>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-theme.css' %}">
+    <link rel="stylesheet" href="{% static 'css/site.css' %}">
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <form class="form-signin" action="/auth/" method="post">{% csrf_token %}
+        <h2 class="form-signin-heading">Пожалуйста, войдите</h2>
+        <label for="inputLogin" class="sr-only">Логин</label>
+        <input type="text" id="inputLogin" class="form-control" placeholder="Логин" required autofocus name="user">
+        <label for="inputPassword" class="sr-only">Пароль</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Пароль" required name="password">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+      </form>
+
+    </div> <!-- /container -->
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
 </html>
