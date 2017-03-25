@@ -5,6 +5,8 @@ import requests
 import datetime
 import calendar
 
+from general_stat.views import get_token
+
 
 import general_stat.views
 
@@ -13,14 +15,22 @@ from django.contrib import auth
 # Create your views here.
 
 def get_persons():
-    request = requests.get(import_bd.persons_url)
+
+    request = requests.get(import_bd.persons_url,
+                           headers={'Authorization': get_token()})
+
     persons = request.json()
     return persons
 
 
 def get_daily_stat(site_id, person_id, start='2004-12-12', end='2017-03-16'):
 
-    request = requests.get( import_bd.daily_stat_url + str(site_id) + '/' + str(person_id) + '/between?start=' + start + '&end=' + end)
+    if site_id ==1:
+        site_id += 1
+
+
+    request = requests.get( import_bd.daily_stat_url + str(site_id) + '/' + str(person_id) + '/between?start=' + start + '&end=' + end,
+                            headers={'Authorization': get_token()})
 
     daily_stat = [x for x in request.json()] # if (x["siteId"] == site_id and x["personId"] == person_id)]
 
