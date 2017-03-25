@@ -46,6 +46,4 @@
 
 @property (weak, nonatomic) IBOutlet UIDatePicker *endDatePicker;
 
-
-
 @end

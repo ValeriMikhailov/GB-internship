@@ -21,16 +21,6 @@
     [super viewDidLoad];
     
     
-    /*
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
-    [titleLabel setTextColor:[UIColor whiteColor]];
-    [titleLabel setBackgroundColor:[UIColor colorWithRed:76/255.0 green:175/255.0 blue:80/255.0 alpha:1]];
-    [titleLabel setFont:[UIFont fontWithName: @"Magistral" size: 16.0f]];
-    titleLabel.text=@"Daily Statistics";
-    titleLabel.textAlignment= NSTextAlignmentCenter;
-    [self.view addSubview:titleLabel];*/
-    
-    
     [[GBPersistentManager sharedManager] getArrayOfAvaliableSitesOnSuccess:^(NSArray *sitesArray) {
         _sitesArray =sitesArray;
     } onFailure:^(NSError *error) {
@@ -45,11 +35,6 @@
     
     _pickedPersonTextField.inputView=[self createViewForPicker:_personPicker];
     _pickedSiteTextField.inputView=[self createViewForPicker:_sitePicker];
-    
-    _pickedStartDateTextField.inputView=[self createViewForDatePicker:_startDatePicker];
-    _pickedEndDateTextField.inputView=[self createViewForDatePicker:_endDatePicker];
-    [_startDatePicker addTarget:self action:@selector(selectStartDate) forControlEvents:UIControlEventValueChanged];
-    [_endDatePicker addTarget:self action:@selector(selectEndDate) forControlEvents:UIControlEventValueChanged];
  
 }
 
@@ -150,9 +135,6 @@ numberOfRowsInComponent:(NSInteger)component
     }
     
 }
-
-
-
 
 
 - (IBAction)showStatisticsButtonAction:(id)sender
@@ -273,61 +255,15 @@ numberOfRowsInComponent:(NSInteger)component
                                      pickerView.frame.size.height / 2);
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
     
-    [titleLabel setTextColor:[UIColor whiteColor]];
+    [titleLabel setTextColor:[UIColor blackColor]];
     [titleLabel setBackgroundColor:[UIColor colorWithRed:76/255.0 green:175/255.0 blue:80/255.0 alpha:1]];
-    [titleLabel setFont:[UIFont fontWithName: @"Magistral" size: 16.0f]];
+    [titleLabel setFont:[UIFont fontWithName: @"Trebuchet MS" size: 16.0f]];
     titleLabel.text=title;
     titleLabel.textAlignment= NSTextAlignmentCenter;
     [pickerView addSubview:titleLabel];
     
     return pickerView;
 }
-
--(void) selectStartDate
-{
-    _pickedStartDateTextField.text=[self stringFromDate:_startDatePicker.date];
-    [_pickedStartDateTextField resignFirstResponder];
-}
--(void) selectEndDate
-{
-        _pickedEndDateTextField.text=[self stringFromDate:_endDatePicker.date];
-        [_pickedEndDateTextField resignFirstResponder];
-}
-
-- (UIView *)createViewForDatePicker:(UIDatePicker*) selectedPicker {
-    
-    UIView *pickerView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 216)];
-    
-    pickerView.backgroundColor = [UIColor whiteColor];
-    
-    
-    NSString* title;
-    
-    if(selectedPicker.tag == startDayPicker)
-    {
-        title=@"Choose Start Date";
-    }
-    else if (selectedPicker.tag == endDayPicker)
-    {
-        title=@"Choose End Date";
-    }
-    
-    [pickerView addSubview: selectedPicker];
-    
-    selectedPicker.center = CGPointMake(pickerView.frame.size.width  / 2,
-                                        pickerView.frame.size.height / 2);
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
-    
-    [titleLabel setTextColor:[UIColor whiteColor]];
-    [titleLabel setBackgroundColor:[UIColor colorWithRed:76/255.0 green:175/255.0 blue:80/255.0 alpha:1]];
-    [titleLabel setFont:[UIFont fontWithName: @"Magistral" size: 16.0f]];
-    titleLabel.text=title;
-    titleLabel.textAlignment= NSTextAlignmentCenter;
-    [pickerView addSubview:titleLabel];
-    
-    return pickerView;
-}
-
 
 
 - (NSDate*) dateFromString:(NSString*) string {

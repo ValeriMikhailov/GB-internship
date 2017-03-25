@@ -163,9 +163,9 @@ numberOfRowsInComponent:(NSInteger)component
                                      pickerView.frame.size.height / 2);
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
     
-    [titleLabel setTextColor:[UIColor whiteColor]];
+    [titleLabel setTextColor:[UIColor blackColor]];
     [titleLabel setBackgroundColor:[UIColor colorWithRed:76/255.0 green:175/255.0 blue:80/255.0 alpha:1]];
-    [titleLabel setFont:[UIFont fontWithName: @"Magistral" size: 16.0f]];
+    [titleLabel setFont:[UIFont fontWithName: @"Trebuchet MS" size: 16.0f]];
     titleLabel.text=@"Choose Site";
     titleLabel.textAlignment= NSTextAlignmentCenter;
     [pickerView addSubview:titleLabel];
