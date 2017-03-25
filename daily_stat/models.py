@@ -31,8 +31,8 @@ class Pages(models.Model):
 
 
 class PersonPageRank(models.Model):
-    personid = models.ForeignKey('Persons', models.DO_NOTHING, db_column='personId')  # Field name made lowercase.
-    pageid = models.ForeignKey(Pages, models.DO_NOTHING, db_column='pageId')  # Field name made lowercase.
+    personid = models.ForeignKey('Persons', models.DO_NOTHING, db_column='personId', primary_key=True)  # Field name made lowercase.
+    pageid = models.ForeignKey(Pages, models.DO_NOTHING, db_column='pageId', primary_key=True)  # Field name made lowercase.
     rank = models.IntegerField()
 
     class Meta:
