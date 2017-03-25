@@ -8,8 +8,11 @@
 
 #import "GBLoginViewController.h"
 #import "GBStatisticsViewController.h"
+#import <AFNetworking/AFNetworking.h>
 
 @interface GBLoginViewController ()
+
+@property (strong, nonatomic) AFHTTPSessionManager* sessionManager;
 
 @end
 
@@ -36,8 +39,6 @@
     _usernameFld.delegate = self;
     _passwordFld.delegate = self;
     
-
-    
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -46,6 +47,13 @@
 }
 
 #pragma mark - Actions
+- (IBAction)tryLoginByServer:(id)sender {
+   
+    NSString* login = [NSString stringWithFormat:@"%@", self.usernameFld.text];
+    NSString* pass = [NSString stringWithFormat:@"%@", self.passwordFld.text];
+    
+    [self isCorrectLogin:login AndPassword:pass];
+}
 - (IBAction)loginUser:(id)sender {
     
     NSUserDefaults* df = [NSUserDefaults standardUserDefaults];
@@ -91,6 +99,7 @@
         [self.passwordFld becomeFirstResponder];
     } else {
         [textField resignFirstResponder];
+        [self tryLoginByServer:(self)];
     }
     
     return YES;
@@ -113,6 +122,35 @@
         f.origin.y = 0.0f;
         self.view.frame = f;
     }];
+}
+
+#pragma mark - Help methods -
+- (BOOL) isCorrectLogin:(NSString*)login AndPassword:(NSString*)password {
+    
+    __block BOOL isVerified = NO;
+    
+    self.sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:@"https://52.89.213.205:8443/rest/user/"]];
+    self.sessionManager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    self.sessionManager.securityPolicy.allowInvalidCertificates = YES;
+    self.sessionManager.securityPolicy.validatesDomainName = NO;
+    self.sessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [self.sessionManager.requestSerializer setAuthorizationHeaderFieldWithUsername:login
+                                                                          password:password];
+    [self.sessionManager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    [self.sessionManager GET:@"sites"
+                  parameters:nil
+                    progress:nil
+                     success:^(NSURLSessionDataTask* task, id responseObject) {
+                         isVerified = YES;
+                         NSLog(@"verified = yes");
+                         [self openStatisticsView];
+                     } failure:^(NSURLSessionDataTask* task, NSError* error) {
+                         NSLog(@"%@", error);
+                         NSLog(@"verified = no");
+                     }];
+    
+    return isVerified ? YES : NO;
 }
 
 @end

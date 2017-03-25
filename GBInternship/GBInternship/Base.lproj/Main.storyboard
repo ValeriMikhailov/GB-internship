@@ -73,7 +73,7 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="loginUser:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tTO-Hi-ySe"/>
+                                                            <action selector="tryLoginByServer:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MQn-OY-7LI"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
