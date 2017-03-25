@@ -1,3 +1,4 @@
+basic_url = 'http://52.89.213.205:8080/rest/'
 sites_url = 'http://52.89.213.205:8080/rest/user/sites'
 persons_url = 'http://52.89.213.205:8080/rest/user/persons'
 
