@@ -168,15 +168,17 @@
                     andEndDate: (NSDate*) endDate
                      onSuccess: (void(^)(NSArray* statisticArray)) success
                      onFailure: (void(^)(NSError* error)) failure {
-    
-    if ([self isHasDB:@"StatisticDailyDB"]) {
+    NSString* dbKey = [NSString stringWithFormat:@"StatisticDailyDB%ld%ld%@%@", (long)personID, (long)siteID, firstDate, endDate];
+    if ([self isHasDB:dbKey]) {
         // Get data from DB
         [[GBDataManager sharedManager] getArrayDailyBySiteID:siteID
                                                  andPersonID:personID
                                          andBetweenFirstDate:firstDate
                                                   andEndDate:endDate
                                                    onSuccess:^(NSArray *statisticArray) {
-                                            
+                                                       if (success) {
+                                                           success(statisticArray);
+                                                       }
                                                    } onFailure:^(NSError *error) {
                                                        
                                                    }];
@@ -209,7 +211,7 @@
                  [[NSNotificationCenter defaultCenter]
                   postNotificationName:@"FetchedDaily"
                   object:self];
-                 [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"StatisticDailyDB"];
+                 [[NSUserDefaults standardUserDefaults] setBool:YES forKey:dbKey];
                  success(arr);
              }
          } onFailure:^(NSError *error) {

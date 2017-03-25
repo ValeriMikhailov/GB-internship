@@ -189,16 +189,6 @@
 				52A19EA21E7715D100D984F7 /* AppDelegate.h */,
 				52A19EA31E7715D100D984F7 /* AppDelegate.m */,
 				52A19EA81E7715D100D984F7 /* Main.storyboard */,
-				049FAC7C1E849BBA00F560B2 /* GBLoginViewController.h */,
-				049FAC7D1E849BBA00F560B2 /* GBLoginViewController.m */,
-				049FAC821E849D9A00F560B2 /* GBStatisticsViewController.h */,
-				049FAC831E849D9A00F560B2 /* GBStatisticsViewController.m */,
-				049FAC881E849EF600F560B2 /* GBRegistrationViewController.h */,
-				049FAC891E849EF600F560B2 /* GBRegistrationViewController.m */,
-				049FAC8B1E849FE400F560B2 /* GBGeneralStatisticsViewController.h */,
-				049FAC8C1E849FE400F560B2 /* GBGeneralStatisticsViewController.m */,
-				0467CEA11E85DED400D701BC /* GBDailyStatisticsViewController.h */,
-				0467CEA21E85DED400D701BC /* GBDailyStatisticsViewController.m */,
 				52A19EAE1E7715D100D984F7 /* Assets.xcassets */,
 				52A19EB01E7715D100D984F7 /* LaunchScreen.storyboard */,
 				52A19EB31E7715D100D984F7 /* Info.plist */,
@@ -262,6 +252,16 @@
 		52A19ED61E7718E500D984F7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				049FAC7C1E849BBA00F560B2 /* GBLoginViewController.h */,
+				049FAC7D1E849BBA00F560B2 /* GBLoginViewController.m */,
+				049FAC881E849EF600F560B2 /* GBRegistrationViewController.h */,
+				049FAC891E849EF600F560B2 /* GBRegistrationViewController.m */,
+				049FAC821E849D9A00F560B2 /* GBStatisticsViewController.h */,
+				049FAC831E849D9A00F560B2 /* GBStatisticsViewController.m */,
+				049FAC8B1E849FE400F560B2 /* GBGeneralStatisticsViewController.h */,
+				049FAC8C1E849FE400F560B2 /* GBGeneralStatisticsViewController.m */,
+				0467CEA11E85DED400D701BC /* GBDailyStatisticsViewController.h */,
+				0467CEA21E85DED400D701BC /* GBDailyStatisticsViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";

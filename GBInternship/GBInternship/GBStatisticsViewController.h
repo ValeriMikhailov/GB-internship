@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GBStatisticsViewController : UIViewController
+@interface GBStatisticsViewController : UITabBarController
+
+- (IBAction)logOutAction:(id)sender;
 
 @end

@@ -202,10 +202,17 @@
                        andDateFrom: (NSDate*) startDate
                        andDateTill: (NSDate*) endDate {
     
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate *startOfDay = [calendar dateBySettingHour:0
+                                              minute:0
+                                              second:0 ofDate:startDate options:0];
+    NSDate *endOfDay = [calendar dateBySettingHour:23
+                                            minute:59
+                                            second:59 ofDate:endDate options:0];
     NSEntityDescription* entity = [NSEntityDescription entityForName:@"GBStatistic" inManagedObjectContext:self.managedObjectContext];
     NSFetchRequest* request = [[NSFetchRequest alloc] init];
     [request setEntity:entity];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"sites.siteID == %d AND persons.personID == %d  AND date > %@ AND (date < %@ OR date == %@)", siteID, personID, startDate, endDate, endDate]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"sites.siteID == %d AND persons.personID == %d AND date >= %@ AND date <= %@", siteID, personID, startOfDay, endOfDay]];
     NSArray* stat = [self.managedObjectContext executeFetchRequest:request error:nil];
     return stat;
 }

@@ -131,12 +131,16 @@
                     progress:nil
                      success:^(NSURLSessionDataTask* task, id responseObject) {
                          isVerified = YES;
-                         NSLog(@"verified = yes");
                          [self openStatisticsView];
                      } failure:^(NSURLSessionDataTask* task, NSError* error) {
                          NSLog(@"%@", error);
-                         NSLog(@"verified = no");
-                         [self alertBadLogin];
+                         NSDictionary* dict = [error userInfo];
+                         NSString* errorStr = [dict objectForKey:@"NSLocalizedDescription"];
+                         
+                         if ([errorStr isEqualToString:@"Request failed: unauthorized (401)"]){
+                             [self alertBadLogin];
+                         }
+                         
                      }];
     
     return isVerified ? YES : NO;

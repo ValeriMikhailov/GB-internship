@@ -95,15 +95,12 @@ numberOfRowsInComponent:(NSInteger)component
 {
     NSString* stringInPicker;
     
-    if(pickerView.tag == sitePicker)
-    {
+    if(pickerView.tag == sitePicker) {
         GBSite* site = (GBSite*) _sitesArray[row];
         
         stringInPicker = site.siteURL;
         
-    }
-    else if (pickerView.tag == personPicker)
-    {
+    } else if (pickerView.tag == personPicker) {
         GBPerson* person = (GBPerson*) _personsArray[row];
         
         stringInPicker =person.personName;
@@ -148,41 +145,13 @@ numberOfRowsInComponent:(NSInteger)component
 }
 
 
-- (IBAction)showStatisticsButtonAction:(id)sender
-{
+- (IBAction)showStatisticsButtonAction:(id)sender {
     NSLog(@"******************");
     
     //NSDate* date1 = [self dateFromString:@"2017-03-09"];
     //NSDate* date2 = [self dateFromString:@"2017-03-15"];
     NSDate* date1 = _pickedStartDate;
     NSDate* date2 = _pickedEndDate;
-    
-    /*[[GBPersistentManager sharedManager] getArrayDailyBySiteID:_pickedSite.siteID
-                                                   andPersonID:_pickedPerson.personID
-                                           andBetweenFirstDate:date1
-                                                    andEndDate:date2
-                                                     onSuccess:^(NSArray *statisticArray) {
-                                                         
-                                                         for (GBStatistic* stat in statisticArray) {
-                                                             NSLog(@"Name: %@, Rank: %d, Day: %@", stat.persons.personName, stat.rank, [self stringFromDate:stat.startDate]);
-                                                             
-                                                             _statisticArray=statisticArray;
-                                                         }
-                                                         
-                                                     } onFailure:^(NSError *error) {
-                                                         
-                                                     }];
-     */
-    [[GBPersistentManager sharedManager] getArrayDailyBySiteID:_pickedSite.siteID
-                                               andPersonID:_pickedPerson.personID
-                                       andBetweenFirstDate:date1
-                                                andEndDate:date2
-                                                 onSuccess:^(NSArray *statisticArray) {
-                                                     
-                                                                                                        
-                                                 } onFailure:^(NSError *error) {
-                                                     
-                                                 }];
     [[GBPersistentManager sharedManager] getArrayDailyBySiteID:_pickedSite.siteID
                                                    andPersonID:_pickedPerson.personID
                                            andBetweenFirstDate:date1
@@ -190,15 +159,14 @@ numberOfRowsInComponent:(NSInteger)component
                                                      onSuccess:^(NSArray *statisticArray) {
                                                    
                                                    for (GBStatistic* stat in statisticArray) {
-                                                       NSLog(@"Name: %@, Site: %@, Rank: %d, StartDate: %@", stat.persons.personName, stat.sites.siteURL, stat.rank, [self stringFromDate:stat.date]);
+                                                       NSLog(@"Name: %@, SiteID: %d, Rank: %d, StartDate: %@", stat.persons.personName, stat.sites.siteID, stat.rank, [self stringFromDate:stat.date]);
+                                                       
                                                    }
-                                                   _statisticArray=statisticArray;
-                                                   
+                                                         self.statisticArray = statisticArray;
+                                                         [self.ranksTable reloadData];
                                                } onFailure:^(NSError *error) {
                                                    
                                                }];
-    
-     [_ranksTable reloadData];
     
 };
 
