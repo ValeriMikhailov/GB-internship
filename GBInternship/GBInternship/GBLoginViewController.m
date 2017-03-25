@@ -67,19 +67,7 @@
         
     } else {
         
-        NSLog(@"login credentials incorrect");
-        UIAlertController* error = [UIAlertController alertControllerWithTitle:@"Oooops" message:@"Your username and password does not match" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"ОК"
-                                                           style:UIAlertActionStyleDefault
-                                                         handler:^(UIAlertAction * _Nonnull action) {
-                                                             
-                                                             [self dismissViewControllerAnimated:YES completion:nil];
-                                                             
-                                                         }];
-        
-        
-        [error addAction:okAction];
-        [self presentViewController:error animated:YES completion:nil];
+        [self alertBadLogin];
     }
 }
 
@@ -148,9 +136,26 @@
                      } failure:^(NSURLSessionDataTask* task, NSError* error) {
                          NSLog(@"%@", error);
                          NSLog(@"verified = no");
+                         [self alertBadLogin];
                      }];
     
     return isVerified ? YES : NO;
+}
+
+- (void) alertBadLogin {
+    
+    UIAlertController* error = [UIAlertController alertControllerWithTitle:@"Oooops" message:@"Your username and password does not match" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"ОК"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * _Nonnull action) {
+                                                         
+                                                         [self dismissViewControllerAnimated:YES completion:nil];
+                                                         
+                                                     }];
+    
+    
+    [error addAction:okAction];
+    [self presentViewController:error animated:YES completion:nil];
 }
 
 @end
