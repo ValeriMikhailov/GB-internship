@@ -3,3 +3,4 @@
 *.sqlite3
 /.idea/
 *.directory
+/db_settings.py

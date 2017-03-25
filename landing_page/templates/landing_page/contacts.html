@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<div class="row">
+	<div class="col-sm-12 col-lg-12">
+		{% if "success" in message %}
+			<div class="alert alert-success" role="alert">{{message.success}}</div>
+		{% endif %}
+		{% if "error" in message %}
+			<div class="alert alert-warning" role="alert">{{message.error}}</div>
+		{% endif %}
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3><i class="icon-map-marker main-color"></i> Место нахождения</h3>
+			</div>
+			<div class="panel-body">
+				<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d8992.532665914889!2d37.624127!3d55.704057!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x2c3294b0a11f3c0!2z0J7QsdGD0YfQsNGO0YnQuNC5INC_0L7RgNGC0LDQuyBHZWVrYnJhaW5z!5e0!3m2!1sru!2sru!4v1490303160462" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+			</div>
+		</div>
+	</div>
+</div>
+<hr>
+<div class="row">
+	<div class="col-sm-4 col-lg-4">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3><i class="icon-pushpin main-color"></i> Наш офис</h3>
+			</div>
+			<div class="panel-body">
+				<address>
+					<strong>Обучающий портал Geekbrains</strong><br>
+					117105, Москва, Варшавское ш.<br>
+					д. 1, стр. 6, оф. А205<br>
+					<i class="icon-phone-sign"></i> + 4 (123) 456-7890
+				</address>
+			</div>
+		</div>
+	</div>
+	<div class="col-12 col-lg-8">
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="">
+					<i class="icon-envelope main-color"></i>
+					Обратная связь
+				</h3>
+			</div>
+			<div class="panel-body">
+				<!-- CONTACT FORM https://github.com/jonmbake/bootstrap3-contact-form -->
+
+				<form role="form" id="feedbackForm" method="post" action="/contacts/">{% csrf_token %}
+					<div class="form-group">
+						<input required type="text" class="form-control" id="name" name="name" placeholder="Имя" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg==&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
+						<span class="help-block" style="display: none;">Please enter your name.</span>
+					</div>
+					<div class="form-group">
+						<input required type="email" class="form-control" id="email" name="email" placeholder="Электронная почта">
+						<span class="help-block" style="display: none;">Please enter a valid e-mail address.</span>
+					</div>
+					<div class="form-group">
+						<textarea required rows="10" cols="100" class="form-control" id="message" name="message" placeholder="Сообщение"></textarea>
+						<span class="help-block" style="display: none;">Please enter a message.</span>
+					</div>
+					<button type="submit" id="feedbackSubmit" class="btn btn-primary btn-lg" style="display: block; margin-top: 10px;">Отправить</button>
+				</form>
+				<!-- END CONTACT FORM -->
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}
