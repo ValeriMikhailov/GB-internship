@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0467CEA31E85DED400D701BC /* GBDailyStatisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0467CEA21E85DED400D701BC /* GBDailyStatisticsViewController.m */; };
 		049FAC7B1E849A7C00F560B2 /* 1488569581_analytics.png in Resources */ = {isa = PBXBuildFile; fileRef = 049FAC7A1E849A7C00F560B2 /* 1488569581_analytics.png */; };
 		049FAC7E1E849BBA00F560B2 /* GBLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049FAC7D1E849BBA00F560B2 /* GBLoginViewController.m */; };
 		049FAC841E849D9A00F560B2 /* GBStatisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049FAC831E849D9A00F560B2 /* GBStatisticsViewController.m */; };
@@ -55,6 +56,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0467CEA11E85DED400D701BC /* GBDailyStatisticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBDailyStatisticsViewController.h; sourceTree = "<group>"; };
+		0467CEA21E85DED400D701BC /* GBDailyStatisticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBDailyStatisticsViewController.m; sourceTree = "<group>"; };
 		049FAC7A1E849A7C00F560B2 /* 1488569581_analytics.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1488569581_analytics.png; sourceTree = "<group>"; };
 		049FAC7C1E849BBA00F560B2 /* GBLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBLoginViewController.h; sourceTree = "<group>"; };
 		049FAC7D1E849BBA00F560B2 /* GBLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBLoginViewController.m; sourceTree = "<group>"; };
@@ -192,6 +195,8 @@
 				049FAC881E849EF600F560B2 /* GBRegistrationViewController.h */,
 				049FAC891E849EF600F560B2 /* GBRegistrationViewController.m */,
 				049FAC8B1E849FE400F560B2 /* GBGeneralStatisticsViewController.h */,
+				0467CEA11E85DED400D701BC /* GBDailyStatisticsViewController.h */,
+				0467CEA21E85DED400D701BC /* GBDailyStatisticsViewController.m */,
 				049FAC8C1E849FE400F560B2 /* GBGeneralStatisticsViewController.m */,
 				049FAC831E849D9A00F560B2 /* GBStatisticsViewController.m */,
 				52A19EAE1E7715D100D984F7 /* Assets.xcassets */,
@@ -492,6 +497,7 @@
 				52FEFAE31E818DE9007E5972 /* GBPerson+CoreDataClass.m in Sources */,
 				52A19EA41E7715D100D984F7 /* AppDelegate.m in Sources */,
 				52FEFAE81E818DE9007E5972 /* GBUser+CoreDataProperties.m in Sources */,
+				0467CEA31E85DED400D701BC /* GBDailyStatisticsViewController.m in Sources */,
 				52FEFAEE1E819C22007E5972 /* GBPersonAPI.m in Sources */,
 				52A19EAD1E7715D100D984F7 /* GBInternship.xcdatamodeld in Sources */,
 				52FEFAF11E819C43007E5972 /* GBSiteAPI.m in Sources */,

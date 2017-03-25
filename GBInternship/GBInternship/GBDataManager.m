@@ -125,6 +125,7 @@
         statistic.sites = site;
         statistic.rank = rank;
         statistic.startDate = startDate;
+        statistic.date = [self dateFromString:@"0000-00-00"];
         [statistic.managedObjectContext save:nil];
     }
     
@@ -143,7 +144,7 @@
     NSFetchRequest* request = [[NSFetchRequest alloc] init];
     [request setEntity:entityObject];
     [request setFetchLimit:1];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"sites.siteID == %d AND persons.personID == %d AND ANY date == %@", siteID, personID, date]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"sites.siteID == %d AND persons.personID == %d AND date == %@", siteID, personID, date]];
     
     NSError *error = nil;
     NSUInteger count = [self.managedObjectContext countForFetchRequest:request error:&error];
@@ -179,6 +180,7 @@
         statistic.date = date;
         statistic.persons = person;
         statistic.sites = site;
+        statistic.startDate = [self dateFromString:@"0000-00-00"];
         [statistic.managedObjectContext save:nil];
     }
 }
@@ -192,12 +194,6 @@
     [request setEntity:entity];
     [request setPredicate:[NSPredicate predicateWithFormat:@"sites.siteID == %d", siteID]];
     NSArray* stat = [self.managedObjectContext executeFetchRequest:request error:nil];
-
-    for (GBStatistic* st in stat) {
-        NSLog(@"%d, %@ - %@", st.rank, st.sites.siteURL, st.persons.personName);
-        
-    }
-    
     return stat;
 }
 
@@ -209,7 +205,7 @@
     NSEntityDescription* entity = [NSEntityDescription entityForName:@"GBStatistic" inManagedObjectContext:self.managedObjectContext];
     NSFetchRequest* request = [[NSFetchRequest alloc] init];
     [request setEntity:entity];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"sites.siteID == %d AND persons.personID == %d AND date > %@ AND (date < %@ OR date == %@)", siteID, personID, startDate, endDate, endDate]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"sites.siteID == %d AND persons.personID == %d  AND date > %@ AND (date < %@ OR date == %@)", siteID, personID, startDate, endDate, endDate]];
     NSArray* stat = [self.managedObjectContext executeFetchRequest:request error:nil];
     return stat;
 }
@@ -376,5 +372,16 @@
         abort();
     }
 }
+
+
+
+- (NSDate*) dateFromString:(NSString*) string {
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    return [dateFormatter dateFromString:string];
+}
+
 
 @end

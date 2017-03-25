@@ -14,6 +14,8 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) NSArray *sitesArray;
 @property (strong, nonatomic) NSArray *personsArray;
+@property (strong, nonatomic) NSArray *statisticArray;
+- (NSDate*) dateFromString:(NSString*) string;
 
 @end
 

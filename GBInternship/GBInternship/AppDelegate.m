@@ -52,7 +52,7 @@
     
     // Examples to check fetch data from each manager
     // GBServerManager
-    /*
+    
     [[GBServerManager sharedManager] getArrayOfAvaliablePersonsOnSuccess:^(NSArray *personsArray) {
         _personsArray=personsArray;
         for (GBPerson* person in personsArray) {
@@ -77,7 +77,7 @@
         
     } onFailure:^(NSError *error) {
         
-    }];*/
+    }];
     
     /* for(GBSite* obj in _sitesArray){
         
@@ -92,7 +92,7 @@
     
     */
     
-    /*
+    
     NSDate* date1 = [self dateFromString:@"2017-03-09"];
     NSDate* date2 = [self dateFromString:@"2017-03-15"];
     [[GBServerManager sharedManager] getArrayDailyBySiteID:1
@@ -102,13 +102,13 @@
                                                  onSuccess:^(NSArray *statisticArray) {
                                                      
                                                      for (GBStatisticAPI* stat in statisticArray) {
-                                                         NSLog(@"Name: %ld, Site: %ld, Rank: %ld, StartDate: %@", (long)stat.personID, (long)stat.siteID, (long)stat.rank, [self stringFromDate:stat.date]);
+                                                        // NSLog(@"Person Name: %ld, Site: %ld, Rank: %ld, Date: %@", (long)stat.personID, (long)stat.siteID, (long)stat.rank, [self stringFromDate:stat.date]);
                                                      }
                                                      
                                                  } onFailure:^(NSError *error) {
                                                      
                                                  }];
-    */
+    
     //GBDataManger
     
     
@@ -140,7 +140,9 @@
         }
     } onFailure:^(NSError *error) {
         
-    }];
+    }];*/
+    
+
     
     [[GBDataManager sharedManager] getArrayDailyBySiteID:1
                                              andPersonID:1
@@ -148,13 +150,18 @@
                                               andEndDate:date2
                                                onSuccess:^(NSArray *statisticArray) {
                                                    
-                                                   for (GBStatistic* stat in statisticArray) {
+                                                 /*  for (GBStatistic* stat in statisticArray) {
+                                                       _statisticArray=statisticArray;
                                                        NSLog(@"Name: %@, Site: %@, Rank: %d, StartDate: %@", stat.persons.personName, stat.sites.siteURL, stat.rank, [self stringFromDate:stat.date]);
                                                    }
-                                                   
+                                                   */
                                                } onFailure:^(NSError *error) {
                                                    
-                                               }];*/
+                                               }];
+    for (GBStatistic* obj in _statisticArray)
+    {
+        NSLog(@"*******Name: %@, Site: %@, Rank: %d, StartDate: %@", obj.persons.personName, obj.sites.siteURL, obj.rank, [self stringFromDate:obj.date]);
+    }
     
     //GBPersistentManager
     /*
@@ -183,7 +190,8 @@
         } onFailure:^(NSError *error) {
             
         }];
-
+     */
+/*
     NSDate* date1 = [self dateFromString:@"2017-03-09"];
     NSDate* date2 = [self dateFromString:@"2017-03-15"];
     [[GBPersistentManager sharedManager] getArrayDailyBySiteID:1
@@ -199,7 +207,7 @@
                                                      } onFailure:^(NSError *error) {
 
                                                      }];
-    
+ 
     
     [[GBDataManager sharedManager] getArrayBySiteID:1 onSuccess:^(NSArray *statisticArray) {
         for (GBStatistic* stat in statisticArray) {
@@ -207,7 +215,9 @@
         }
     } onFailure:^(NSError *error) {
         
-    }];*/
+    }];
+    
+    */
     
 
     
