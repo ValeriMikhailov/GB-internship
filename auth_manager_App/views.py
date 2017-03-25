@@ -15,6 +15,15 @@ def get_token(user, password):
     auth_request = requests.post(import_bd.basic_url + "signin",
                                  auth=HTTPBasicAuth(user, password)
                                  )
+    response = requests.post(import_bd.basic_url + "signin", auth=HTTPBasicAuth(user, password))
+
+    print(type(response.status_code))
+
+    if response.status_code == 401:
+        return ''
+
+
+
     return auth_request.text
 
 def show_auth_page(request, redirect_to=''):
