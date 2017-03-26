@@ -18,20 +18,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
     
     _usernameFld.delegate = self;
     _passwordFld.delegate = self;
     _reEnterPasswordFld.delegate =self;
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
 
 //Register user
 - (IBAction)registerUser:(id)sender {
@@ -118,29 +109,22 @@
 
 
 - (void) openStatisticsView {
-    
     UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     GBStatisticsViewController* vc = [sb instantiateViewControllerWithIdentifier:@"GBStatisticsNavigationController"];
     [self presentViewController:vc animated:YES completion:nil];
 }
 
-
-
 #pragma mark - UITextFieldDelegate
 
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     
     return YES;
 }
 
 #pragma mark - keyboard movements
-
-
-- (void)keyboardWillShow:(NSNotification *)notification
-{
+- (void)keyboardWillShow:(NSNotification *)notification {
     CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     
     [UIView animateWithDuration:0.3 animations:^{
@@ -150,8 +134,7 @@
     }];
 }
 
--(void)keyboardWillHide:(NSNotification *)notification
-{
+-(void)keyboardWillHide:(NSNotification *)notification {
     [UIView animateWithDuration:0.3 animations:^{
         CGRect f = self.view.frame;
         f.origin.y = 0.0f;

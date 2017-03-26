@@ -56,19 +56,7 @@
 }
 - (IBAction)loginUser:(id)sender {
     
-    NSUserDefaults* df = [NSUserDefaults standardUserDefaults];
     
-    if ([self.usernameFld.text isEqualToString:[df objectForKey:@"username"]] && [self.passwordFld.text isEqualToString:[df objectForKey:@"password"]]) {
-        NSLog(@"login credentials accepted");
-        [self openStatisticsView];
-        
-        self.usernameFld.text = nil;
-        self.passwordFld.text = nil;
-        
-    } else {
-        
-        [self alertBadLogin];
-    }
 }
 
 
@@ -117,31 +105,47 @@
     
     __block BOOL isVerified = NO;
     
-    self.sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:@"https://52.89.213.205:8443/rest/user/"]];
-    self.sessionManager.requestSerializer = [AFHTTPRequestSerializer serializer];
-    self.sessionManager.securityPolicy.allowInvalidCertificates = YES;
-    self.sessionManager.securityPolicy.validatesDomainName = NO;
-    self.sessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
-    [self.sessionManager.requestSerializer setAuthorizationHeaderFieldWithUsername:login
-                                                                          password:password];
-    [self.sessionManager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    
-    [self.sessionManager GET:@"sites"
-                  parameters:nil
-                    progress:nil
-                     success:^(NSURLSessionDataTask* task, id responseObject) {
-                         isVerified = YES;
-                         [self openStatisticsView];
-                     } failure:^(NSURLSessionDataTask* task, NSError* error) {
-                         NSLog(@"%@", error);
-                         NSDictionary* dict = [error userInfo];
-                         NSString* errorStr = [dict objectForKey:@"NSLocalizedDescription"];
-                         
-                         if ([errorStr isEqualToString:@"Request failed: unauthorized (401)"]){
-                             [self alertBadLogin];
-                         }
-                         
-                     }];
+    if ([self connectedToInternet]) {
+        self.sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:@"https://52.89.213.205:8443/rest/user/"]];
+        self.sessionManager.requestSerializer = [AFHTTPRequestSerializer serializer];
+        self.sessionManager.securityPolicy.allowInvalidCertificates = YES;
+        self.sessionManager.securityPolicy.validatesDomainName = NO;
+        self.sessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
+        [self.sessionManager.requestSerializer setAuthorizationHeaderFieldWithUsername:login
+                                                                              password:password];
+        [self.sessionManager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        
+        [self.sessionManager GET:@"sites"
+                      parameters:nil
+                        progress:nil
+                         success:^(NSURLSessionDataTask* task, id responseObject) {
+                             isVerified = YES;
+                             [self saveInNSDefaultsLogin:login andPassword:password];
+                             [self openStatisticsView];
+                         } failure:^(NSURLSessionDataTask* task, NSError* error) {
+                             NSLog(@"%@", error);
+                             NSDictionary* dict = [error userInfo];
+                             NSString* errorStr = [dict objectForKey:@"NSLocalizedDescription"];
+                             
+                             if ([errorStr isEqualToString:@"Request failed: unauthorized (401)"]){
+                                 [self alertBadLogin];
+                             }
+                             
+                         }];
+        
+    } else {
+        
+        if ([self isHasDBLogin:login andPassword:password]) {
+            
+            isVerified = YES;
+            [self openStatisticsView];
+            
+        } else {
+            
+            isVerified = NO;
+            [self alertBadLogin];
+        }
+    }
     
     return isVerified ? YES : NO;
 }
@@ -160,6 +164,40 @@
     
     [error addAction:okAction];
     [self presentViewController:error animated:YES completion:nil];
+}
+
+- (BOOL) connectedToInternet {
+    
+    NSString *URLString = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://www.google.com"] encoding:NSASCIIStringEncoding error:nil];
+    
+    ( URLString != NULL ) ? NSLog(@"connection good") : NSLog(@"connection bad");
+    return ( URLString != NULL ) ? YES : NO;
+}
+
+- (void) saveInNSDefaultsLogin:(NSString*) login andPassword:(NSString*) password {
+    
+    [[NSUserDefaults standardUserDefaults] setValue:login forKey:@"login"];
+    [[NSUserDefaults standardUserDefaults] setValue:password forKey:@"password"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (BOOL) isHasDBLogin:(NSString*)login andPassword:(NSString*) password {
+    
+    NSUserDefaults* df = [NSUserDefaults standardUserDefaults];
+    
+    if ([self.usernameFld.text isEqualToString:[df objectForKey:@"login"]] && [self.passwordFld.text isEqualToString:[df objectForKey:@"password"]]) {
+        NSLog(@"login credentials accepted");
+        self.usernameFld.text = nil;
+        self.passwordFld.text = nil;
+        
+        return YES;
+        
+    } else {
+
+        return NO;
+    }
+    
+    return nil;
 }
 
 @end
