@@ -54,11 +54,6 @@
     
     [self isCorrectLogin:login AndPassword:pass];
 }
-- (IBAction)loginUser:(id)sender {
-    
-    
-}
-
 
 - (void) openStatisticsView {
     
@@ -151,17 +146,16 @@
 }
 
 - (void) alertBadLogin {
-    
-    UIAlertController* error = [UIAlertController alertControllerWithTitle:@"Oooops" message:@"Your username and password does not match" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"ОК"
-                                                       style:UIAlertActionStyleDefault
-                                                     handler:^(UIAlertAction * _Nonnull action) {
-                                                         
-                                                         [self dismissViewControllerAnimated:YES completion:nil];
-                                                         
-                                                     }];
-    
-    
+    UIAlertController* error =
+    [UIAlertController alertControllerWithTitle:@"Oooops"
+                                        message:@"Your username and password does not match"
+                                 preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* okAction =
+    [UIAlertAction actionWithTitle:@"ОК"
+                             style:UIAlertActionStyleDefault
+                           handler:^(UIAlertAction* action) {
+                               [self dismissViewControllerAnimated:YES completion:nil];
+                           }];
     [error addAction:okAction];
     [self presentViewController:error animated:YES completion:nil];
 }

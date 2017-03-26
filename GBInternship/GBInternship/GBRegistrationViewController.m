@@ -9,8 +9,11 @@
 #import "GBRegistrationViewController.h"
 #import "GBLoginViewController.h"
 #import "GBStatisticsViewController.h"
+#import <AFNetworking/AFNetworking.h>
 
 @interface GBRegistrationViewController ()  <UITextFieldDelegate>
+
+@property (strong, nonatomic) AFHTTPSessionManager* sessionManager;
 
 @end
 
@@ -30,19 +33,8 @@
     //Check for full fields and show alert
     if ([self.usernameFld.text isEqualToString:@""] || [self.passwordFld.text isEqualToString:@""]) {
         
-        UIAlertController* error = [UIAlertController alertControllerWithTitle:@"Oooops" message:@"You must complete all fields" preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"ОК"
-                                                           style:UIAlertActionStyleDefault
-                                                         handler:^(UIAlertAction * _Nonnull action) {
-                                                             
-                                                             [self dismissViewControllerAnimated:YES completion:nil];
-                                                             
-                                                         }];
-        
-        [error addAction:okAction];
-        
-        [self presentViewController:error animated:YES completion:nil];
+        // empty fields alert
+        [self emptyFieldsAlert];
         
     } else {
         
@@ -56,54 +48,58 @@
     
     if ([self.passwordFld.text isEqualToString:self.reEnterPasswordFld.text]) {
         NSLog(@"passwords match!");
-        [self registerNewUser];
+        [self registerNewUser:self.usernameFld.text andPassword:self.passwordFld.text];
         
     } else {
-        
-        NSLog(@"passwords don't match");
-        UIAlertController* error = [UIAlertController alertControllerWithTitle:@"Oooops" message:@"Your entered passwords do not match" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"ОК"
-                                                           style:UIAlertActionStyleDefault
-                                                         handler:^(UIAlertAction * _Nonnull action) {
-                                                             
-                                                             [self dismissViewControllerAnimated:YES completion:nil];
-                                                             
-                                                         }];
-        
-        
-        [error addAction:okAction];
-        
-        
-        
-        [self presentViewController:error animated:YES completion:nil];
-        
+        //doesn't match passwords
+        [self doesntMatchPasswordsAlert];
     }
 }
 
 
-- (void) registerNewUser {
+- (void) registerNewUser:(NSString*)login andPassword:(NSString*)password {
     
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    AFHTTPSessionManager* man = [AFHTTPSessionManager manager];
+    man.requestSerializer = [AFHTTPRequestSerializer serializer];
+    man.responseSerializer = [AFHTTPResponseSerializer serializer];
+    man.securityPolicy.allowInvalidCertificates = YES;
+    man.securityPolicy.validatesDomainName = NO;
+
+    [man.requestSerializer setValue:@"application/x-www-form-urlencoded; application/json; charset=UTF-8; text/html" forHTTPHeaderField:@"Content-Type"];
+    NSDictionary* params = @{@"userName": login,
+                             @"password": password};
     
-    [defaults setObject:self.usernameFld.text forKey:@"username"];
-    [defaults setObject:self.passwordFld.text forKey:@"password"];
-    [defaults setBool:YES forKey:@"registered"];
+    [man GET:@"https://52.89.213.205:8443/rest/user/sites"
+                  parameters:nil
+                    progress:nil
+                     success:^(NSURLSessionDataTask* task, id responseObject) {
+
+                         
+                         NSLog(@"*************************");
+                     } failure:^(NSURLSessionDataTask* task, NSError* error) {
+                         
+                     }];
     
-    [defaults synchronize];
+    [man POST:@"https://52.89.213.205:8443/rest/user/signup"
+                   parameters:params
+                     progress:nil
+                      success:^(NSURLSessionDataTask* task, id responseObject) {
+                          
+                          NSLog(@"*************************");
+                          
+                      } failure:^(NSURLSessionDataTask* task, NSError* error) {
+                          NSLog(@"%@", error);
+                          NSDictionary* dict = [error userInfo];
+                          NSString* errorStr = [dict objectForKey:@"NSLocalizedDescription"];
+                          
+                          if ([errorStr isEqualToString:@"Request failed: unauthorized (401)"]){
+                              
+                          }
+                      }];
+
     
-    UIAlertController* success = [UIAlertController alertControllerWithTitle:@"Success" message:@"You have registered a new user" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"ОК"
-                                                       style:UIAlertActionStyleDefault
-                                                     handler:^(UIAlertAction * _Nonnull action) {
-                                                         
-                                                         
-                                                         [self openStatisticsView];
-                                                         
-                                                     }];
-    
-    [success addAction:okAction];
-    
-    [self presentViewController:success animated:YES completion:nil];
+    //successfully registered user alert
+    //[self successfullyRegisteredAlert];
     
 }
 
@@ -140,6 +136,54 @@
         f.origin.y = 0.0f;
         self.view.frame = f;
     }];
+}
+
+#pragma mark - Help methods -
+- (void) emptyFieldsAlert {
+    
+    UIAlertController* error =
+    [UIAlertController alertControllerWithTitle:@"Oooops"
+                                        message:@"You must complete all fields"
+                                 preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"ОК"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction* action) {
+                                                         [self dismissViewControllerAnimated:YES completion:nil];
+                                                     }];
+    [error addAction:okAction];
+    [self presentViewController:error animated:YES completion:nil];
+}
+
+- (void) doesntMatchPasswordsAlert {
+    NSLog(@"passwords don't match");
+    UIAlertController* error =
+    [UIAlertController alertControllerWithTitle:@"Oooops"
+                                        message:@"Your entered passwords do not match"
+                                 preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"ОК"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction* action) {
+                                                         [self dismissViewControllerAnimated:YES completion:nil];
+                                                     }];
+    [error addAction:okAction];
+    [self presentViewController:error animated:YES completion:nil];
+}
+
+- (void) successfullyRegisteredAlert {
+    
+    UIAlertController* success =
+    [UIAlertController alertControllerWithTitle:@"Success"
+                                        message:@"You have registered a new user"
+                                 preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* okAction =
+    [UIAlertAction actionWithTitle:@"ОК"
+                             style:UIAlertActionStyleDefault
+                           handler:^(UIAlertAction* action) {
+                               [self openStatisticsView];
+                           }];
+    [success addAction:okAction];
+    [self presentViewController:success animated:YES completion:nil];
 }
 
 

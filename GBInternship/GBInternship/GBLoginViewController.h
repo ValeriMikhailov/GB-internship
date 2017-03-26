@@ -15,7 +15,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *usernameFld;
 @property (weak, nonatomic) IBOutlet UITextField *passwordFld;
 
-- (IBAction)loginUser:(id)sender;
 - (void) openStatisticsView;
 
 @end

@@ -10,23 +10,11 @@
 
 @interface GBRegistrationViewController : UIViewController <UITextViewDelegate>
 
-
-
 @property (weak, nonatomic) IBOutlet UIButton *registerBtn;
-
-
 @property (weak, nonatomic) IBOutlet UITextField *usernameFld;
-
-
 @property (weak, nonatomic) IBOutlet UITextField *passwordFld;
-
 @property (weak, nonatomic) IBOutlet UITextField *reEnterPasswordFld;
 
-
-
-
 - (IBAction)registerUser:(id)sender;
-
-
 
 @end
