@@ -16,5 +16,6 @@
     <string name="textview_date">DATE</string>
     <string name="textview_pages">PAGES</string>
     <string name="textview_total">TOTAL</string>
+    <string name="jopa">No data, sorry!</string>
 
 </resources>

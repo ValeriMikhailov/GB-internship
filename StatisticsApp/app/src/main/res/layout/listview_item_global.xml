@@ -11,16 +11,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:paddingBottom="@dimen/textview_padding"
-        android:paddingLeft="@dimen/textview_padding"
-        android:paddingTop="@dimen/textview_padding"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
         android:text="TextView" />
 
     <TextView
-        android:id="@+id/count"
+        android:id="@+id/rank"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="2"
+        android:gravity="right"
         android:paddingBottom="@dimen/textview_padding"
         android:paddingTop="@dimen/textview_padding"
         android:text="TextView" />
