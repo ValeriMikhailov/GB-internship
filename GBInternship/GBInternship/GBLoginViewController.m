@@ -18,10 +18,22 @@
 
 @implementation GBLoginViewController
 
+
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+ //   self.usernameFld.text = @"";
+ //   self.passwordFld.text = @"";
+    self.usernameFld.text = nil;
+    self.passwordFld.text = nil;
+    
+    
+ 
+   
+                                                   
+   
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -64,6 +76,7 @@
 }
 
 #pragma mark - UITextFieldDelegate
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
     if ([textField isEqual:self.usernameFld]) {
@@ -79,12 +92,14 @@
 #pragma mark - keyboard movements
 - (void)keyboardWillShow:(NSNotification *)notification {
     CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    
+    keyboardSize.height= 2*keyboardSize.height/3;
+
     [UIView animateWithDuration:0.3 animations:^{
         CGRect f = self.view.frame;
         f.origin.y = -keyboardSize.height;
         self.view.frame = f;
     }];
+    
 }
 
 -(void)keyboardWillHide:(NSNotification *)notification {
@@ -110,14 +125,18 @@
                                                                               password:password];
         [self.sessionManager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
         
+        
         [self.sessionManager GET:@"sites"
                       parameters:nil
                         progress:nil
+         
                          success:^(NSURLSessionDataTask* task, id responseObject) {
                              isVerified = YES;
                              [self saveInNSDefaultsLogin:login andPassword:password];
                              [self openStatisticsView];
-                         } failure:^(NSURLSessionDataTask* task, NSError* error) {
+                         }
+         
+                         failure:^(NSURLSessionDataTask* task, NSError* error) {
                              NSLog(@"%@", error);
                              NSDictionary* dict = [error userInfo];
                              NSString* errorStr = [dict objectForKey:@"NSLocalizedDescription"];
@@ -128,7 +147,9 @@
                              
                          }];
         
-    } else {
+    }
+    
+    else {
         
         if ([self isHasDBLogin:login andPassword:password]) {
             
@@ -141,7 +162,7 @@
             [self alertBadLogin];
         }
     }
-    
+   
     return isVerified ? YES : NO;
 }
 
@@ -191,7 +212,7 @@
         return NO;
     }
     
-    return nil;
+    return 0;
 }
 
 @end

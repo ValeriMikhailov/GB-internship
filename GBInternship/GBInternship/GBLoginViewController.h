@@ -14,6 +14,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
 @property (weak, nonatomic) IBOutlet UITextField *usernameFld;
 @property (weak, nonatomic) IBOutlet UITextField *passwordFld;
+@property (weak, nonatomic) IBOutlet UIImageView *logoImageView;
+@property (weak, nonatomic) IBOutlet UILabel *statisticsAppLabel;
 
 - (void) openStatisticsView;
 

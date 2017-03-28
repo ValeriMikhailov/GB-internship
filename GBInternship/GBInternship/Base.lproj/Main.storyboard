@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7fx-hj-D10">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7fx-hj-D10">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -121,8 +121,10 @@
                     <navigationItem key="navigationItem" id="hgl-Q0-J30"/>
                     <connections>
                         <outlet property="loginBtn" destination="jit-Cx-aRC" id="aW2-L7-9zz"/>
+                        <outlet property="logoImageView" destination="t11-xD-b12" id="T7R-kj-cY3"/>
                         <outlet property="passwordFld" destination="ESd-Fl-5hz" id="8Mn-aA-3oK"/>
                         <outlet property="registerBtn" destination="YHf-W5-dFg" id="i3z-96-dEF"/>
+                        <outlet property="statisticsAppLabel" destination="pz8-Qm-Tzu" id="sUS-2z-79M"/>
                         <outlet property="usernameFld" destination="FGI-zR-Vnd" id="6Sf-z8-ZIS"/>
                     </connections>
                 </viewController>
@@ -397,7 +399,7 @@
         <!--Navigation Controller-->
         <scene sceneID="jFd-oq-9dh">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7fx-hj-D10" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="GBLoginNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="7fx-hj-D10" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bIe-3O-RN2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

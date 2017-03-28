@@ -7,6 +7,7 @@
 //
 
 #import "GBStatisticsViewController.h"
+#import "GBLoginViewController.h"
 
 @interface GBStatisticsViewController ()
 
@@ -25,9 +26,11 @@
 }
 
 - (IBAction)logOutAction:(id)sender {
+
+       
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"login"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"password"];
     
-    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    GBStatisticsViewController* vc = [sb instantiateViewControllerWithIdentifier:@"GBLoginViewController"];
-    [self presentViewController:vc animated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 @end
