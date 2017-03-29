@@ -150,23 +150,6 @@
             app:layout_constraintTop_toBottomOf="@+id/textViewDate" />
 
         <TextView
-            android:id="@+id/lastUpdateTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="Last Update надо делать!!!"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="10sp"
-            android:visibility="visible"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewTotal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="90dp" />
-
-        <TextView
             android:id="@+id/textViewDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

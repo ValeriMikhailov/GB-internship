@@ -70,7 +70,6 @@ public class DailyFragment extends Fragment implements View.OnFocusChangeListene
         });
 
         //EditText для ввода дат
-
         from = (EditText) view.findViewById(R.id.from);
         from.setOnFocusChangeListener(this);
         to = (EditText) view.findViewById(R.id.to);
@@ -80,9 +79,6 @@ public class DailyFragment extends Fragment implements View.OnFocusChangeListene
         final String[] names = new String[]{"Путин", "Навальный", "Жириновский", "Медведев"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, names);
         listView.setAdapter(adapter);
-
-        TextView lastUpdate = (TextView) view.findViewById(R.id.lastUpdateTextView);
-        lastUpdate.setText(getResources().getString(R.string.last_update) + "  Это надо сделать!!!");
 
         MaterialSpinner spinner = (MaterialSpinner) view.findViewById(R.id.spinnerSiteDailyFragment);
         spinner.setItems("lenta.ru", "pochta.ru", "android.com", "material.io", "mail.ru");
@@ -99,7 +95,7 @@ public class DailyFragment extends Fragment implements View.OnFocusChangeListene
     }
 
     //вызывается когда сменился фокус на EditText
-    //Потом проверка, если в фокусе, то инициировать диалог и показать
+    //Потом проверка, если в фокусе, то инициализировать диалог выбора даты и показать
     @Override
     public void onFocusChange(View view, boolean hasFocus) {
         initDateDialog(view);
@@ -121,15 +117,15 @@ public class DailyFragment extends Fragment implements View.OnFocusChangeListene
                 Calendar newCalendar = Calendar.getInstance();
                 newCalendar.set(year, monthOfYear, dayOfMonth);
                 switch (view.getId()) {
-                  case R.id.from:
-                   from.setText(dateFormat.format(newCalendar.getTime()));
-                  break;
-                  case R.id.to:
-                    to.setText(dateFormat.format(newCalendar.getTime()));
-                    break;
-            }
+                    case R.id.from:
+                        from.setText(dateFormat.format(newCalendar.getTime()));
+                        break;
+                    case R.id.to:
+                        to.setText(dateFormat.format(newCalendar.getTime()));
+                        break;
+                }
 
-              }
+            }
         }, calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH));

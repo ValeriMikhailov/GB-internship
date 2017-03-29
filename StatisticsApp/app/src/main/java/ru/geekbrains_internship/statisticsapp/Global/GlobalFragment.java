@@ -33,21 +33,19 @@ import ru.geekbrains_internship.statisticsapp.R;
 
 public class GlobalFragment extends Fragment {
 
-    private static final String URL_BASIC = "http://52.89.213.205:9000/rest/user/";
-
+    private static final String URL_BASIC = "http://52.89.213.205:9050/rest/user/";
     private final String TAG = "GlobalFragment";
 
-    private ProgressBar progressBar;
+    private ProgressBar progressBar; //индикатор загрузки данных в листвью
 
-    ArrayList<HashMap<String, String>> personList;
+    ArrayList<HashMap<String, String>> personList; //данные для адаптера листвью
     ListView listView;
-    ScrollView sc;
     MaterialSpinner spinner;
-    List<String> sitesForSpinner;
-    HashMap<String, Integer> siteItem;
+    List<String> sitesForSpinner; //данные для спиннера
+    HashMap<String, Integer> siteItem; //список сайтов
     String name;
     String url;
-    TextView jopa;
+    TextView jopa; //текст "нет данных" для листвью
     int idSite;
     SimpleAdapter adapter;
 
@@ -63,7 +61,6 @@ public class GlobalFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_global, container, false);
 
-        sc = (ScrollView) view.findViewById(R.id.scrollViewGlobal);
         jopa = (TextView) view.findViewById(R.id.jopa);
         jopa.setVisibility(View.INVISIBLE);
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
@@ -94,20 +91,8 @@ public class GlobalFragment extends Fragment {
                 WhatsUrl();
                 jopa.setVisibility(View.INVISIBLE);
                 new GetPersonsGlobal().execute();
-              //  synchronized (adapter) {
-
-//                    adapter.notifyDataSetChanged();
-              //  }
-
             }
         });
-
-        //listView = (ListView) view.findViewById(R.id.listViewGlobalFragment);
-        //new GetPersonsGlobal().execute();
-
-        TextView lastUpdate = (TextView) view.findViewById(R.id.lastUpdateTextView);
-        lastUpdate.setText(getResources().getString(R.string.last_update) + "  Это надо сделать!!!");
-
 
         return view;
     }
@@ -129,12 +114,6 @@ public class GlobalFragment extends Fragment {
         @Override
         protected Void doInBackground(Void... arg0) {
             HttpHandler sh = new HttpHandler();
-
-//            //определяем id выбранного в спиннере сайта
-//            int idSite = siteItem.get(name);
-//            //формируем url по этому id
-//            url = URL_BASIC + idSite;
-//            Log.e(TAG, url);
 
             // запрос по url и получение ответа
             String jsonStr = sh.makeServiceCall(url);
@@ -292,10 +271,9 @@ public class GlobalFragment extends Fragment {
     //метод определения нужного url для листвью в зависимости от выбранного пункта в спиннере
     private void WhatsUrl() {
         //определяем id выбранного в спиннере сайта
-//        idSite = siteItem.get(name);
+        //idSite = siteItem.get(name);
         //формируем url по этому id
         url = URL_BASIC + idSite;
         Log.e(TAG, url);
-        //return url;
     }
 }
