@@ -28,11 +28,6 @@
  //   self.passwordFld.text = @"";
     self.usernameFld.text = nil;
     self.passwordFld.text = nil;
-    
-    
- 
-   
-                                                   
    
 }
 
