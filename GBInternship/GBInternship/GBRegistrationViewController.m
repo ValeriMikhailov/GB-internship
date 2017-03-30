@@ -58,118 +58,41 @@
 
 
 - (void) registerNewUser:(NSString*)login andPassword:(NSString*)password {
-    // Try to do it with NSURLSession
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    NSOperationQueue* queue = [NSOperationQueue mainQueue];
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:queue];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setHTTPMethod:@"POST"];
-    [request addValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
+    NSString* url = @"https://52.89.213.205:8443/rest/user/signup";
+    self.sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:url]];
+    self.sessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
+    self.sessionManager.responseSerializer = [AFJSONResponseSerializer serializer];
+    self.sessionManager.securityPolicy.allowInvalidCertificates = YES;
+    self.sessionManager.securityPolicy.validatesDomainName = NO;
+    [self.sessionManager.requestSerializer
+     setAuthorizationHeaderFieldWithUsername:@"user@gmail.com"
+     password:@"user"];
+    [self.sessionManager.requestSerializer setValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
     
-    NSDictionary *postDict = @{@"userName": login,
-                               @"password": password};
-    NSData *postData = [NSJSONSerialization dataWithJSONObject:postDict
-                                                       options:0
-                                                         error:nil];
-    [request setURL:[NSURL URLWithString:@"https://52.89.213.205:8443/rest/user/signup"]];
-    [request setHTTPBody:postData];
-    NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        if (!error) {
-            NSURLSessionUploadTask* uploadTask =
-            [session uploadTaskWithRequest:request
-                                  fromData:postData completionHandler:^(NSData* data, NSURLResponse* response, NSError* error) {
-                                      NSLog(@"%@", uploadTask);
-                                      
-                                  }];
-        } else {
-            // error code here
-            NSLog(@"%@", error);
-        }
-        
-    }];
-    [postDataTask resume];
+    NSMutableDictionary *postDictAFN = [[NSMutableDictionary alloc] init];
+    [postDictAFN setValue:login forKey:@"userName"];
+    [postDictAFN setValue:password forKey:@"password"];
     
-    //NSData* request = [NSData dataWithBytes:[jsonRequest UTF8String]
-                                     //length:[jsonRequest length]];
-    
-    //NSData* request = [NSJSONSerialization dataWithJSONObject:jsonRequest
-                                                      //options:NSJSONWritingPrettyPrinted
-                                                        //error:nil];
-    
-//    [man POST:@"https://52.89.213.205:8443/rest/user/signup"
-//                   parameters:jsonRequest
-//                     progress:nil
-//                      success:^(NSURLSessionDataTask* task, id responseObject) {
-//                          
-//                          NSLog(@"*************************");
-//                          
-//                      } failure:^(NSURLSessionDataTask* task, NSError* error) {
-//                          NSLog(@"%@", error);
-//                          NSDictionary* dict = [error userInfo];
-//                          NSString* errorStr = [dict objectForKey:@"NSLocalizedDescription"];
-//                          
-//                          if ([errorStr isEqualToString:@"Request failed: unauthorized (401)"]){
-//                              
-//                          }
-//                      }];
-
-    
-    //successfully registered user alert
-    //[self successfullyRegisteredAlert];
-    
-
-////    NSDictionary* dict = @{@"\"userName\"":[NSString stringWithFormat:@"\"%@\"", login],
-////                           @"\"password\"":[NSString stringWithFormat:@"\"%@\"", password]};
-//    NSDictionary* dict = @{@"\"userName\"":@"\"stas2@gmail.com\"",
-//                           @"\"password\"":@"\"12\""};
-//    // Change your 'params' dictionary to JSON string to set it into HTTP
-//    // body. Dictionary type will be not understanding by request.
-//    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dict
-//                                                       options:0
-//                                                         error:nil];
-//    NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-//    //NSString *jsonString = [NSString stringWithFormat:@"{\"userName\":\"%@\",\"password\":\"%@\"}",login,password];
-//    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-//
-//
-//    NSMutableURLRequest *request =
-//    [[AFJSONRequestSerializer serializer] requestWithMethod:@"POST"
-//                                                  URLString:@"https://52.89.213.205:8443/rest/user/signup"
-//                                                 parameters:nil
-//                                                      error:nil];
-//    
-//    //set headers
-//    [request setValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
-//    
-//    //post  
-//    [request setHTTPBody:[jsonString dataUsingEncoding:NSUTF8StringEncoding]];
-//    
-//    [[manager dataTaskWithRequest:request
-//            completionHandler:^(NSURLResponse* response, id responseObject, NSError* error) {
-//        
-//        if (!error) {
-//            NSLog(@"Reply JSON: %@", responseObject);
-//            
-//            if ([responseObject isKindOfClass:[NSDictionary class]]) {
-//                //blah blah
-//            }
-//        } else {
-//            NSLog(@"Error: %@, %@, %@", error, response, responseObject);
-//        }
-//    }] resume];
-    
+    [self.sessionManager POST:url
+                   parameters:postDictAFN
+                     progress:nil
+                      success:^(NSURLSessionDataTask* task, id responseObject) {
+                          //NSLog(@"AFN jsonPost: %@", task);
+                          //NSLog(@"AFN jsonPost: %@", responseObject);
+                          //NSLog(@"\n\n\n\n\n\n\n\n");
+                          
+                          //successfully registered user alert
+                          [self successfullyRegisteredAlert];
+                      } failure:^(NSURLSessionDataTask* task, NSError* error) {
+                          NSError* dict1 = [[error userInfo] objectForKey:@"NSUnderlyingError"];
+                          NSString* errorStr = [[dict1 userInfo] objectForKey:@"NSLocalizedDescription"];
+                          NSLog(@"errorStr: %@", errorStr);
+                          if ([errorStr isEqualToString:@"Request failed: conflict (409)"]){
+                              [self userAlreadyExistsAlert];
+                          }
+                      }];
     
 }
-
-- (void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential *))completionHandler{
-    if([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]){
-        if([challenge.protectionSpace.host isEqualToString:@"52.89.213.205"]){
-            NSURLCredential *credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
-            completionHandler(NSURLSessionAuthChallengeUseCredential,credential);
-        }
-    }
-}
-
 
 - (void) openStatisticsView {
     UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -177,11 +100,25 @@
     [self presentViewController:vc animated:YES completion:nil];
 }
 
+- (void) openLoginView {
+    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    GBLoginViewController* vc = [sb instantiateViewControllerWithIdentifier:@"GBLoginViewController"];
+    [self presentViewController:vc animated:YES completion:nil];
+}
+
 #pragma mark - UITextFieldDelegate
 
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [textField resignFirstResponder];
+    
+    if ([textField isEqual:self.usernameFld]) {
+        [self.passwordFld becomeFirstResponder];
+    } else if ([textField isEqual:self.passwordFld]) {
+        [self.reEnterPasswordFld becomeFirstResponder];
+    } else {
+        [textField resignFirstResponder];
+        [self registerNewUser:self.usernameFld.text andPassword:self.passwordFld.text];
+    }
     
     return YES;
 }
@@ -251,6 +188,29 @@
                            }];
     [success addAction:okAction];
     [self presentViewController:success animated:YES completion:nil];
+}
+
+- (void) userAlreadyExistsAlert {
+    
+    UIAlertController* exists =
+    [UIAlertController alertControllerWithTitle:@"User exists"
+                                        message:@"You have entered login that already used! Please register with other login."
+                                 preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* okAction =
+    [UIAlertAction actionWithTitle:@"ОК"
+                             style:UIAlertActionStyleDefault
+                           handler:^(UIAlertAction* action) {
+                               
+                           }];
+    UIAlertAction* tryLogin =
+    [UIAlertAction actionWithTitle:@"Try to login"
+                             style:UIAlertActionStyleDefault
+                           handler:^(UIAlertAction* action) {
+                               [self openLoginView];
+                           }];
+    [exists addAction:okAction];
+    [exists addAction:tryLogin];
+    [self presentViewController:exists animated:YES completion:nil];
 }
 
 
