@@ -182,7 +182,7 @@
     NSString* message;
     
     if ([lastVisit isEqualToString:@"nil"]) {
-        message = @"Greetings! You're using this app at first time!";
+        message = @"Greetings! You're using this app for the first time!";
     } else {
         message = [NSString stringWithFormat:@"Hello again, your last visit was:\n%@ ago", lastVisit ];
     }

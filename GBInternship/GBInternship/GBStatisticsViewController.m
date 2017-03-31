@@ -34,8 +34,8 @@
 
 - (void) byeAlert {
     UIAlertController* bye =
-    [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"See you later, dear %@", [[GBPersistentManager sharedManager] currentUser]]
-                                        message:@"Will wait you again!"
+    [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Dear %@, already leaving?", [[GBPersistentManager sharedManager] currentUser]]
+                                        message:@"Hope to see you soon!"
                                  preferredStyle:UIAlertControllerStyleAlert];
     
     [self presentViewController:bye animated:YES completion:nil];

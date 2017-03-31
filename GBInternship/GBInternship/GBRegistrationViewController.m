@@ -180,7 +180,7 @@
     
     UIAlertController* success =
     [UIAlertController alertControllerWithTitle:@"Success"
-                                        message:@"You have registered a new user"
+                                        message:@"You are registered as a new user"
                                  preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction* okAction =
     [UIAlertAction actionWithTitle:@"ОК"
@@ -196,7 +196,7 @@
     
     UIAlertController* exists =
     [UIAlertController alertControllerWithTitle:@"User exists"
-                                        message:@"You have entered login that already used! Please register with other login."
+                                        message:@"You have entered login that already in use! Please register with other login."
                                  preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction* okAction =
     [UIAlertAction actionWithTitle:@"ОК"

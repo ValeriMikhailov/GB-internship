@@ -262,7 +262,7 @@
         return NO;
     }
     
-    return nil;
+    return NO;
 }
 
 - (void) saveUserWithLogin: (NSString*) login andPassword: (NSString*) password {
