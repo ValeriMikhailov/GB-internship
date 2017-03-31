@@ -9,6 +9,7 @@
 #import "GBLoginViewController.h"
 #import "GBStatisticsViewController.h"
 #import <AFNetworking/AFNetworking.h>
+#import "GBPersistentManager.h"
 
 @interface GBLoginViewController ()
 
@@ -127,8 +128,9 @@
          
                          success:^(NSURLSessionDataTask* task, id responseObject) {
                              isVerified = YES;
-                             [self saveInNSDefaultsLogin:login andPassword:password];
-                             [self openStatisticsView];
+                             [[GBPersistentManager sharedManager] saveUserWithLogin:login andPassword:password];
+                             [self helloAlert:login];
+                             //[self openStatisticsView];
                          }
          
                          failure:^(NSURLSessionDataTask* task, NSError* error) {
@@ -147,10 +149,9 @@
     else {
         
         if ([self isHasDBLogin:login andPassword:password]) {
-            
             isVerified = YES;
-            [self openStatisticsView];
-            
+            [self helloAlert:login];
+            //[self openStatisticsView];
         } else {
             
             isVerified = NO;
@@ -176,6 +177,35 @@
     [self presentViewController:error animated:YES completion:nil];
 }
 
+- (void) helloAlert: (NSString*) login {
+    
+    NSString* lastVisit = [[GBPersistentManager sharedManager] userLastVisitDate:login];
+    NSString* message;
+    
+    if (!lastVisit) {
+        message = @"Greetings! Using this app at first time!";
+    } else {
+        message = [NSString stringWithFormat:@"Hello again, your last visit date is: %@", lastVisit];
+    }
+    
+    UIAlertController* hello =
+    [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Hello, dear %@", login]
+                                        message:message
+                                 preferredStyle:UIAlertControllerStyleAlert];
+    
+    [self presentViewController:hello animated:YES completion:nil];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        [hello dismissViewControllerAnimated:YES completion:^{
+            [self openStatisticsView];
+        }];
+        
+    });
+    
+
+    
+}
+
 - (BOOL) connectedToInternet {
     
     NSString *URLString = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://www.google.com"] encoding:NSASCIIStringEncoding error:nil];
@@ -184,26 +214,16 @@
     return ( URLString != NULL ) ? YES : NO;
 }
 
-- (void) saveInNSDefaultsLogin:(NSString*) login andPassword:(NSString*) password {
-    
-    [[NSUserDefaults standardUserDefaults] setValue:login forKey:@"login"];
-    [[NSUserDefaults standardUserDefaults] setValue:password forKey:@"password"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
 - (BOOL) isHasDBLogin:(NSString*)login andPassword:(NSString*) password {
     
-    NSUserDefaults* df = [NSUserDefaults standardUserDefaults];
+    BOOL exists = [[GBPersistentManager sharedManager] isUserExistAndCheckLogin:login andPassword:password];
     
-    if ([self.usernameFld.text isEqualToString:[df objectForKey:@"login"]] && [self.passwordFld.text isEqualToString:[df objectForKey:@"password"]]) {
-        NSLog(@"login credentials accepted");
+    if (exists) {
         self.usernameFld.text = nil;
         self.passwordFld.text = nil;
-        
         return YES;
-        
     } else {
-
+        
         return NO;
     }
     

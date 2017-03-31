@@ -17,6 +17,7 @@
 #import "GBStatisticAPI.h"
 #import "GBStatistic+CoreDataProperties.h"
 
+
 @interface GBPersistentManager ()
 
 @end
@@ -248,6 +249,46 @@
 - (BOOL) isHasDB:(NSString*)entity {
     
     return ([[NSUserDefaults standardUserDefaults] boolForKey:entity]) ? YES : NO;
+}
+
+- (BOOL) isUserExistAndCheckLogin: (NSString*) login andPassword: (NSString*) password {
+    
+    GBUser* user = [[GBDataManager sharedManager] userFromDBWithLogin:login];
+    
+    if ([login isEqualToString:user.loginName] && [password isEqualToString:user.password]) {
+        NSLog(@"login credentials accepted");
+        return YES;
+    } else {
+        return NO;
+    }
+    
+    return nil;
+}
+
+- (void) saveUserWithLogin: (NSString*) login andPassword: (NSString*) password {
+    
+    [[GBDataManager sharedManager] saveUserWithLogin:login andPassword:password];
+}
+
+- (void) saveUserLastDateWithLogin: (NSString*) login {
+    
+    [[GBDataManager sharedManager] saveUserLastDateVisitWithLogin:login];
+}
+
+- (NSString*) userLastVisitDate: (NSString*) login {
+    
+    NSDate* lastVisitDate = [[GBDataManager sharedManager] userLastVisitDateWithLogin:login];
+    NSString* lastVisit = [self stringFromDate:lastVisitDate];
+    
+    return lastVisit;
+}
+
+- (NSString*) stringFromDate:(NSDate*) date {
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    return [dateFormatter stringFromDate:date];
 }
 
 @end

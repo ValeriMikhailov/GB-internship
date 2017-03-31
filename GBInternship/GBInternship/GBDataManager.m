@@ -10,6 +10,7 @@
 #import "GBSite+CoreDataClass.h"
 #import "GBPerson+CoreDataClass.h"
 #import "GBStatistic+CoreDataClass.h"
+#import "GBUser+CoreDataClass.h"
 
 @implementation GBDataManager
 
@@ -185,7 +186,69 @@
     }
 }
 
-#pragma mark - Fetch from DB methods - 
+- (void) saveUserWithLogin: (NSString*) login andPassword: (NSString*) password {
+    
+    NSEntityDescription* entityObject =
+    [NSEntityDescription entityForName:@"GBUser"
+                inManagedObjectContext:self.managedObjectContext];
+    
+    NSFetchRequest* request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityObject];
+    [request setFetchLimit:1];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"loginName = %@", login]];
+    
+    NSError *error = nil;
+    NSUInteger count = [self.managedObjectContext countForFetchRequest:request error:&error];
+    
+    BOOL duplicate = count > 0 ? YES : NO;
+    
+    if (!duplicate) {
+        
+        // Set newUser ID
+        NSEntityDescription* entity2 = [NSEntityDescription entityForName:@"GBUser" inManagedObjectContext:self.managedObjectContext];
+        NSFetchRequest* request2 = [[NSFetchRequest alloc] init];
+        [request2 setEntity:entity2];
+        NSArray* users = [self.managedObjectContext executeFetchRequest:request2 error:nil];
+        NSLog(@"%lu", (unsigned long)users.count);
+        GBUser* user =
+        [NSEntityDescription insertNewObjectForEntityForName:@"GBUser"
+                                      inManagedObjectContext:self.managedObjectContext];
+        user.userID = users.count + 1;
+        NSLog(@"%d", user.userID);
+        
+        user.loginName = login;
+        NSLog(@"%@", user.loginName);
+        user.password = password;
+        NSLog(@"%@", user.password);
+        
+        [user.managedObjectContext save:nil];
+        
+        //check how much of users are in DB
+        NSEntityDescription* entity3 = [NSEntityDescription entityForName:@"GBUser" inManagedObjectContext:self.managedObjectContext];
+        NSFetchRequest* request3 = [[NSFetchRequest alloc] init];
+        [request3 setEntity:entity3];
+        NSArray* users2 = [self.managedObjectContext executeFetchRequest:request3 error:nil];
+        NSLog(@"%lu", (unsigned long)users2.count);
+    }
+}
+
+- (void) saveUserLastDateVisitWithLogin: (NSString*) login {
+    
+    NSEntityDescription* entityObject =
+    [NSEntityDescription entityForName:@"GBUser"
+                inManagedObjectContext:self.managedObjectContext];
+    
+    NSFetchRequest* request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityObject];
+    [request setFetchLimit:1];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"loginName = %@", login]];
+    NSArray* users = [self.managedObjectContext executeFetchRequest:request error:nil];
+    //NSLog(@"%lu", (unsigned long)sites.count);
+    GBUser* user = [users firstObject];
+    user.lastVisitDate = [NSDate date];
+}
+
+#pragma mark - Fetch from DB methods -
 
 - (NSArray*) allStatisticForSite: (NSInteger) siteID {
 
@@ -215,6 +278,28 @@
     [request setPredicate:[NSPredicate predicateWithFormat:@"sites.siteID == %d AND persons.personID == %d AND date >= %@ AND date <= %@", siteID, personID, startOfDay, endOfDay]];
     NSArray* stat = [self.managedObjectContext executeFetchRequest:request error:nil];
     return stat;
+}
+
+- (GBUser*) userFromDBWithLogin:(NSString*) login {
+
+    NSEntityDescription* entity = [NSEntityDescription entityForName:@"GBUser" inManagedObjectContext:self.managedObjectContext];
+    NSFetchRequest* request = [[NSFetchRequest alloc] init];
+    [request setEntity:entity];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"loginName == %@", login]];
+    NSArray* arr = [self.managedObjectContext executeFetchRequest:request error:nil];
+    return [arr firstObject];
+}
+
+- (NSDate*) userLastVisitDateWithLogin: (NSString*) login {
+    
+    NSEntityDescription* entity = [NSEntityDescription entityForName:@"GBUser" inManagedObjectContext:self.managedObjectContext];
+    NSFetchRequest* request = [[NSFetchRequest alloc] init];
+    [request setEntity:entity];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"loginName == %@", login]];
+    NSArray* arr = [self.managedObjectContext executeFetchRequest:request error:nil];
+    GBUser* user = [arr firstObject];
+    
+    return user.lastVisitDate;
 }
 
 

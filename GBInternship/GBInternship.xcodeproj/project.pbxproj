@@ -239,12 +239,12 @@
 				52FEFADA1E818DE9007E5972 /* GBSite+CoreDataProperties.m */,
 				52FEFADB1E818DE9007E5972 /* GBUser+CoreDataClass.h */,
 				52FEFADC1E818DE9007E5972 /* GBUser+CoreDataClass.m */,
-				52FEFADD1E818DE9007E5972 /* GBUser+CoreDataProperties.h */,
-				52FEFADE1E818DE9007E5972 /* GBUser+CoreDataProperties.m */,
 				52FEFADF1E818DE9007E5972 /* GBStatistic+CoreDataClass.h */,
 				52FEFAE01E818DE9007E5972 /* GBStatistic+CoreDataClass.m */,
 				52FEFAE11E818DE9007E5972 /* GBStatistic+CoreDataProperties.h */,
 				52FEFAE21E818DE9007E5972 /* GBStatistic+CoreDataProperties.m */,
+				52FEFADD1E818DE9007E5972 /* GBUser+CoreDataProperties.h */,
+				52FEFADE1E818DE9007E5972 /* GBUser+CoreDataProperties.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";

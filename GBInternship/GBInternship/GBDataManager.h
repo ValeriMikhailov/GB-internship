@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import <UIKit/UIKit.h>
+#import "GBUser+CoreDataClass.h"
 
 @interface GBDataManager : NSObject
 
@@ -50,5 +51,11 @@
                     andEndDate: (NSDate*) endDate
                      onSuccess: (void(^)(NSArray* statisticArray)) success
                      onFailure: (void(^)(NSError* error)) failure;
+
+#pragma mark - User's entity methods - 
+- (GBUser*) userFromDBWithLogin:(NSString*) login;
+- (void) saveUserWithLogin: (NSString*) login andPassword: (NSString*) password;
+- (NSDate*) userLastVisitDateWithLogin: (NSString*) login;
+- (void) saveUserLastDateVisitWithLogin: (NSString*) login;
 
 @end

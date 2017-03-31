@@ -2,7 +2,7 @@
 //  GBUser+CoreDataProperties.m
 //  GBInternship
 //
-//  Created by Stanly Shiyanovskiy on 21.03.17.
+//  Created by Stanly Shiyanovskiy on 31.03.17.
 //  Copyright © 2017 Stanly Shiyanovskiy. All rights reserved.
 //
 
@@ -16,7 +16,7 @@
 
 @dynamic lastVisitDate;
 @dynamic loginName;
-@dynamic password;
 @dynamic userID;
+@dynamic password;
 
 @end

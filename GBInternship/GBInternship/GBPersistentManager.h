@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GBUser+CoreDataClass.h"
 
 @interface GBPersistentManager : NSObject
 
@@ -33,5 +34,10 @@
                     andEndDate: (NSDate*) endDate
                      onSuccess: (void(^)(NSArray* statisticArray)) success
                      onFailure: (void(^)(NSError* error)) failure;
+
+//User's methods
+- (BOOL) isUserExistAndCheckLogin: (NSString*) login andPassword: (NSString*) password;
+- (void) saveUserWithLogin: (NSString*) login andPassword: (NSString*) password;
+- (NSString*) userLastVisitDate: (NSString*) login;
 
 @end

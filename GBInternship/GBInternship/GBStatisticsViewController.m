@@ -28,8 +28,8 @@
 - (IBAction)logOutAction:(id)sender {
 
        
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"login"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"password"];
+    //[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"login"];
+    //[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"password"];
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
