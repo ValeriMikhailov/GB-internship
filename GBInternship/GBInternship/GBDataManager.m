@@ -270,7 +270,7 @@
         [request3 setEntity:entity3];
         NSArray* users2 = [self.managedObjectContext executeFetchRequest:request3 error:nil];
         NSLog(@"%lu", (unsigned long)users2.count);
-    }
+    } 
 }
 
 - (void) saveUserLastDateVisitWithLogin: (NSString*) login {

@@ -10,6 +10,7 @@
 #import "GBLoginViewController.h"
 #import "GBStatisticsViewController.h"
 #import <AFNetworking/AFNetworking.h>
+#import "GBPersistentManager.h"
 
 @interface GBRegistrationViewController ()  <UITextFieldDelegate, NSURLSessionDelegate>
 
@@ -83,6 +84,7 @@
                           
                           //successfully registered user alert
                           [self successfullyRegisteredAlert];
+                          [[GBPersistentManager sharedManager] saveUserWithLogin:login andPassword:password];
                       } failure:^(NSURLSessionDataTask* task, NSError* error) {
                           NSError* dict1 = [[error userInfo] objectForKey:@"NSUnderlyingError"];
                           NSString* errorStr = [[dict1 userInfo] objectForKey:@"NSLocalizedDescription"];

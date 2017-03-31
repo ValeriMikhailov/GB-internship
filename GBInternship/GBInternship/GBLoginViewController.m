@@ -130,7 +130,6 @@
                              isVerified = YES;
                              [[GBPersistentManager sharedManager] saveUserWithLogin:login andPassword:password];
                              [self helloAlert:login];
-                             //[self openStatisticsView];
                          }
          
                          failure:^(NSURLSessionDataTask* task, NSError* error) {
@@ -151,9 +150,7 @@
         if ([self isHasDBLogin:login andPassword:password]) {
             isVerified = YES;
             [self helloAlert:login];
-            //[self openStatisticsView];
         } else {
-            
             isVerified = NO;
             [self alertBadLogin];
         }
