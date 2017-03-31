@@ -278,9 +278,24 @@
 - (NSString*) userLastVisitDate: (NSString*) login {
     
     NSDate* lastVisitDate = [[GBDataManager sharedManager] userLastVisitDateWithLogin:login];
-    NSString* lastVisit = [self stringFromDate:lastVisitDate];
+    NSString* lastVisit = [self timeLeftSinceDate:lastVisitDate];
     
     return lastVisit;
+}
+
+- (void) setUserCurrentState: (NSString*) login {
+    
+    [[GBDataManager sharedManager] setUserCurrentState:login];
+}
+
+- (void) setAllUsersStatesToNO {
+    
+    [[GBDataManager sharedManager] setAllUsersStatesToNo];
+}
+
+- (NSString*) currentUser {
+    
+    return [[GBDataManager sharedManager] currentUser];
 }
 
 - (NSString*) stringFromDate:(NSDate*) date {
@@ -289,6 +304,55 @@
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
     return [dateFormatter stringFromDate:date];
+}
+
+-(NSString*) timeLeftSinceDate: (NSDate *) dateT {
+    
+    if (!dateT) {
+        return @"nil";
+    } else {
+        
+        NSString* str;
+        // The time interval
+        NSTimeInterval theTimeInterval = [[NSDate date] timeIntervalSinceDate:dateT];
+        // Get the system calendar
+        NSCalendar *sysCalendar = [NSCalendar currentCalendar];
+        // Create the NSDates
+        NSDate *date1 = [[NSDate alloc] init];
+        NSDate *date2 = [[NSDate alloc] initWithTimeInterval:theTimeInterval sinceDate:date1];
+        // Get conversion to months, days, hours, minutes
+        NSCalendarUnit unitFlags = NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
+        NSDateComponents *breakdownInfo = [sysCalendar components:unitFlags fromDate:date1  toDate:date2  options:0];
+        NSInteger months = breakdownInfo.month;
+        NSInteger days = breakdownInfo.day;
+        NSInteger hours = breakdownInfo.hour;
+        NSInteger minutes = breakdownInfo.minute;
+        
+        if (months == 0) {
+            if (days == 0) {
+                if (hours == 0) {
+                    if (minutes == 0) {
+                        str = [NSString stringWithFormat:@"%li seconds", (long)[breakdownInfo second]];
+                    } else {
+                        str = [NSString stringWithFormat:@"%li min  %li seconds", (long)[breakdownInfo minute], (long)[breakdownInfo second]];
+                    }
+                } else {
+                    str =
+                    [NSString stringWithFormat:@"%li hours %li min %li seconds", (long)[breakdownInfo hour], (long)[breakdownInfo minute], (long)[breakdownInfo second]];
+                }
+            } else {
+                str =
+                [NSString stringWithFormat:@"%li days %li hours %li min %li seconds", (long)[breakdownInfo day], (long)[breakdownInfo hour], (long)[breakdownInfo minute], (long)[breakdownInfo second]];
+            }
+        } else {
+            str =
+            [NSString stringWithFormat:@"%li months %li days %li hours %li min %li seconds", (long)[breakdownInfo month], (long)[breakdownInfo day], (long)[breakdownInfo hour], (long)[breakdownInfo minute], (long)[breakdownInfo second]];
+        }
+        
+        return str;
+    }
+    
+    return nil;
 }
 
 @end

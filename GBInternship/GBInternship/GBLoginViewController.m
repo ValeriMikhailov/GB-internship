@@ -179,13 +179,15 @@
 
 - (void) helloAlert: (NSString*) login {
     
+    [[GBPersistentManager sharedManager] setUserCurrentState:login];
+    
     NSString* lastVisit = [[GBPersistentManager sharedManager] userLastVisitDate:login];
     NSString* message;
     
-    if (!lastVisit) {
-        message = @"Greetings! Using this app at first time!";
+    if ([lastVisit isEqualToString:@"nil"]) {
+        message = @"Greetings! You're using this app at first time!";
     } else {
-        message = [NSString stringWithFormat:@"Hello again, your last visit date is: %@", lastVisit];
+        message = [NSString stringWithFormat:@"Hello again, your last visit was:\n%@ ago", lastVisit ];
     }
     
     UIAlertController* hello =
@@ -194,15 +196,13 @@
                                  preferredStyle:UIAlertControllerStyleAlert];
     
     [self presentViewController:hello animated:YES completion:nil];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         [hello dismissViewControllerAnimated:YES completion:^{
             [self openStatisticsView];
         }];
         
     });
-    
-
     
 }
 

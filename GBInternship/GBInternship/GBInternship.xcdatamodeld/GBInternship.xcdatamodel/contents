@@ -18,6 +18,7 @@
         <relationship name="sites" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GBSite" inverseName="statistic" inverseEntity="GBSite" syncable="YES"/>
     </entity>
     <entity name="GBUser" representedClassName="GBUser" syncable="YES">
+        <attribute name="isCurrent" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="lastVisitDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="loginName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
@@ -27,6 +28,6 @@
         <element name="GBPerson" positionX="-99" positionY="-9" width="128" height="88"/>
         <element name="GBSite" positionX="288" positionY="-7" width="128" height="88"/>
         <element name="GBStatistic" positionX="99" positionY="-9" width="128" height="118"/>
-        <element name="GBUser" positionX="88" positionY="-144" width="128" height="103"/>
+        <element name="GBUser" positionX="88" positionY="-144" width="128" height="118"/>
     </elements>
 </model>

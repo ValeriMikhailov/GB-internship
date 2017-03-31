@@ -18,5 +18,6 @@
 @dynamic loginName;
 @dynamic userID;
 @dynamic password;
+@dynamic isCurrent;
 
 @end

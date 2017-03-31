@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSString *loginName;
 @property (nonatomic) int16_t userID;
 @property (nullable, nonatomic, copy) NSString *password;
+@property (nonatomic) BOOL isCurrent;
 
 @end
 

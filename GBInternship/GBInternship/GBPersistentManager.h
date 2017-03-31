@@ -39,5 +39,9 @@
 - (BOOL) isUserExistAndCheckLogin: (NSString*) login andPassword: (NSString*) password;
 - (void) saveUserWithLogin: (NSString*) login andPassword: (NSString*) password;
 - (NSString*) userLastVisitDate: (NSString*) login;
+- (void) saveUserLastDateWithLogin: (NSString*) login;
+- (void) setUserCurrentState: (NSString*) login;
+- (void) setAllUsersStatesToNO;
+- (NSString*) currentUser;
 
 @end
