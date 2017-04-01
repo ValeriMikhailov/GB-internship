@@ -91,6 +91,8 @@
                           NSLog(@"errorStr: %@", errorStr);
                           if ([errorStr isEqualToString:@"Request failed: conflict (409)"]){
                               [self userAlreadyExistsAlert];
+                          } else if ([errorStr isEqualToString:@"Request failed: bad request (400)"]) {
+                              [self loginFieldRequirements];
                           }
                       }];
     
@@ -150,6 +152,22 @@
     UIAlertController* error =
     [UIAlertController alertControllerWithTitle:@"Oooops"
                                         message:@"You must complete all fields"
+                                 preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"ОК"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction* action) {
+                                                         [self dismissViewControllerAnimated:YES completion:nil];
+                                                     }];
+    [error addAction:okAction];
+    [self presentViewController:error animated:YES completion:nil];
+}
+
+- (void) loginFieldRequirements {
+    
+    UIAlertController* error =
+    [UIAlertController alertControllerWithTitle:@"Wrong registration fields!"
+                                        message:@"Your login must meet these requirements: must be at least 3 characters, include @ symbol and domain postfix.\nFor example: ben@jail.com"
                                  preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"ОК"

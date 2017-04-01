@@ -12,13 +12,16 @@
 
 @interface GBStatisticsViewController ()
 
+@property (strong, nonatomic) GBUser* currentUser;
+
 @end
 
 @implementation GBStatisticsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.currentUser = [[GBPersistentManager sharedManager] currentUser];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -29,12 +32,13 @@
 - (IBAction)logOutAction:(id)sender {
     //[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"login"];
     //[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"password"];
+    [[GBPersistentManager sharedManager] saveUserLastDateWithLogin:self.currentUser.loginName];
     [self byeAlert];
 }
 
 - (void) byeAlert {
     UIAlertController* bye =
-    [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Dear %@, already leaving?", [[GBPersistentManager sharedManager] currentUser]]
+    [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Dear %@, already leaving?", self.currentUser.loginName]
                                         message:@"Hope to see you soon!"
                                  preferredStyle:UIAlertControllerStyleAlert];
     

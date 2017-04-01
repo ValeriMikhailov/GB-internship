@@ -199,12 +199,8 @@
     NSArray* users = [self.managedObjectContext executeFetchRequest:request error:nil];
     //NSLog(@"%lu", (unsigned long)sites.count);
     GBUser* user = [users firstObject];
-    
-    if (user.isCurrent == YES) {
-        user.isCurrent = NO;
-    } else {
-        user.isCurrent = YES;
-    }
+    user.isCurrent = YES;
+    [user.managedObjectContext save:nil];
 }
 
 - (void) setAllUsersStatesToNo {
@@ -223,6 +219,7 @@
     for (GBUser* usr in users) {
         usr.isCurrent = NO;
         usr.lastVisitDate = [NSDate date];
+        [usr.managedObjectContext save:nil];
     }
     
 }
@@ -269,7 +266,7 @@
         NSFetchRequest* request3 = [[NSFetchRequest alloc] init];
         [request3 setEntity:entity3];
         NSArray* users2 = [self.managedObjectContext executeFetchRequest:request3 error:nil];
-        NSLog(@"%lu", (unsigned long)users2.count);
+        //NSLog(@"%lu", (unsigned long)users2.count);
     } 
 }
 
@@ -287,22 +284,8 @@
     //NSLog(@"%lu", (unsigned long)sites.count);
     GBUser* user = [users firstObject];
     user.lastVisitDate = [NSDate date];
-}
-
-- (NSString*) currentUser {
-    
-    NSEntityDescription* entityObject =
-    [NSEntityDescription entityForName:@"GBUser"
-                inManagedObjectContext:self.managedObjectContext];
-    
-    NSFetchRequest* request = [[NSFetchRequest alloc] init];
-    [request setEntity:entityObject];
-    [request setFetchLimit:1];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"isCurrent == YES"]];
-    NSArray* users = [self.managedObjectContext executeFetchRequest:request error:nil];
-    NSLog(@"%lu", (unsigned long)users.count);
-    GBUser* user = [users firstObject];
-    return user.loginName;
+    //NSLog(@"\n\n\n\n\n\nuser last visit is: %@", user.lastVisitDate);
+    [user.managedObjectContext save:nil];
 }
 
 #pragma mark - Fetch from DB methods -
@@ -347,6 +330,16 @@
     return [arr firstObject];
 }
 
+- (GBUser*) currentUser {
+    
+    NSEntityDescription* entity = [NSEntityDescription entityForName:@"GBUser" inManagedObjectContext:self.managedObjectContext];
+    NSFetchRequest* request = [[NSFetchRequest alloc] init];
+    [request setEntity:entity];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"isCurrent == YES"]];
+    NSArray* arr = [self.managedObjectContext executeFetchRequest:request error:nil];
+    return [arr firstObject];
+}
+
 - (NSDate*) userLastVisitDateWithLogin: (NSString*) login {
     
     NSEntityDescription* entity = [NSEntityDescription entityForName:@"GBUser" inManagedObjectContext:self.managedObjectContext];
@@ -355,7 +348,7 @@
     [request setPredicate:[NSPredicate predicateWithFormat:@"loginName == %@", login]];
     NSArray* arr = [self.managedObjectContext executeFetchRequest:request error:nil];
     GBUser* user = [arr firstObject];
-    
+    //NSLog(@"\n\n\n\n\n\n\nuser last visit in DB: %@", user.lastVisitDate);
     return user.lastVisitDate;
 }
 

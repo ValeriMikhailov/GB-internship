@@ -59,6 +59,6 @@
 - (void) saveUserLastDateVisitWithLogin: (NSString*) login;
 - (void) setUserCurrentState: (NSString*) login;
 - (void) setAllUsersStatesToNo;
-- (NSString*) currentUser;
+- (GBUser*) currentUser;
 
 @end

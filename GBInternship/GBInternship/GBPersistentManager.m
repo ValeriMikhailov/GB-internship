@@ -293,7 +293,7 @@
     [[GBDataManager sharedManager] setAllUsersStatesToNo];
 }
 
-- (NSString*) currentUser {
+- (GBUser*) currentUser {
     
     return [[GBDataManager sharedManager] currentUser];
 }

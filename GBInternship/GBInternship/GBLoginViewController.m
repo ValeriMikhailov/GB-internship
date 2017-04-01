@@ -163,13 +163,13 @@
     
     CABasicAnimation *animation =
     [CABasicAnimation animationWithKeyPath:@"position"];
-    [animation setDuration:0.05];
-    [animation setRepeatCount:4];
+    [animation setDuration:0.07];
+    [animation setRepeatCount:3];
     [animation setAutoreverses:YES];
     [animation setFromValue:[NSValue valueWithCGPoint:
-                             CGPointMake([self.filedsOutlet center].x - 20.0f, [self.filedsOutlet center].y)]];
+                             CGPointMake([self.filedsOutlet center].x - 10.0f, [self.filedsOutlet center].y)]];
     [animation setToValue:[NSValue valueWithCGPoint:
-                           CGPointMake([self.filedsOutlet center].x + 20.0f, [self.filedsOutlet center].y)]];
+                           CGPointMake([self.filedsOutlet center].x + 10.0f, [self.filedsOutlet center].y)]];
     [CATransaction setCompletionBlock:^{
         [self alertBadLogin];
     }];
@@ -192,12 +192,12 @@
 }
 
 - (void) helloAlert: (NSString*) login {
-    
+    // установка пользователю значения "текущий"
     [[GBPersistentManager sharedManager] setUserCurrentState:login];
-    
+    // получение значения "последний визит" для определения срока отсутствия пользователя
     NSString* lastVisit = [[GBPersistentManager sharedManager] userLastVisitDate:login];
     NSString* message;
-    
+    // вывод сообщения в алерте в зависимости от того, авторизировался ли такой пользователь уже через мобильное приложение
     if ([lastVisit isEqualToString:@"nil"]) {
         message = @"Greetings! You're using this app for the first time!";
     } else {
@@ -228,6 +228,7 @@
     return ( URLString != NULL ) ? YES : NO;
 }
 
+// метод для работы с БД на случай отсутствия интернет соединения
 - (BOOL) isHasDBLogin:(NSString*)login andPassword:(NSString*) password {
     
     BOOL exists = [[GBPersistentManager sharedManager] isUserExistAndCheckLogin:login andPassword:password];
