@@ -14,6 +14,7 @@
 @interface GBLoginViewController ()
 
 @property (strong, nonatomic) AFHTTPSessionManager* sessionManager;
+@property (weak, nonatomic) IBOutlet UIStackView *filedsOutlet;
 
 @end
 
@@ -138,11 +139,11 @@
                              NSString* errorStr = [dict objectForKey:@"NSLocalizedDescription"];
                              
                              if ([errorStr isEqualToString:@"Request failed: unauthorized (401)"]){
-                                 [self alertBadLogin];
+                                 // обработка неправильного ввода логина/пароля
+                                 [self shakeFiledsStack];
                              }
                              
                          }];
-        
     }
     
     else {
@@ -155,8 +156,24 @@
             [self alertBadLogin];
         }
     }
-   
     return isVerified ? YES : NO;
+}
+
+- (void) shakeFiledsStack {
+    
+    CABasicAnimation *animation =
+    [CABasicAnimation animationWithKeyPath:@"position"];
+    [animation setDuration:0.05];
+    [animation setRepeatCount:4];
+    [animation setAutoreverses:YES];
+    [animation setFromValue:[NSValue valueWithCGPoint:
+                             CGPointMake([self.filedsOutlet center].x - 20.0f, [self.filedsOutlet center].y)]];
+    [animation setToValue:[NSValue valueWithCGPoint:
+                           CGPointMake([self.filedsOutlet center].x + 20.0f, [self.filedsOutlet center].y)]];
+    [CATransaction setCompletionBlock:^{
+        [self alertBadLogin];
+    }];
+    [[self.filedsOutlet layer] addAnimation:animation forKey:@"position"];
 }
 
 - (void) alertBadLogin {
