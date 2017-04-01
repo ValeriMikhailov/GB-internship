@@ -24,7 +24,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *pickedSiteTextField;
 
-@property (weak, nonatomic) IBOutlet UIPickerView *personPicker;
-@property (weak, nonatomic) IBOutlet UIPickerView *sitePicker;
+
+@property (strong, nonatomic) UIPickerView *sitePicker;
 @property (weak, nonatomic) IBOutlet UITableView *ranksTable;
 @end

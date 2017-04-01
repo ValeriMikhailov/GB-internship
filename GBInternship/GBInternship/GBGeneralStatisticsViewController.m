@@ -23,6 +23,13 @@
                                                  name:@"FetchedSites"
                                                object:nil];
     
+    _sitePicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 200, 320, 200)];
+    
+    _sitePicker.delegate = self;
+    _sitePicker.showsSelectionIndicator = YES;
+    _sitePicker.dataSource=self;
+
+    
      _pickedSiteTextField.inputView=[self createPicker];
     
     

@@ -37,8 +37,32 @@
         
     }];
     
+    _personPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 200, 320, 200)];
+    
+    _personPicker.delegate = self;
+    _personPicker.showsSelectionIndicator = YES;
+    _personPicker.dataSource=self;
+    _personPicker.tag=0;
+    
+    _sitePicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 200, 320, 200)];
+    
+    _sitePicker.delegate = self;
+    _sitePicker.showsSelectionIndicator = YES;
+    _sitePicker.dataSource=self;
+    _sitePicker.tag=1;
+    
+    
     _pickedPersonTextField.inputView=[self createViewForPicker:_personPicker];
     _pickedSiteTextField.inputView=[self createViewForPicker:_sitePicker];
+    
+    
+    _startDatePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 200, 320, 200)];
+    _endDatePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 200, 320, 200)];
+    _startDatePicker.datePickerMode=UIDatePickerModeDate;
+    _endDatePicker.datePickerMode=UIDatePickerModeDate;
+    _startDatePicker.tag=2;
+    _endDatePicker.tag=3;
+    
     
     _pickedStartDateTextField.inputView=[self createViewForDatePicker:_startDatePicker];
     _pickedEndDateTextField.inputView=[self createViewForDatePicker:_endDatePicker];

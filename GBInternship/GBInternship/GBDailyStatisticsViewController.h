@@ -39,11 +39,17 @@
 @property (weak, nonatomic) IBOutlet UITextField *pickedStartDateTextField;
 @property (weak, nonatomic) IBOutlet UITextField *pickedEndDateTextField;
 
-@property (weak, nonatomic) IBOutlet UIPickerView *personPicker;
-@property (weak, nonatomic) IBOutlet UIPickerView *sitePicker;
+//@property (weak, nonatomic) IBOutlet UIPickerView *personPicker;
+//@property (weak, nonatomic) IBOutlet UIPickerView *sitePicker;
 @property (weak, nonatomic) IBOutlet UITableView *ranksTable;
-@property (weak, nonatomic) IBOutlet UIDatePicker *startDatePicker;
+//@property (weak, nonatomic) IBOutlet UIDatePicker *startDatePicker;
+//@property (weak, nonatomic) IBOutlet UIDatePicker *endDatePicker;
 
-@property (weak, nonatomic) IBOutlet UIDatePicker *endDatePicker;
+
+@property (strong, nonatomic)  UIPickerView *personPicker;
+@property (strong, nonatomic) UIPickerView *sitePicker;
+@property (strong, nonatomic)  UIDatePicker *startDatePicker;
+@property (strong, nonatomic)  UIDatePicker *endDatePicker;
+
 
 @end
