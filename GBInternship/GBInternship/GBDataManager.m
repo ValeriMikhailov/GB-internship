@@ -262,10 +262,10 @@
         [user.managedObjectContext save:nil];
         
         //check how much of users are in DB
-        NSEntityDescription* entity3 = [NSEntityDescription entityForName:@"GBUser" inManagedObjectContext:self.managedObjectContext];
-        NSFetchRequest* request3 = [[NSFetchRequest alloc] init];
-        [request3 setEntity:entity3];
-        NSArray* users2 = [self.managedObjectContext executeFetchRequest:request3 error:nil];
+//        NSEntityDescription* entity3 = [NSEntityDescription entityForName:@"GBUser" inManagedObjectContext:self.managedObjectContext];
+//        NSFetchRequest* request3 = [[NSFetchRequest alloc] init];
+//        [request3 setEntity:entity3];
+//        NSArray* users2 = [self.managedObjectContext executeFetchRequest:request3 error:nil];
         //NSLog(@"%lu", (unsigned long)users2.count);
     } 
 }

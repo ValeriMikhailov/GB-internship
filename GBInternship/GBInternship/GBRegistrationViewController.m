@@ -251,7 +251,7 @@
     [animation setToValue:[NSValue valueWithCGPoint:
                            CGPointMake([self.textFieldsStackOutlet center].x + 10.0f, [self.textFieldsStackOutlet center].y)]];
     [CATransaction setCompletionBlock:^{
-        [self performSelector:method];
+        [self performSelector:method withObject:nil afterDelay:0];
     }];
     [[self.textFieldsStackOutlet layer] addAnimation:animation forKey:@"position"];
 }
