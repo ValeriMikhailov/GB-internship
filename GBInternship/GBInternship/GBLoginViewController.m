@@ -210,7 +210,7 @@
                                  preferredStyle:UIAlertControllerStyleAlert];
     
     [self presentViewController:hello animated:YES completion:nil];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         [hello dismissViewControllerAnimated:YES completion:^{
             [self openStatisticsView];

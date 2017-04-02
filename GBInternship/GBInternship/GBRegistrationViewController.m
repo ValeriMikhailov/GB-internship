@@ -15,6 +15,7 @@
 @interface GBRegistrationViewController ()  <UITextFieldDelegate, NSURLSessionDelegate>
 
 @property (strong, nonatomic) AFHTTPSessionManager* sessionManager;
+@property (weak, nonatomic) IBOutlet UIStackView *textFieldsStackOutlet;
 
 @end
 
@@ -90,9 +91,13 @@
                           NSString* errorStr = [[dict1 userInfo] objectForKey:@"NSLocalizedDescription"];
                           NSLog(@"errorStr: %@", errorStr);
                           if ([errorStr isEqualToString:@"Request failed: conflict (409)"]){
-                              [self userAlreadyExistsAlert];
+                              //[self userAlreadyExistsAlert];
+                              SEL selector = @selector(userAlreadyExistsAlert);
+                              [self shakeFiledsStackWithErrorMethod:selector];
                           } else if ([errorStr isEqualToString:@"Request failed: bad request (400)"]) {
-                              [self loginFieldRequirements];
+                              SEL selector = @selector(loginFieldRequirements);
+                              [self shakeFiledsStackWithErrorMethod:selector];
+                              //[self loginFieldRequirements];
                           }
                       }];
     
@@ -167,7 +172,7 @@
     
     UIAlertController* error =
     [UIAlertController alertControllerWithTitle:@"Wrong registration fields!"
-                                        message:@"Your login must meet these requirements: must be at least 3 characters, include @ symbol and domain postfix.\nFor example: ben@jail.com"
+                                        message:@"Your login must meet these requirements: must be at least 3 characters, include @ symbol and domain postfix.\nPassword must be at least 4 characters.\nFor example: ben@jail.com"
                                  preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"ОК"
@@ -198,13 +203,14 @@
     
     UIAlertController* success =
     [UIAlertController alertControllerWithTitle:@"Success"
-                                        message:@"You are registered as a new user"
+                                        message:@"You are registered as a new user.\nUse your login & password to authorize in app."
                                  preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction* okAction =
     [UIAlertAction actionWithTitle:@"ОК"
                              style:UIAlertActionStyleDefault
                            handler:^(UIAlertAction* action) {
-                               [self openStatisticsView];
+                               [[GBPersistentManager sharedManager] saveUserWithLogin:self.usernameFld.text andPassword:self.passwordFld.text];
+                               [self openLoginView];
                            }];
     [success addAction:okAction];
     [self presentViewController:success animated:YES completion:nil];
@@ -231,6 +237,23 @@
     [exists addAction:okAction];
     [exists addAction:tryLogin];
     [self presentViewController:exists animated:YES completion:nil];
+}
+
+- (void) shakeFiledsStackWithErrorMethod:(SEL)method {
+    
+    CABasicAnimation *animation =
+    [CABasicAnimation animationWithKeyPath:@"position"];
+    [animation setDuration:0.07];
+    [animation setRepeatCount:3];
+    [animation setAutoreverses:YES];
+    [animation setFromValue:[NSValue valueWithCGPoint:
+                             CGPointMake([self.textFieldsStackOutlet center].x - 10.0f, [self.textFieldsStackOutlet center].y)]];
+    [animation setToValue:[NSValue valueWithCGPoint:
+                           CGPointMake([self.textFieldsStackOutlet center].x + 10.0f, [self.textFieldsStackOutlet center].y)]];
+    [CATransaction setCompletionBlock:^{
+        [self performSelector:method];
+    }];
+    [[self.textFieldsStackOutlet layer] addAnimation:animation forKey:@"position"];
 }
 
 
