@@ -8,7 +8,7 @@
 
 #import "GBDailyStatisticsViewController.h"
 
-@interface GBDailyStatisticsViewController ()
+@interface GBDailyStatisticsViewController () 
 #define sitePicker 0
 #define personPicker 1
 #define startDayPicker 2
@@ -26,13 +26,13 @@
                                                object:nil];
     
     [[GBPersistentManager sharedManager] getArrayOfAvaliableSitesOnSuccess:^(NSArray *sitesArray) {
-        _sitesArray =sitesArray;
+        _sitesArray = sitesArray;
     } onFailure:^(NSError *error) {
         
     }];
     
     [[GBPersistentManager sharedManager] getArrayOfAvaliablePersonsOnSuccess:^(NSArray *personsArray) {
-        _personsArray =personsArray;
+        _personsArray = personsArray;
     } onFailure:^(NSError *error) {
         
     }];
@@ -42,14 +42,14 @@
     _personPicker.delegate = self;
     _personPicker.showsSelectionIndicator = YES;
     _personPicker.dataSource=self;
-    _personPicker.tag=0;
+    _personPicker.tag = 1;
     
     _sitePicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 200, 320, 200)];
     
     _sitePicker.delegate = self;
     _sitePicker.showsSelectionIndicator = YES;
     _sitePicker.dataSource=self;
-    _sitePicker.tag=1;
+    _sitePicker.tag = 0;
     
     
     _pickedPersonTextField.inputView=[self createViewForPicker:_personPicker];
@@ -80,46 +80,33 @@
     
 }
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
 #pragma mark PickerView DataSource
 
 - (NSInteger)numberOfComponentsInPickerView:
-(UIPickerView *)pickerView
-{
+(UIPickerView *)pickerView {
     return 1;
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView
-numberOfRowsInComponent:(NSInteger)component
-{
-    int count;
-    if(pickerView.tag == sitePicker)
-    {
+numberOfRowsInComponent:(NSInteger)component {
+    int count = 0;
+    if (pickerView.tag == sitePicker) {
         count = (int)_sitesArray.count;
-        
-    }
-    else if (pickerView.tag == personPicker)
-    {
+    } else if (pickerView.tag == personPicker) {
         count = (int)_personsArray.count;
+    } else {
+        return count;
     }
    
-    
     return count;
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView
              titleForRow:(NSInteger)row
-            forComponent:(NSInteger)component
-{
+            forComponent:(NSInteger)component {
     NSString* stringInPicker;
     
-    if(pickerView.tag == sitePicker) {
+    if (pickerView.tag == sitePicker) {
         GBSite* site = (GBSite*) _sitesArray[row];
         
         stringInPicker = site.siteURL;
@@ -127,21 +114,18 @@ numberOfRowsInComponent:(NSInteger)component
     } else if (pickerView.tag == personPicker) {
         GBPerson* person = (GBPerson*) _personsArray[row];
         
-        stringInPicker =person.personName;
+        stringInPicker = person.personName;
     }
     
     return stringInPicker;
 }
 
-
-
 #pragma mark PickerView Delegate
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row
-      inComponent:(NSInteger)component
-{
+      inComponent:(NSInteger)component {
     
-    if(pickerView.tag == sitePicker){
+    if (pickerView.tag == sitePicker) {
         
         GBSite* site = (GBSite*) _sitesArray[row];
         NSString *resultString = [[NSString alloc] initWithFormat:
@@ -150,12 +134,9 @@ numberOfRowsInComponent:(NSInteger)component
         
         _pickedSiteTextField.text = resultString;
         [_pickedSiteTextField resignFirstResponder];
+        _pickedSite = site;
         
-        _pickedSite=site;
-        }
-    
-   else if(pickerView.tag == personPicker)
-    {
+    } else if (pickerView.tag == personPicker) {
         GBPerson* person = (GBPerson*) _personsArray[row];
         NSString *resultString = [[NSString alloc] initWithFormat:
                                   @"%@",
@@ -269,14 +250,12 @@ numberOfRowsInComponent:(NSInteger)component
     return pickerView;
 }
 
--(void) selectStartDate
-{
+-(void) selectStartDate {
     _pickedStartDateTextField.text=[self stringFromDate:_startDatePicker.date];
     [_pickedStartDateTextField resignFirstResponder];
     _pickedStartDate=_startDatePicker.date;
 }
--(void) selectEndDate
-{
+-(void) selectEndDate {
     _pickedEndDateTextField.text=[self stringFromDate:_endDatePicker.date];
     [_pickedEndDateTextField resignFirstResponder];
     _pickedEndDate=_endDatePicker.date;
