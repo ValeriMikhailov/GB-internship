@@ -35,6 +35,7 @@
 		52FEFAEE1E819C22007E5972 /* GBPersonAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FEFAED1E819C22007E5972 /* GBPersonAPI.m */; };
 		52FEFAF11E819C43007E5972 /* GBSiteAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FEFAF01E819C43007E5972 /* GBSiteAPI.m */; };
 		52FEFAF41E819C52007E5972 /* GBStatisticAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FEFAF31E819C52007E5972 /* GBStatisticAPI.m */; };
+		57678F3A1E98CD7C00C19324 /* GBPieChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57678F391E98CD7C00C19324 /* GBPieChartViewController.m */; };
 		7FB6AA40162AFBEDF17230E5 /* Pods_GBInternship.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55110263F3E6B74E9D02DAB5 /* Pods_GBInternship.framework */; };
 /* End PBXBuildFile section */
 
@@ -112,6 +113,8 @@
 		52FEFAF21E819C52007E5972 /* GBStatisticAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBStatisticAPI.h; sourceTree = "<group>"; };
 		52FEFAF31E819C52007E5972 /* GBStatisticAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBStatisticAPI.m; sourceTree = "<group>"; };
 		55110263F3E6B74E9D02DAB5 /* Pods_GBInternship.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GBInternship.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		57678F381E98CD7C00C19324 /* GBPieChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBPieChartViewController.h; sourceTree = "<group>"; };
+		57678F391E98CD7C00C19324 /* GBPieChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBPieChartViewController.m; sourceTree = "<group>"; };
 		985FA386EB8A5DD9AF6F06E8 /* Pods-GBInternship.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GBInternship.release.xcconfig"; path = "Pods/Target Support Files/Pods-GBInternship/Pods-GBInternship.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -262,6 +265,8 @@
 				049FAC8C1E849FE400F560B2 /* GBGeneralStatisticsViewController.m */,
 				0467CEA11E85DED400D701BC /* GBDailyStatisticsViewController.h */,
 				0467CEA21E85DED400D701BC /* GBDailyStatisticsViewController.m */,
+				57678F381E98CD7C00C19324 /* GBPieChartViewController.h */,
+				57678F391E98CD7C00C19324 /* GBPieChartViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -358,7 +363,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = GB;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Stanly Shiyanovskiy";
 				TargetAttributes = {
 					52A19E9B1E7715D100D984F7 = {
@@ -495,6 +500,7 @@
 				049FAC841E849D9A00F560B2 /* GBStatisticsViewController.m in Sources */,
 				52FEFAEA1E818DE9007E5972 /* GBStatistic+CoreDataProperties.m in Sources */,
 				52FEFAE31E818DE9007E5972 /* GBPerson+CoreDataClass.m in Sources */,
+				57678F3A1E98CD7C00C19324 /* GBPieChartViewController.m in Sources */,
 				52A19EA41E7715D100D984F7 /* AppDelegate.m in Sources */,
 				52FEFAE81E818DE9007E5972 /* GBUser+CoreDataProperties.m in Sources */,
 				0467CEA31E85DED400D701BC /* GBDailyStatisticsViewController.m in Sources */,
@@ -649,6 +655,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 41313FBA1C32477CF8682175 /* Pods-GBInternship.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 3PTYV272Z4;
 				INFOPLIST_FILE = GBInternship/Info.plist;
@@ -663,6 +670,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 985FA386EB8A5DD9AF6F06E8 /* Pods-GBInternship.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 3PTYV272Z4;
 				INFOPLIST_FILE = GBInternship/Info.plist;

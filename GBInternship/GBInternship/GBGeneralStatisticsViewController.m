@@ -7,8 +7,11 @@
 //
 
 #import "GBGeneralStatisticsViewController.h"
+#import "GBPieChartViewController.h"
 
 @interface GBGeneralStatisticsViewController ()
+
+- (IBAction)openCharts:(UIButton *)sender;
 
 @end
 
@@ -180,7 +183,16 @@ numberOfRowsInComponent:(NSInteger)component
     return pickerView;
 }
 
+#pragma mark - Actions -
 
-
-
+//- (IBAction)openCharts:(UIButton *)sender {
+//    
+//    GBPieChartViewController* vc = [[GBPieChartViewController alloc] init];
+//    vc.modalPresentationStyle = UIModalPresentationFormSheet;
+//    vc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+//    [V1 presentViewController:V2 animated:YES completion:nil];
+//    V2.view.superview.frame = CGRectMake(0, 0, 540, 620); //it's important to do this after presentModalViewController
+//    V2.view.superview.center = V1.view.center;
+//    [V1 release];
+//}
 @end
