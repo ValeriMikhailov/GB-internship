@@ -10,4 +10,8 @@
 
 @interface GBPieChartViewController : UIViewController
 
+@property (strong, nonatomic) NSArray* persons;
+@property (strong, nonatomic) NSArray* values;
+@property (copy, nonatomic) NSString* siteTitle;
+
 @end

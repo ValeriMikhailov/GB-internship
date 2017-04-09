@@ -424,7 +424,7 @@
                                 <rect key="frame" x="333" y="72" width="22" height="22"/>
                                 <color key="tintColor" red="0.44324213270000001" green="0.7606936097" blue="0.47542840240000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
-                                    <segue destination="pYw-gO-8M1" kind="show" identifier="GBPieChartViewController" id="jBK-FP-0Dt"/>
+                                    <action selector="openCharts:" destination="mxR-fW-VnF" eventType="touchUpInside" id="dOA-xb-xOL"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -452,7 +452,7 @@
             </objects>
             <point key="canvasLocation" x="3248.8000000000002" y="712.89355322338838"/>
         </scene>
-        <!--Pie Chart-->
+        <!--Pie Chart View Controller-->
         <scene sceneID="aMM-JO-n20">
             <objects>
                 <viewController storyboardIdentifier="GBPieChartViewController" id="pYw-gO-8M1" customClass="GBPieChartViewController" sceneMemberID="viewController">
@@ -461,15 +461,17 @@
                         <viewControllerLayoutGuide type="bottom" id="nZL-UO-sDy"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Trb-wK-l8c" customClass="PieChartView" customModule="Charts">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Pie Chart" id="9hR-2V-3G0"/>
+                    <connections>
+                        <outlet property="chartView" destination="Trb-wK-l8c" id="yeD-3k-DAF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4a0-LL-3LN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3962" y="713"/>
+            <point key="canvasLocation" x="3960.8000000000002" y="712.89355322338838"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jFd-oq-9dh">

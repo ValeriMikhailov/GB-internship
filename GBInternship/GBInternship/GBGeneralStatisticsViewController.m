@@ -10,6 +10,7 @@
 #import "GBPieChartViewController.h"
 
 @interface GBGeneralStatisticsViewController () 
+- (IBAction)openCharts:(id)sender;
 
 @end
 
@@ -162,13 +163,57 @@ numberOfRowsInComponent:(NSInteger)component
 }
 
 #pragma mark - Actions -
+- (IBAction)openCharts:(id)sender {
+    
+    if (self.statisticArray.count > 0) {
+        
+        UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        GBPieChartViewController* vc = [sb instantiateViewControllerWithIdentifier:@"GBPieChartViewController"];
+        NSMutableArray* persons = [NSMutableArray array];
+        NSMutableArray* values = [NSMutableArray array];
+        
+        for (GBStatistic* stat in self.statisticArray) {
+            [persons addObject:stat.persons.personName];
+            [values addObject:[NSNumber numberWithDouble:stat.rank]];
+            vc.siteTitle = stat.sites.siteURL;
+        }
+        
+        vc.persons = persons;
+        vc.values = values;
+        
+      
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    } else {
+        
+        [self emptyFieldsAlert];
+    }
+    
+    
+}
 
 #pragma mark - Segues
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if ([[segue identifier] isEqualToString:@"GBPieChartViewController"]) {
-        GBPieChartViewController* vc = [segue destinationViewController];
-    }
+    
 }
+
+#pragma mark - Alerts -
+- (void) emptyFieldsAlert {
+    
+    UIAlertController* error =
+    [UIAlertController alertControllerWithTitle:@"Oooops"
+                                        message:@"You must select source to get statistic or selected site has no data!"
+                                 preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"ОК"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction* action) {
+                                                         [self dismissViewControllerAnimated:YES completion:nil];
+                                                     }];
+    [error addAction:okAction];
+    [self presentViewController:error animated:YES completion:nil];
+}
+
 @end
