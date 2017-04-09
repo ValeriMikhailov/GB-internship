@@ -9,9 +9,7 @@
 #import "GBGeneralStatisticsViewController.h"
 #import "GBPieChartViewController.h"
 
-@interface GBGeneralStatisticsViewController ()
-
-- (IBAction)openCharts:(UIButton *)sender;
+@interface GBGeneralStatisticsViewController () 
 
 @end
 
@@ -19,7 +17,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reloadUI)
@@ -47,27 +44,14 @@
     } onFailure:^(NSError *error) {
         
     }];
-    
-        
 
 }
-
 
 - (void) reloadUI {
     
     [self.ranksTable reloadData];
     [self.sitePicker reloadAllComponents];
 }
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
-
-
 
 #pragma mark PickerView DataSource
 
@@ -134,8 +118,8 @@ numberOfRowsInComponent:(NSInteger)component
     
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -149,14 +133,8 @@ numberOfRowsInComponent:(NSInteger)component
     cell.textLabel.textAlignment = NSTextAlignmentLeft;
     cell.detailTextLabel.text = [[NSString alloc] initWithFormat:@"%hd",statistic.rank];
     cell.detailTextLabel.textAlignment=NSTextAlignmentRight;
-    // Configure the cell...
-    
-    
     return cell;
 }
-
-
-
 
 
 // popover with picker for sites
@@ -185,14 +163,12 @@ numberOfRowsInComponent:(NSInteger)component
 
 #pragma mark - Actions -
 
-//- (IBAction)openCharts:(UIButton *)sender {
-//    
-//    GBPieChartViewController* vc = [[GBPieChartViewController alloc] init];
-//    vc.modalPresentationStyle = UIModalPresentationFormSheet;
-//    vc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-//    [V1 presentViewController:V2 animated:YES completion:nil];
-//    V2.view.superview.frame = CGRectMake(0, 0, 540, 620); //it's important to do this after presentModalViewController
-//    V2.view.superview.center = V1.view.center;
-//    [V1 release];
-//}
+#pragma mark - Segues
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([[segue identifier] isEqualToString:@"GBPieChartViewController"]) {
+        GBPieChartViewController* vc = [segue destinationViewController];
+    }
+}
 @end

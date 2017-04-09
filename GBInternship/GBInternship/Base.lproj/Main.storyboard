@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7fx-hj-D10">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="4yd-UF-ueF">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -329,24 +329,6 @@
             </objects>
             <point key="canvasLocation" x="3248.8000000000002" y="23.838080959520241"/>
         </scene>
-        <!--Pie Chart View Controller-->
-        <scene sceneID="Ajy-fT-9hu">
-            <objects>
-                <viewController id="LUY-0I-f1k" customClass="GBPieChartViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="nzZ-kp-3ye"/>
-                        <viewControllerLayoutGuide type="bottom" id="zKU-k0-7Lf"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="P6n-nl-TNq" customClass="PieChartView" customModule="Charts">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="B5p-Q2-nai" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4015" y="24"/>
-        </scene>
         <!--General Statistics-->
         <scene sceneID="9Uc-Zr-hmp">
             <objects>
@@ -442,7 +424,7 @@
                                 <rect key="frame" x="333" y="72" width="22" height="22"/>
                                 <color key="tintColor" red="0.44324213270000001" green="0.7606936097" blue="0.47542840240000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
-                                    <action selector="openCharts:" destination="mxR-fW-VnF" eventType="touchUpInside" id="Uq6-nf-Nmo"/>
+                                    <segue destination="pYw-gO-8M1" kind="show" identifier="GBPieChartViewController" id="jBK-FP-0Dt"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -469,6 +451,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JkW-H6-MEU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3248.8000000000002" y="712.89355322338838"/>
+        </scene>
+        <!--Pie Chart-->
+        <scene sceneID="aMM-JO-n20">
+            <objects>
+                <viewController storyboardIdentifier="GBPieChartViewController" id="pYw-gO-8M1" customClass="GBPieChartViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9wt-6B-PRA"/>
+                        <viewControllerLayoutGuide type="bottom" id="nZL-UO-sDy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Trb-wK-l8c" customClass="PieChartView" customModule="Charts">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Pie Chart" id="9hR-2V-3G0"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4a0-LL-3LN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3962" y="713"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jFd-oq-9dh">
