@@ -25,6 +25,40 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="25dp">
 
+        <ProgressBar
+            android:id="@+id/progressBarStat"
+            style="@android:style/Widget.Material.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:foregroundGravity="center_vertical|center_horizontal"
+            android:theme="@style/AppTheme"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDate" />
+
+        <TextView
+            android:id="@+id/jopa_stat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:foregroundGravity="center_vertical|center_horizontal"
+            android:text="jopa"
+            android:theme="@style/AppTheme"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDate" />
+
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
@@ -134,16 +168,17 @@
             app:layout_constraintTop_toBottomOf="@+id/chooseSiteTextView"
             app:ms_arrow_tint="@color/colorPrimaryDark" />
 
-        <ListView
+        <ru.geekbrains_internship.statisticsapp.Daily.MyListView
             android:id="@+id/listViewDailyFragment"
             android:layout_width="0dp"
-            android:layout_height="194dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
             android:listSelector="@color/backgroundActivityColor"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            android:scrollbars="vertical"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -184,17 +219,19 @@
             android:id="@+id/textViewTotal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="70dp"
             android:layout_marginEnd="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="0dp"
             android:background="@color/colorPrimary"
             android:paddingBottom="@dimen/textview_padding"
             android:paddingLeft="14dp"
             android:paddingTop="@dimen/textview_padding"
             android:text="@string/textview_total"
             android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -204,11 +241,12 @@
             android:id="@+id/textViewTotalCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="left"
+            android:gravity="right"
+            android:paddingRight="0dp"
             android:text="500"
             android:textColor="@android:color/white"
             app:layout_constraintBaseline_toBaselineOf="@+id/textViewTotal"
-            app:layout_constraintLeft_toLeftOf="@+id/textViewPages" />
+            app:layout_constraintRight_toRightOf="@+id/textViewPages" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline2"
@@ -216,7 +254,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5"
-            tools:layout_editor_absoluteX="160dp"
+            tools:layout_editor_absoluteX="165dp"
             tools:layout_editor_absoluteY="25dp" />
 
     </android.support.constraint.ConstraintLayout>
