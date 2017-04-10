@@ -467,9 +467,59 @@
                     </view>
                     <connections>
                         <outlet property="chartView" destination="Trb-wK-l8c" id="yeD-3k-DAF"/>
+                        <outlet property="popUp" destination="b2G-Hl-vGl" id="nBc-oP-aWw"/>
+                        <outlet property="popupImg" destination="RVI-Zu-05w" id="zKi-s2-wcn"/>
+                        <outlet property="popupLabel" destination="DaL-si-4ya" id="thw-vH-s2u"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4a0-LL-3LN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="b2G-Hl-vGl">
+                    <rect key="frame" x="0.0" y="0.0" width="270" height="400"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cF2-43-JAo">
+                            <rect key="frame" x="0.0" y="182" width="270" height="218"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hrF-pM-4x7">
+                                    <rect key="frame" x="0.0" y="0.0" width="270" height="210"/>
+                                </view>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DaL-si-4ya">
+                                    <rect key="frame" x="29" y="19" width="213" height="14.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="DaL-si-4ya" firstAttribute="leading" secondItem="cF2-43-JAo" secondAttribute="leading" constant="29" id="6hd-gI-AS5"/>
+                                <constraint firstItem="DaL-si-4ya" firstAttribute="bottom" secondItem="cF2-43-JAo" secondAttribute="bottomMargin" id="B61-6S-YqD"/>
+                                <constraint firstItem="hrF-pM-4x7" firstAttribute="centerY" secondItem="cF2-43-JAo" secondAttribute="centerY" constant="-4" id="Gwm-e0-RhX"/>
+                                <constraint firstItem="DaL-si-4ya" firstAttribute="centerX" secondItem="hrF-pM-4x7" secondAttribute="centerX" id="NRM-n2-Ohf"/>
+                                <constraint firstItem="hrF-pM-4x7" firstAttribute="centerX" secondItem="cF2-43-JAo" secondAttribute="centerX" id="Spr-iA-cg6"/>
+                                <constraint firstItem="hrF-pM-4x7" firstAttribute="top" secondItem="cF2-43-JAo" secondAttribute="top" id="q1C-QE-cYD"/>
+                                <constraint firstAttribute="trailing" secondItem="hrF-pM-4x7" secondAttribute="trailing" id="rXC-lc-yK9"/>
+                                <constraint firstItem="DaL-si-4ya" firstAttribute="top" secondItem="cF2-43-JAo" secondAttribute="top" constant="19" id="wNe-vf-oxh"/>
+                                <constraint firstItem="hrF-pM-4x7" firstAttribute="leading" secondItem="cF2-43-JAo" secondAttribute="leading" id="zzs-e3-HaX"/>
+                            </constraints>
+                        </scrollView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RVI-Zu-05w">
+                            <rect key="frame" x="50" y="20" width="170" height="155"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="RVI-Zu-05w" secondAttribute="height" multiplier="34:31" id="QYd-zf-QVL"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="RVI-Zu-05w" firstAttribute="top" secondItem="b2G-Hl-vGl" secondAttribute="top" constant="20" id="2gc-Z1-gki"/>
+                        <constraint firstAttribute="bottom" secondItem="cF2-43-JAo" secondAttribute="bottom" id="6el-nj-yhw"/>
+                        <constraint firstAttribute="trailing" secondItem="RVI-Zu-05w" secondAttribute="trailing" constant="50" id="Asv-lU-luG"/>
+                        <constraint firstItem="cF2-43-JAo" firstAttribute="top" secondItem="RVI-Zu-05w" secondAttribute="bottom" constant="7" id="Fqk-hk-K7l"/>
+                        <constraint firstItem="RVI-Zu-05w" firstAttribute="leading" secondItem="b2G-Hl-vGl" secondAttribute="leading" constant="50" id="KUs-oh-ZIQ"/>
+                        <constraint firstAttribute="trailing" secondItem="cF2-43-JAo" secondAttribute="trailing" id="PLl-9X-I09"/>
+                        <constraint firstItem="cF2-43-JAo" firstAttribute="leading" secondItem="b2G-Hl-vGl" secondAttribute="leading" id="ejF-XZ-7ai"/>
+                    </constraints>
+                </view>
             </objects>
             <point key="canvasLocation" x="3960.8000000000002" y="712.89355322338838"/>
         </scene>

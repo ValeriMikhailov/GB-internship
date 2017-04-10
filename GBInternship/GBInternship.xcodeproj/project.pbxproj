@@ -13,6 +13,7 @@
 		049FAC841E849D9A00F560B2 /* GBStatisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049FAC831E849D9A00F560B2 /* GBStatisticsViewController.m */; };
 		049FAC8A1E849EF600F560B2 /* GBRegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049FAC891E849EF600F560B2 /* GBRegistrationViewController.m */; };
 		049FAC8D1E849FE400F560B2 /* GBGeneralStatisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049FAC8C1E849FE400F560B2 /* GBGeneralStatisticsViewController.m */; };
+		527C99A61E9AD95200D9B8EE /* Putin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 527C99A51E9AD95200D9B8EE /* Putin.jpg */; };
 		52A19EA11E7715D100D984F7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A19EA01E7715D100D984F7 /* main.m */; };
 		52A19EA41E7715D100D984F7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A19EA31E7715D100D984F7 /* AppDelegate.m */; };
 		52A19EAA1E7715D100D984F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52A19EA81E7715D100D984F7 /* Main.storyboard */; };
@@ -69,6 +70,7 @@
 		049FAC8B1E849FE400F560B2 /* GBGeneralStatisticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBGeneralStatisticsViewController.h; sourceTree = "<group>"; };
 		049FAC8C1E849FE400F560B2 /* GBGeneralStatisticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBGeneralStatisticsViewController.m; sourceTree = "<group>"; };
 		41313FBA1C32477CF8682175 /* Pods-GBInternship.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GBInternship.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GBInternship/Pods-GBInternship.debug.xcconfig"; sourceTree = "<group>"; };
+		527C99A51E9AD95200D9B8EE /* Putin.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Putin.jpg; sourceTree = "<group>"; };
 		52A19E9C1E7715D100D984F7 /* GBInternship.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GBInternship.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52A19EA01E7715D100D984F7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		52A19EA21E7715D100D984F7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				52A19EB01E7715D100D984F7 /* LaunchScreen.storyboard */,
 				52A19EB31E7715D100D984F7 /* Info.plist */,
 				049FAC7A1E849A7C00F560B2 /* 1488569581_analytics.png */,
+				527C99A51E9AD95200D9B8EE /* Putin.jpg */,
 				52A19EAB1E7715D100D984F7 /* GBInternship.xcdatamodeld */,
 				52A19E9F1E7715D100D984F7 /* Supporting Files */,
 			);
@@ -410,6 +413,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				527C99A61E9AD95200D9B8EE /* Putin.jpg in Resources */,
 				52A19EB21E7715D100D984F7 /* LaunchScreen.storyboard in Resources */,
 				049FAC7B1E849A7C00F560B2 /* 1488569581_analytics.png in Resources */,
 				52A19EAF1E7715D100D984F7 /* Assets.xcassets in Resources */,
