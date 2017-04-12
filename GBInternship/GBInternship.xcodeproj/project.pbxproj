@@ -16,6 +16,7 @@
 		527C99A61E9AD95200D9B8EE /* Putin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 527C99A51E9AD95200D9B8EE /* Putin.jpg */; };
 		527C99A81E9D2A4500D9B8EE /* Medvedev.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 527C99A71E9D2A4500D9B8EE /* Medvedev.jpg */; };
 		527C99AA1E9D2B5500D9B8EE /* Zhirinovskiy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 527C99A91E9D2B5500D9B8EE /* Zhirinovskiy.jpg */; };
+		527C99C41E9E639300D9B8EE /* GBDailyChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 527C99C31E9E639300D9B8EE /* GBDailyChartViewController.m */; };
 		52A19EA11E7715D100D984F7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A19EA01E7715D100D984F7 /* main.m */; };
 		52A19EA41E7715D100D984F7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A19EA31E7715D100D984F7 /* AppDelegate.m */; };
 		52A19EAA1E7715D100D984F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52A19EA81E7715D100D984F7 /* Main.storyboard */; };
@@ -75,6 +76,8 @@
 		527C99A51E9AD95200D9B8EE /* Putin.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Putin.jpg; sourceTree = "<group>"; };
 		527C99A71E9D2A4500D9B8EE /* Medvedev.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Medvedev.jpg; sourceTree = "<group>"; };
 		527C99A91E9D2B5500D9B8EE /* Zhirinovskiy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Zhirinovskiy.jpg; sourceTree = "<group>"; };
+		527C99C21E9E639300D9B8EE /* GBDailyChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBDailyChartViewController.h; sourceTree = "<group>"; };
+		527C99C31E9E639300D9B8EE /* GBDailyChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBDailyChartViewController.m; sourceTree = "<group>"; };
 		52A19E9C1E7715D100D984F7 /* GBInternship.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GBInternship.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52A19EA01E7715D100D984F7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		52A19EA21E7715D100D984F7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -276,6 +279,8 @@
 				0467CEA21E85DED400D701BC /* GBDailyStatisticsViewController.m */,
 				57678F381E98CD7C00C19324 /* GBPieChartViewController.h */,
 				57678F391E98CD7C00C19324 /* GBPieChartViewController.m */,
+				527C99C21E9E639300D9B8EE /* GBDailyChartViewController.h */,
+				527C99C31E9E639300D9B8EE /* GBDailyChartViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -510,6 +515,7 @@
 				52FEFAE71E818DE9007E5972 /* GBUser+CoreDataClass.m in Sources */,
 				52FEFAE41E818DE9007E5972 /* GBPerson+CoreDataProperties.m in Sources */,
 				049FAC841E849D9A00F560B2 /* GBStatisticsViewController.m in Sources */,
+				527C99C41E9E639300D9B8EE /* GBDailyChartViewController.m in Sources */,
 				52FEFAEA1E818DE9007E5972 /* GBStatistic+CoreDataProperties.m in Sources */,
 				52FEFAE31E818DE9007E5972 /* GBPerson+CoreDataClass.m in Sources */,
 				57678F3A1E98CD7C00C19324 /* GBPieChartViewController.m in Sources */,

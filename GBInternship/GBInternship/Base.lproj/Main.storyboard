@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="4yd-UF-ueF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7fx-hj-D10">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -303,6 +303,13 @@
                                     <constraint firstItem="HZM-8b-LOX" firstAttribute="width" secondItem="lEZ-G4-cKf" secondAttribute="width" id="XTD-pF-ryi"/>
                                 </constraints>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VFl-wV-YTU">
+                                <rect key="frame" x="333" y="72" width="22" height="22"/>
+                                <color key="tintColor" red="0.44341599939999998" green="0.76082652809999995" blue="0.4726769328" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="openChart:" destination="2BJ-p5-bZb" eventType="touchUpInside" id="ar6-7V-DnP"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -310,7 +317,9 @@
                             <constraint firstAttribute="trailingMargin" secondItem="rdV-hn-mbp" secondAttribute="trailing" constant="4" id="6Z3-53-X9y"/>
                             <constraint firstItem="Vkk-d1-JYx" firstAttribute="top" secondItem="rdV-hn-mbp" secondAttribute="bottom" constant="15" id="G1m-7C-sra"/>
                             <constraint firstItem="rdV-hn-mbp" firstAttribute="leading" secondItem="Uwj-Kb-ai5" secondAttribute="leadingMargin" constant="4" id="KgS-W4-9qf"/>
+                            <constraint firstItem="VFl-wV-YTU" firstAttribute="top" secondItem="2hn-pc-7On" secondAttribute="bottom" constant="8" id="bHn-at-sEB"/>
                             <constraint firstItem="rdV-hn-mbp" firstAttribute="top" secondItem="2hn-pc-7On" secondAttribute="bottom" constant="22" id="nOZ-ze-h9D"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="VFl-wV-YTU" secondAttribute="trailing" constant="4" id="okP-ub-dDG"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Daily" id="PqW-PW-dxG">
@@ -328,6 +337,41 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Q9-VA-ETW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3248.8000000000002" y="23.838080959520241"/>
+        </scene>
+        <!--Daily Chart View Controller-->
+        <scene sceneID="7uD-sY-FNM">
+            <objects>
+                <viewController storyboardIdentifier="GBDailyChartViewController" id="2dM-Ai-eZm" customClass="GBDailyChartViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eZV-w4-pQG"/>
+                        <viewControllerLayoutGuide type="bottom" id="YFa-x9-beI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="GKu-5r-Q3c">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vlO-Iq-wGf" customClass="BarChartView" customModule="Charts">
+                                <rect key="frame" x="0.0" y="82" width="375" height="550"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="vlO-Iq-wGf" secondAttribute="height" multiplier="25:39" constant="22.435897435897402" id="wZn-1w-iLM"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="vlO-Iq-wGf" firstAttribute="leading" secondItem="GKu-5r-Q3c" secondAttribute="leading" id="3Cd-mg-Lgr"/>
+                            <constraint firstAttribute="trailing" secondItem="vlO-Iq-wGf" secondAttribute="trailing" id="KCg-Wz-KOK"/>
+                            <constraint firstItem="YFa-x9-beI" firstAttribute="top" secondItem="vlO-Iq-wGf" secondAttribute="bottom" constant="35" id="OBi-FL-8sy"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="chartView" destination="vlO-Iq-wGf" id="3J8-zX-87w"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5it-il-Wde" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3944.8000000000002" y="23.838080959520241"/>
         </scene>
         <!--General Statistics-->
         <scene sceneID="9Uc-Zr-hmp">
@@ -521,7 +565,7 @@
                     </constraints>
                 </view>
             </objects>
-            <point key="canvasLocation" x="3960.8000000000002" y="712.89355322338838"/>
+            <point key="canvasLocation" x="3945" y="1110"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jFd-oq-9dh">

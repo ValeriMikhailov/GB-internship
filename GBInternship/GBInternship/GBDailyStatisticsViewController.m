@@ -7,12 +7,17 @@
 //
 
 #import "GBDailyStatisticsViewController.h"
+#import "GBDailyChartViewController.h"
 
 @interface GBDailyStatisticsViewController () 
 #define sitePicker 0
 #define personPicker 1
 #define startDayPicker 2
 #define endDayPicker 3
+
+- (IBAction)openChart:(id)sender;
+
+
 @end
 
 @implementation GBDailyStatisticsViewController
@@ -267,15 +272,11 @@ numberOfRowsInComponent:(NSInteger)component {
     
     pickerView.backgroundColor = [UIColor whiteColor];
     
-    
     NSString* title;
     
-    if(selectedPicker.tag == startDayPicker)
-    {
+    if(selectedPicker.tag == startDayPicker) {
         title=@"Choose Start Date";
-    }
-    else if (selectedPicker.tag == endDayPicker)
-    {
+    } else if (selectedPicker.tag == endDayPicker) {
         title=@"Choose End Date";
     }
     
@@ -313,5 +314,47 @@ numberOfRowsInComponent:(NSInteger)component {
     return [dateFormatter stringFromDate:date];
 }
 
+#pragma mark - Actions -
+- (IBAction)openChart:(id)sender {
+    
+    if (self.pickedPerson && self.pickedSite && self.pickedStartDate && self.pickedEndDate) {
+        
+        UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        GBDailyChartViewController* vc = [sb instantiateViewControllerWithIdentifier:@"GBDailyChartViewController"];
+        NSMutableArray* dates = [NSMutableArray array];
+        NSMutableArray* ranks = [NSMutableArray array];
+        
+        for (GBStatistic* stat in self.statisticArray) {
+            [dates addObject:stat.date];
+            [ranks addObject:[NSNumber numberWithDouble:stat.rank]];
+            //vc.siteTitle = stat.sites.siteURL;
+        }
+        
+        vc.dates = dates;
+        vc.ranks = ranks;
+        
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    } else {
+        
+        [self emptyFieldsAlert];
+    }
+}
 
+#pragma mark - Alerts -
+- (void) emptyFieldsAlert {
+    
+    UIAlertController* error =
+    [UIAlertController alertControllerWithTitle:@"Oooops"
+                                        message:@"You must select all fields filters to get correct data!"
+                                 preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"ОК"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction* action) {
+                                                         [self dismissViewControllerAnimated:YES completion:nil];
+                                                     }];
+    [error addAction:okAction];
+    [self presentViewController:error animated:YES completion:nil];
+}
 @end

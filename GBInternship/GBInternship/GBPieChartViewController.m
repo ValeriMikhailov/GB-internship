@@ -41,7 +41,7 @@
     self.chartView.entryLabelColor = UIColor.whiteColor;
     self.chartView.entryLabelFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:12.f];
     
-    [self.chartView animateWithXAxisDuration:1.4 easingOption:ChartEasingOptionEaseOutBack];
+    [self.chartView animateWithXAxisDuration:3.0 yAxisDuration:3.0 easingOption:ChartEasingOptionEaseOutBack];
     
     [self setDataCount:(int)self.persons.count range:100];
 }
