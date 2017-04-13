@@ -81,6 +81,14 @@
         
         BarChartData *data = [[BarChartData alloc] initWithDataSets:dataSets];
         
+        NSNumberFormatter *pFormatter = [[NSNumberFormatter alloc] init];
+        pFormatter.numberStyle = NSNumberFormatterNoStyle;
+        pFormatter.maximumFractionDigits = 1;
+        pFormatter.multiplier = @1.f;
+        [data setValueFormatter:[[ChartDefaultValueFormatter alloc] initWithFormatter:pFormatter]];
+        [data setValueFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:11.f]];
+        [data setValueTextColor:UIColor.blackColor];
+        
         self.chartView.data = data;
         self.chartView.fitBars = YES;
     }
