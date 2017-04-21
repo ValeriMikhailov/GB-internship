@@ -69,7 +69,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginStart="16dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@drawable/btn_ok_selector"
         android:text="@string/button_ok"
         android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
         android:textColor="@android:color/white"
